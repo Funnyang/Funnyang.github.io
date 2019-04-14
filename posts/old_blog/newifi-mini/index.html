@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.55.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Newifi Mini | 不知道是谁的博客</title>
+    <meta property="og:title" content="Newifi Mini - 不知道是谁的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2015-10-01T17:02:31&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2015-10-01T17:02:31&#43;08:00">
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="Newifi Mini">
+        
+    <meta name="author" content="lon3r">
+    <meta property="og:url" content="https://funnyang.github.io/posts/old_blog/newifi-mini/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://funnyang.github.io/">
+                        不知道是谁的博客
+                    </a>
+                
+                <p class="description">一条狗</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://funnyang.github.io/">首页</a>
+                    
+                    <a  href="https://funnyang.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Newifi Mini</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2015年10月1日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://funnyang.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8">路由器</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            <blockquote>
+<p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
+</blockquote>
+
+<p>在校园里总是有一些奇葩需求。</p>
+
+<p>新校区可以办理联通宽带，果断办理，校园网的不稳定和按流量收费的政策着实不让本人满意。根据之前得到的消息，联通 201 宽带是不可共享的（对于懂点网络的人当然将信将疑），人家价格便宜嘛，这种做法也可以原谅啦！</p>
+
+<p>于是寝室几个人合伙买了个路由器，学生党挑来挑去选了个便宜的 newifi mini，果断入坑，网上说固件很烂我还不信，寝室方圆之内信号居然不是满格</p>
+
+<p>只有刷第三方固件了，听人说老毛子改的华硕固件不错，刷完之后信号果然好了许多，不过寝室的打 LOL 的兄弟直呼比校园网还卡，然而本人下东西没问题啊，不折腾了。为什么不想折腾呢？因为在寝室路由器用的是交换机模式，很多智能路由的功能用不到，稳定是关键。</p>
+
+<p>该做的事迟早要做，你逃不掉。</p>
+
+<p>后来我上网也开始卡，百度都不能秒开，渐渐地我也发现这简直不是10M带宽应有的体验。所以我猜这固件可能并不稳定，寝室路由器大家一起用贵在稳定，不能自己没事就折腾，故放弃 openwrt 之类的固件，刷了小米固件（本人半个米粉）。小米还算有良心，买的这坑路由器终于像个正常的路由器了(‘・ω・’)</p>
+
+<p>然后的问题是，这特么是智能路由器啊！当个交换机太可惜了。然后我做了如下事情：</p>
+
+<ol>
+<li>关闭 DHCP 功能，修改 lan 口 IP 为 <code>10.0.0.1</code>（为了绕过联通的限制）<br /></li>
+<li>光猫接出来两根网线分别接路由器 LAN 口和 WAN 口<br /></li>
+</ol>
+
+<p>舍友们上网，直接连上 WiFi，拨号即可。<br />
+本人连的时候就改改IP为 <code>10.0.0.x</code> 即可。
+然后我就一个人霸占了它的智能，远程下载，迅雷加速什么的都可以啦！</p>
+
+<p>附录：北京联通 201 python 自动登陆脚本，适用于 newifi mini 的小米固件，其他未测试</p>
+
+<pre><code class="language-python">#! /extdisks/sda4/opkg/usr/bin python
+#date: 2015/11/09
+#For Autologin ChinaUnicom 201
+#Code by Funnyang
+
+import sys
+import re
+import urllib2
+import urllib
+import requests
+import cookielib
+import socket                                          
+import fcntl                                           
+import struct
+
+reload(sys)
+sys.setdefaultencoding(&quot;utf-8&quot;)
+
+#get local ip
+def get_ip_address(ifname):  
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  
+    return socket.inet_ntoa(fcntl.ioctl(      
+         s.fileno(),         
+         0x8915,  # SIOCGIFADDR                 
+         struct.pack('256s', ifname[:15])                         
+    )[20:24])                                  
+
+#login
+loginurl = 'http://114.247.41.52:808/protalAction!portalAuth.action?'
+
+class Login(object):
+
+    def __init__(self):
+        self.wlanuserip = ''
+        self.localIp = ''
+        self.basip = ''
+        self.lpsUserName = ''
+        self.lpsPwd = ''
+
+        self.cj = cookielib.LWPCookieJar()
+        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cj))
+        urllib2.install_opener(self.opener)
+        
+    def setLoginInfo(self,wlanusrip,localIp,basip,lpsUserName,lpsPwd):
+        self.wlanuserip = wlanuserip                                       
+        self.localIp = localIp                                            
+        self.basip =  basip                                              
+        self.lpsUserName =  lpsUserName                                       
+        self.lpsPwd = lpsPwd 
+        
+    def login(self):
+        loginparams = {'wlanuserip':self.wlanuserip,'localIp':self.localIp,'basip':self.basip,'lpsUserName':self.lpsUserName,'lpsPwd':self.lpsPwd}
+        headers = {'User-Agent':'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5'}    
+        req = urllib2.Request(loginurl, urllib.urlencode(loginparams),headers=headers)  
+        response = urllib2.urlopen(req)
+        self.operate = self.opener.open(req)
+        thePage = response.read()    
+        print thePage
+        
+if __name__ == '__main__':
+    userlogin = Login()
+    wlanuserip = get_ip_address('eth0.2') 
+    localIp = ''
+    basip = '61.148.2.82'
+    lpsUserName = '手机号/账户'
+    lpsPwd = '密码'
+    userlogin.setLoginInfo(wlanuserip,localIp,basip,lpsUserName,lpsPwd)
+    userlogin.login()
+</code></pre>
+
+<p>以上未涉及技术的细节，均可直接到newifi官方论坛找到。</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://funnyang.github.io/">lon3r</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://funnyang.github.io/posts/old_blog/newifi-mini/">https://funnyang.github.io/posts/old_blog/newifi-mini/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://funnyang.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/iris-learing-notes-1/" title="Iris 学习笔记 1">Iris 学习笔记 1</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="debian vsftpd安装配置">debian vsftpd安装配置</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/" title="源码安装 chkrootkit 报错">源码安装 chkrootkit 报错</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macos-sierra/" title="黑苹果直升 macOS Sierra">黑苹果直升 macOS Sierra</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/beginners-guide-of-nginx/" title="Beginner’s Guide of Nginx">Beginner’s Guide of Nginx</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/" title="Y480 完美黑苹果全套驱动分享">Y480 完美黑苹果全套驱动分享</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/" title="英文原版Ghost如何使用七牛云">英文原版Ghost如何使用七牛云</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/" title="Ghost博客优化大结局（2）">Ghost博客优化大结局（2）</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/" title="Ghost博客优化大结局（1）">Ghost博客优化大结局（1）</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/posts/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/" title="nginx 代理 ghost 的高性能配置">nginx 代理 ghost 的高性能配置</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://funnyang.github.io/categories/development/">development(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/categories/golang/">golang(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/categories/%E6%84%9F%E6%83%B3/">感想(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/categories/%E6%9D%82%E9%A1%B9/">杂项(4)</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://funnyang.github.io/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://funnyang.github.io/tags/apache/">apache</a>
+    
+    <a href="https://funnyang.github.io/tags/dns/">dns</a>
+    
+    <a href="https://funnyang.github.io/tags/go/">go</a>
+    
+    <a href="https://funnyang.github.io/tags/golang/">golang</a>
+    
+    <a href="https://funnyang.github.io/tags/hackintosh/">hackintosh</a>
+    
+    <a href="https://funnyang.github.io/tags/iodined/">iodined</a>
+    
+    <a href="https://funnyang.github.io/tags/iris/">iris</a>
+    
+    <a href="https://funnyang.github.io/tags/mysql/">mysql</a>
+    
+    <a href="https://funnyang.github.io/tags/osx/">osx</a>
+    
+    <a href="https://funnyang.github.io/tags/php/">php</a>
+    
+    <a href="https://funnyang.github.io/tags/xhprof/">xhprof</a>
+    
+    <a href="https://funnyang.github.io/tags/%E6%84%9F%E6%83%B3/">感想</a>
+    
+    <a href="https://funnyang.github.io/tags/%E8%81%94%E9%80%9A201/">联通201</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://funnyang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://funnyang.github.io/">不知道是谁的博客 By lon3r</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

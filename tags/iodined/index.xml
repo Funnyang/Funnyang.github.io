@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iodined on 不知道是谁的博客</title>
+    <link>https://funnyang.github.io/tags/iodined/</link>
+    <description>Recent content in iodined on 不知道是谁的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 03 Mar 2015 20:01:57 +0800</lastBuildDate>
+    
+	<atom:link href="https://funnyang.github.io/tags/iodined/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DNS 隧道免费上网教程之 iodined</title>
+      <link>https://funnyang.github.io/posts/old_blog/dns%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</link>
+      <pubDate>Tue, 03 Mar 2015 20:01:57 +0800</pubDate>
+      
+      <guid>https://funnyang.github.io/posts/old_blog/dns%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;实现免费上网一直是鄙人的终极奋斗目标&lt;/p&gt;
+
+&lt;p&gt;近日，在下听说了一种可以通过建立 DNS 隧道免费上网的方式，当然这项技术其实早就有了，只是本人见识短，目光浅，如今才真正知晓。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
