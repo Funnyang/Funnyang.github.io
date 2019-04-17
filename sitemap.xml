@@ -33,7 +33,7 @@
   </url>
   
   <url>
-    <loc>https://funnyang.github.io/posts/iris-learing-notes-1/</loc>
+    <loc>https://funnyang.github.io/posts/golang/iris-learing-notes-1/</loc>
     <lastmod>2019-04-03T11:43:25+08:00</lastmod>
   </url>
   
@@ -242,6 +242,11 @@
   <url>
     <loc>https://funnyang.github.io/tags/iodined/</loc>
     <lastmod>2015-03-03T20:01:57+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://funnyang.github.io/posts/mongo/read/</loc>
     <priority>0</priority>
   </url>
   

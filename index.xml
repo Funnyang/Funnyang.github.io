@@ -13,10 +13,10 @@
     
     <item>
       <title>Iris 学习笔记 1</title>
-      <link>https://funnyang.github.io/posts/iris-learing-notes-1/</link>
+      <link>https://funnyang.github.io/posts/golang/iris-learing-notes-1/</link>
       <pubDate>Wed, 03 Apr 2019 11:43:25 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/iris-learing-notes-1/</guid>
+      <guid>https://funnyang.github.io/posts/golang/iris-learing-notes-1/</guid>
       <description>&lt;p&gt;Iris 学习简单记录，因为某些原因未在项目中使用，所以仅是记录而已，多数内容来源于官方 Readme。&lt;/p&gt;</description>
     </item>
     
@@ -242,6 +242,19 @@
 &lt;p&gt;实现免费上网一直是鄙人的终极奋斗目标&lt;/p&gt;
 
 &lt;p&gt;近日，在下听说了一种可以通过建立 DNS 隧道免费上网的方式，当然这项技术其实早就有了，只是本人见识短，目光浅，如今才真正知晓。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://funnyang.github.io/posts/mongo/read/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://funnyang.github.io/posts/mongo/read/</guid>
+      <description>建立全局管理用户 只能进行数据库维护,不能查询数据
+use admin db.createUser( { user: &amp;quot;root&amp;quot;, pwd: &amp;quot;2018&amp;quot;, roles: [ { role: &amp;quot;userAdminAnyDatabase&amp;quot;, db: &amp;quot;admin&amp;quot; } ] } )  设置系统安全认证 vi /etc/mongd.conf
+security: authorization: enabled  重启
+单库分别管理 一个连接只能进行一次 auth 认证, 无法使用多库连接池, 不采用.
+ 建立用户  // 普通用户 use admin db.auth(&amp;quot;root&amp;quot;, &amp;quot;2018&amp;quot;) use db1 db.createUser( { user:&amp;quot;mywood&amp;quot;, pwd:&amp;quot;2018&amp;quot;, roles:[{ role: &amp;quot;readWrite&amp;quot;, db: &amp;quot;db1&amp;quot; }] } ) use db2 db.createUser( { user:&amp;quot;mywood&amp;quot;, pwd:&amp;quot;2018&amp;quot;, roles:[{ role: &amp;quot;readWrite&amp;quot;, db: &amp;quot;db2&amp;quot; }] } )   登录操作  登录 db1</description>
     </item>
     
     <item>

@@ -7,22 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DNS | 不知道是谁的博客</title>
-    <meta property="og:title" content="DNS - 不知道是谁的博客">
+    <title> | 不知道是谁的博客</title>
+    <meta property="og:title" content=" - 不知道是谁的博客">
     <meta property="og:type" content="article">
         
         
     <meta name="Keywords" content="">
-    <meta name="description" content="DNS">
+    <meta name="description" content="">
         
     <meta name="author" content="lon3r">
-    <meta property="og:url" content="https://funnyang.github.io/tags/dns/">
+    <meta property="og:url" content="https://funnyang.github.io/posts/mongo/read/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
     
+        <link rel="stylesheet" href="/css/prism.css">
+    
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" type="application/rss+xml+xml" href="https://funnyang.github.io/tags/dns/index.xml" title="不知道是谁的博客" />
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
     
@@ -31,7 +32,6 @@
     
     
 </head>
-
 
 <body>
 <header id="header" class="clearfix">
@@ -64,53 +64,262 @@
 
             <div class="col-8" id="main">
                 <div class="res-cons">
-                    
-                    <h3 class="archive-title">
-                        包含标签
-                        <span class="keyword">DNS</span>
-                        的文章
-                    </h3>
-                    
-
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://funnyang.github.io/posts/old_blog/dns%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/">DNS 隧道免费上网教程之 iodined</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2015年3月3日
-                            </date>
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title"></h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            1年1月1日
+                        </date>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
                             
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://funnyang.github.io/categories/%E6%9D%82%E9%A1%B9">杂项</a>
-                                
-                            </div>
+
+<h1 id="建立全局管理用户">建立全局管理用户</h1>
+
+<p>只能进行数据库维护,不能查询数据</p>
+
+<pre><code class="language-js">use admin
+
+db.createUser(
+  {
+    user: &quot;root&quot;,
+    pwd: &quot;2018&quot;,
+    roles: [ { role: &quot;userAdminAnyDatabase&quot;, db: &quot;admin&quot; } ]
+  }
+)
+</code></pre>
+
+<h1 id="设置系统安全认证">设置系统安全认证</h1>
+
+<p>vi /etc/mongd.conf</p>
+
+<pre><code class="language-yaml">security:
+    authorization: enabled
+</code></pre>
+
+<p>重启</p>
+
+<h1 id="单库分别管理">单库分别管理</h1>
+
+<p>一个连接只能进行一次 auth 认证, 无法使用多库连接池, 不采用.</p>
+
+<ul>
+<li>建立用户</li>
+</ul>
+
+<pre><code class="language-js">// 普通用户
+use admin
+db.auth(&quot;root&quot;, &quot;2018&quot;)
+
+use db1
+db.createUser(
+	{
+		user:&quot;mywood&quot;, 
+		pwd:&quot;2018&quot;, 
+		roles:[{ role: &quot;readWrite&quot;, db: &quot;db1&quot; }]
+	}
+)
+
+use db2
+db.createUser(
+	{
+		user:&quot;mywood&quot;, 
+		pwd:&quot;2018&quot;, 
+		roles:[{ role: &quot;readWrite&quot;, db: &quot;db2&quot; }]
+	}
+)
+</code></pre>
+
+<ul>
+<li>登录操作</li>
+</ul>
+
+<p>登录 db1</p>
+
+<pre><code class="language-js">use db1
+db.auth(&quot;mywood&quot;, &quot;2018&quot;)
+db.coll1.find()
+</code></pre>
+
+<p>登录 db2</p>
+
+<pre><code class="language-js">use db2
+db.auth(&quot;mywood&quot;, &quot;2018&quot;)
+db.coll3.find()
+</code></pre>
+
+<h1 id="多库分别管理">多库分别管理</h1>
+
+<p>采用此方案</p>
+
+<ul>
+<li>建立用户</li>
+</ul>
+
+<pre><code class="language-js">// 普通用户
+use admin
+db.auth(&quot;root&quot;, &quot;2018&quot;)
+
+use sample
+db.createUser(
+	{
+		user:&quot;wood&quot;, 
+		pwd:&quot;2018&quot;, 
+		roles:[
+			{ role: &quot;readWrite&quot;, db: &quot;db1&quot; },
+			{ role: &quot;readWrite&quot;, db: &quot;db2&quot; },
+		]
+	}
+)
+
+//-----
+
+//增加新库可重新赋权
+use admin
+db.auth(&quot;root&quot;, &quot;2018&quot;)
+
+db.grantRolesToUser(
+   &quot;wood&quot;,
+   [ &quot;readWrite&quot; , { role: &quot;readWrite&quot;, db: &quot;db3&quot; } ]
+)
+</code></pre>
+
+<ul>
+<li>登录操作</li>
+</ul>
+
+<pre><code class="language-js">use sample
+db.auth(&quot;wood&quot;, &quot;2018&quot;)
+
+use db1
+db.coll1.find()
+
+use db2
+db.coll2.find()
+
+use db3
+db.coll3.find()
+</code></pre>
+
+<h1 id="全库读写用户">全库读写用户</h1>
+
+<p>权限过大, 可对 admin 操作, 不采用</p>
+
+<ul>
+<li>建立用户</li>
+</ul>
+
+<pre><code class="language-js">use admin
+db.auth(&quot;root&quot;, &quot;2018&quot;)
+
+use admin
+db.auth(&quot;root&quot;, &quot;2018&quot;)
+db.createUser(
+	{
+		user:&quot;wood&quot;, 
+		pwd:&quot;2018&quot;, 
+		roles:[{ role: &quot;readWriteAnyDatabase&quot;, db:&quot;admin&quot; }]
+	}
+)
+</code></pre>
+
+<ul>
+<li>登录操作
+```js
+// 登录
+use admin
+db.auth(&ldquo;wood&rdquo;, &ldquo;2018&rdquo;)</li>
+</ul>
+
+<p>use db1
+db.coll1.find()</p>
+
+<p>use db2
+db.coll3.find()</p>
+
+<pre><code>
+# 查看全部用户
+```js
+db.system.users.find()
+</code></pre>
+
+<h1 id="建立用户命令">建立用户命令</h1>
+
+<p>在 go 中,无用户操作的方法，需要通过 RunCommand 命令
+<a href="https://docs.mongodb.com/manual/reference/command/nav-user-management/">https://docs.mongodb.com/manual/reference/command/nav-user-management/</a>
+<a href="https://docs.mongodb.com/manual/reference/command/createUser/">https://docs.mongodb.com/manual/reference/command/createUser/</a></p>
+
+<pre><code class="language-js">db.createUser(
+	{
+		user:&quot;test1&quot;, 
+		pwd:&quot;wood2019&quot;, 
+		roles:[{ role: &quot;readWrite&quot;, db: &quot;db1&quot; }]
+	}
+)
+
+db.runCommand( 
+    {
+        createUser: &quot;test1&quot;,
+        pwd: &quot;wood2019&quot;,
+        roles: [{ role: &quot;readWrite&quot;, db: &quot;db1&quot; }]
+    }
+)
+</code></pre>
+
+<pre><code class="language-golang">v := db.RunCommand(ctx, bson.M{
+	&quot;createUser&quot;: &quot;wood&quot;,
+	&quot;pwd&quot;:        &quot;2019&quot;,
+	&quot;roles&quot;: bson.A{
+		bson.M{&quot;role&quot;: &quot;readWrite&quot;, &quot;db&quot;: &quot;testing&quot;},
+	},
+})
+</code></pre>
+
+<p>建立 sample 库，用户
+username: wood
+password: 2018</p>
+
+<p>创建空间时，授予wood用户访问该空间数据库权限</p>
+
+<p>golang:
+  用 wood 登录到 sample 库</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://funnyang.github.io/">lon3r</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://funnyang.github.io/posts/mongo/read/">https://funnyang.github.io/posts/mongo/read/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+
+                        <div class="post-meta meta-tags">
                             
-                            <div class="post-content">
-                                <blockquote>
-<p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
-</blockquote>
-
-<p>实现免费上网一直是鄙人的终极奋斗目标</p>
-
-<p>近日，在下听说了一种可以通过建立 DNS 隧道免费上网的方式，当然这项技术其实早就有了，只是本人见识短，目光浅，如今才真正知晓。</p>……
-                                <p class="readmore"><a href="https://funnyang.github.io/posts/old_blog/dns%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/">阅读全文</a></p>
-                            </div>
-                        </article>
+                            没有标签
+                            
+                        </div>
+                    </article>
                     
+    
 
-                    
-
-
-
-
+    
+    
                 </div>
             </div>
-
             <div id="secondary">
     <section class="widget">
         <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
@@ -256,13 +465,28 @@
 </footer>
 
 
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
 
 
 
 <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
 
 
 
