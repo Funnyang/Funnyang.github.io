@@ -4,31 +4,48 @@
   
   <url>
     <loc>https://tlog.cc/categories/</loc>
-    <lastmod>2019-05-02T15:02:31+08:00</lastmod>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/posts/</loc>
-    <lastmod>2019-05-02T15:02:31+08:00</lastmod>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/tags/</loc>
-    <lastmod>2019-05-02T15:02:31+08:00</lastmod>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/</loc>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/categories/%E9%BB%91/</loc>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96synologyxpenology/</loc>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/hei/hack-synology-note/</loc>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://tlog.cc/posts/journal/2019-05-02/</loc>
     <lastmod>2019-05-02T15:02:31+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/</loc>
-    <lastmod>2019-05-02T15:02:31+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
