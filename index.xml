@@ -6,10 +6,21 @@
     <description>Recent content on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 03 Apr 2019 11:43:25 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 02 May 2019 15:02:31 +0800</lastBuildDate>
     
 	<atom:link href="https://tlog.cc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>假期随感</title>
+      <link>https://tlog.cc/posts/journal/2019-05-02/</link>
+      <pubDate>Thu, 02 May 2019 15:02:31 +0800</pubDate>
+      
+      <guid>https://tlog.cc/posts/journal/2019-05-02/</guid>
+      <description>过去的一天，都在忙于折腾我的新玩具——蜗牛星际。我买的是 A 款双网卡版，想用来做黑群晖，顺带兼具下班时间家用电脑的职责。
+本着生命不息，折腾不止的心态，果断格式化了卖家帮忙装好的系统。原因有三点：
+ 本能的不信任 本能的想折腾 本能的原版强迫症（基于第一点）  家里没有有线鼠标，导致折腾路上遇到不少阻碍，比如使用 PE 只能键盘控制。家里没有显示器（但是有个坚果 G7 投影），导致折腾路上姿势比较难受，比如站着、蹲着敲键盘。其实蛮喜欢这种状态的，兵来将挡，有问题出现，但似乎难不倒我的样子。</description>
+    </item>
     
     <item>
       <title>Iris 学习笔记 1</title>
