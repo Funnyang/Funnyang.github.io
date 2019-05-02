@@ -15,7 +15,19 @@
   </url>
   
   <url>
+    <loc>https://tlog.cc/tags/synology/</loc>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://tlog.cc/tags/</loc>
+    <lastmod>2019-05-02T19:32:57+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/xpenology/</loc>
     <lastmod>2019-05-02T19:32:57+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -33,7 +45,7 @@
   </url>
   
   <url>
-    <loc>https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96synologyxpenology/</loc>
+    <loc>https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/</loc>
     <lastmod>2019-05-02T19:32:57+08:00</lastmod>
     <priority>0</priority>
   </url>
