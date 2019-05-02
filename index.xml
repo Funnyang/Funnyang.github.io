@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>不知道是谁的博客</title>
-    <link>https://funnyang.github.io/</link>
-    <description>Recent content on 不知道是谁的博客</description>
+    <title>小 ceng 的时间日志</title>
+    <link>https://tlog.cc/</link>
+    <description>Recent content on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 03 Apr 2019 11:43:25 +0800</lastBuildDate>
     
-	<atom:link href="https://funnyang.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tlog.cc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Iris 学习笔记 1</title>
-      <link>https://funnyang.github.io/posts/golang/iris-learning-notes-1/</link>
+      <link>https://tlog.cc/posts/golang/iris-learning-notes-1/</link>
       <pubDate>Wed, 03 Apr 2019 11:43:25 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/golang/iris-learning-notes-1/</guid>
+      <guid>https://tlog.cc/posts/golang/iris-learning-notes-1/</guid>
       <description>&lt;p&gt;Iris 学习简单记录，因为某些原因未在项目中使用，所以仅是记录而已，多数内容来源于官方 Readme。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>debian vsftpd安装配置</title>
-      <link>https://funnyang.github.io/posts/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
+      <link>https://tlog.cc/posts/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Thu, 20 Apr 2017 14:54:14 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://tlog.cc/posts/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -33,10 +33,10 @@
     
     <item>
       <title>源码安装 chkrootkit 报错</title>
-      <link>https://funnyang.github.io/posts/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/</link>
+      <link>https://tlog.cc/posts/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/</link>
       <pubDate>Thu, 29 Sep 2016 07:17:22 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/</guid>
+      <guid>https://tlog.cc/posts/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -44,10 +44,10 @@
     
     <item>
       <title>黑苹果直升 macOS Sierra</title>
-      <link>https://funnyang.github.io/posts/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macos-sierra/</link>
+      <link>https://tlog.cc/posts/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macos-sierra/</link>
       <pubDate>Thu, 29 Sep 2016 07:17:22 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macos-sierra/</guid>
+      <guid>https://tlog.cc/posts/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macos-sierra/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -55,10 +55,10 @@
     
     <item>
       <title>Beginner’s Guide of Nginx</title>
-      <link>https://funnyang.github.io/posts/old_blog/beginners-guide-of-nginx/</link>
+      <link>https://tlog.cc/posts/old_blog/beginners-guide-of-nginx/</link>
       <pubDate>Fri, 23 Sep 2016 13:55:20 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/beginners-guide-of-nginx/</guid>
+      <guid>https://tlog.cc/posts/old_blog/beginners-guide-of-nginx/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -66,10 +66,10 @@
     
     <item>
       <title>Y480 完美黑苹果全套驱动分享</title>
-      <link>https://funnyang.github.io/posts/old_blog/y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/</link>
+      <link>https://tlog.cc/posts/old_blog/y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/</link>
       <pubDate>Fri, 22 Jul 2016 15:15:37 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/</guid>
+      <guid>https://tlog.cc/posts/old_blog/y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -77,10 +77,10 @@
     
     <item>
       <title>英文原版Ghost如何使用七牛云</title>
-      <link>https://funnyang.github.io/posts/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/</link>
+      <link>https://tlog.cc/posts/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/</link>
       <pubDate>Fri, 26 Feb 2016 06:53:28 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/</guid>
+      <guid>https://tlog.cc/posts/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -88,10 +88,10 @@
     
     <item>
       <title>Ghost博客优化大结局（2）</title>
-      <link>https://funnyang.github.io/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/</link>
+      <link>https://tlog.cc/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/</link>
       <pubDate>Fri, 26 Feb 2016 05:16:50 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/</guid>
+      <guid>https://tlog.cc/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -99,10 +99,10 @@
     
     <item>
       <title>Ghost博客优化大结局（1）</title>
-      <link>https://funnyang.github.io/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/</link>
+      <link>https://tlog.cc/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/</link>
       <pubDate>Fri, 26 Feb 2016 05:14:10 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/</guid>
+      <guid>https://tlog.cc/posts/old_blog/ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -110,10 +110,10 @@
     
     <item>
       <title>nginx 代理 ghost 的高性能配置</title>
-      <link>https://funnyang.github.io/posts/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/</link>
+      <link>https://tlog.cc/posts/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Fri, 26 Feb 2016 04:58:00 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://tlog.cc/posts/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -121,10 +121,10 @@
     
     <item>
       <title>&#34;&gt;/dev/null  2&gt;&amp;1&#34; 和 &#34;2&gt;&amp;1  &gt;/dev/null&#34;的区别</title>
-      <link>https://funnyang.github.io/posts/old_blog/devnull%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <link>https://tlog.cc/posts/old_blog/devnull%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
       <pubDate>Tue, 23 Feb 2016 05:26:04 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/devnull%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <guid>https://tlog.cc/posts/old_blog/devnull%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -132,10 +132,10 @@
     
     <item>
       <title>关于斐讯K1已公开的两个漏洞</title>
-      <link>https://funnyang.github.io/posts/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFk1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</link>
+      <link>https://tlog.cc/posts/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFk1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</link>
       <pubDate>Fri, 19 Feb 2016 01:27:24 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFk1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</guid>
+      <guid>https://tlog.cc/posts/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFk1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -143,10 +143,10 @@
     
     <item>
       <title>VPS 折腾轶事</title>
-      <link>https://funnyang.github.io/posts/old_blog/vps%E6%8A%98%E8%85%BE%E8%BD%B6%E4%BA%8B/</link>
+      <link>https://tlog.cc/posts/old_blog/vps%E6%8A%98%E8%85%BE%E8%BD%B6%E4%BA%8B/</link>
       <pubDate>Fri, 29 Jan 2016 15:50:07 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/vps%E6%8A%98%E8%85%BE%E8%BD%B6%E4%BA%8B/</guid>
+      <guid>https://tlog.cc/posts/old_blog/vps%E6%8A%98%E8%85%BE%E8%BD%B6%E4%BA%8B/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -154,10 +154,10 @@
     
     <item>
       <title>x80h刷安卓5.0</title>
-      <link>https://funnyang.github.io/posts/old_blog/x80h%E5%88%B7%E5%AE%89%E5%8D%935.0/</link>
+      <link>https://tlog.cc/posts/old_blog/x80h%E5%88%B7%E5%AE%89%E5%8D%935.0/</link>
       <pubDate>Mon, 25 Jan 2016 03:33:27 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/x80h%E5%88%B7%E5%AE%89%E5%8D%935.0/</guid>
+      <guid>https://tlog.cc/posts/old_blog/x80h%E5%88%B7%E5%AE%89%E5%8D%935.0/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -165,10 +165,10 @@
     
     <item>
       <title>OSX 10.11安装XHProf的经验和教训</title>
-      <link>https://funnyang.github.io/posts/old_blog/osx%E5%AE%89%E8%A3%85xhprof%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</link>
+      <link>https://tlog.cc/posts/old_blog/osx%E5%AE%89%E8%A3%85xhprof%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</link>
       <pubDate>Sat, 10 Oct 2015 12:53:08 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/osx%E5%AE%89%E8%A3%85xhprof%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</guid>
+      <guid>https://tlog.cc/posts/old_blog/osx%E5%AE%89%E8%A3%85xhprof%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -176,10 +176,10 @@
     
     <item>
       <title>OSX 10.11 中 Apache&#43;PHP&#43;MySQL 环境搭建</title>
-      <link>https://funnyang.github.io/posts/old_blog/osx%E4%B8%ADapache&#43;php&#43;mysql%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>https://tlog.cc/posts/old_blog/osx%E4%B8%ADapache&#43;php&#43;mysql%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Wed, 07 Oct 2015 21:04:00 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/osx%E4%B8%ADapache&#43;php&#43;mysql%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>https://tlog.cc/posts/old_blog/osx%E4%B8%ADapache&#43;php&#43;mysql%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -187,10 +187,10 @@
     
     <item>
       <title>联通201宽带破解</title>
-      <link>https://funnyang.github.io/posts/old_blog/%E8%81%94%E9%80%9A201%E5%AE%BD%E5%B8%A6%E7%A0%B4%E8%A7%A3/</link>
+      <link>https://tlog.cc/posts/old_blog/%E8%81%94%E9%80%9A201%E5%AE%BD%E5%B8%A6%E7%A0%B4%E8%A7%A3/</link>
       <pubDate>Thu, 01 Oct 2015 22:16:14 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/%E8%81%94%E9%80%9A201%E5%AE%BD%E5%B8%A6%E7%A0%B4%E8%A7%A3/</guid>
+      <guid>https://tlog.cc/posts/old_blog/%E8%81%94%E9%80%9A201%E5%AE%BD%E5%B8%A6%E7%A0%B4%E8%A7%A3/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -198,10 +198,10 @@
     
     <item>
       <title>Newifi Mini</title>
-      <link>https://funnyang.github.io/posts/old_blog/newifi-mini/</link>
+      <link>https://tlog.cc/posts/old_blog/newifi-mini/</link>
       <pubDate>Thu, 01 Oct 2015 17:02:31 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/newifi-mini/</guid>
+      <guid>https://tlog.cc/posts/old_blog/newifi-mini/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -209,10 +209,10 @@
     
     <item>
       <title>重返黑苹果</title>
-      <link>https://funnyang.github.io/posts/old_blog/%E9%87%8D%E8%BF%94%E9%BB%91%E8%8B%B9%E6%9E%9C/</link>
+      <link>https://tlog.cc/posts/old_blog/%E9%87%8D%E8%BF%94%E9%BB%91%E8%8B%B9%E6%9E%9C/</link>
       <pubDate>Fri, 03 Jul 2015 12:57:02 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/%E9%87%8D%E8%BF%94%E9%BB%91%E8%8B%B9%E6%9E%9C/</guid>
+      <guid>https://tlog.cc/posts/old_blog/%E9%87%8D%E8%BF%94%E9%BB%91%E8%8B%B9%E6%9E%9C/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -220,10 +220,10 @@
     
     <item>
       <title>一切只不过是殊途同归</title>
-      <link>https://funnyang.github.io/posts/old_blog/%E4%B8%80%E5%88%87%E5%8F%AA%E4%B8%8D%E8%BF%87%E6%98%AF%E6%AE%8A%E9%80%94%E5%90%8C%E5%BD%92/</link>
+      <link>https://tlog.cc/posts/old_blog/%E4%B8%80%E5%88%87%E5%8F%AA%E4%B8%8D%E8%BF%87%E6%98%AF%E6%AE%8A%E9%80%94%E5%90%8C%E5%BD%92/</link>
       <pubDate>Sat, 11 Apr 2015 09:56:00 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/%E4%B8%80%E5%88%87%E5%8F%AA%E4%B8%8D%E8%BF%87%E6%98%AF%E6%AE%8A%E9%80%94%E5%90%8C%E5%BD%92/</guid>
+      <guid>https://tlog.cc/posts/old_blog/%E4%B8%80%E5%88%87%E5%8F%AA%E4%B8%8D%E8%BF%87%E6%98%AF%E6%AE%8A%E9%80%94%E5%90%8C%E5%BD%92/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧文留念&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -231,10 +231,10 @@
     
     <item>
       <title>DNS 隧道免费上网教程之 iodined</title>
-      <link>https://funnyang.github.io/posts/old_blog/dns%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</link>
+      <link>https://tlog.cc/posts/old_blog/dns%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</link>
       <pubDate>Tue, 03 Mar 2015 20:01:57 +0800</pubDate>
       
-      <guid>https://funnyang.github.io/posts/old_blog/dns%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</guid>
+      <guid>https://tlog.cc/posts/old_blog/dns%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -245,24 +245,11 @@
     </item>
     
     <item>
-      <title></title>
-      <link>https://funnyang.github.io/posts/mongo/read/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://funnyang.github.io/posts/mongo/read/</guid>
-      <description>建立全局管理用户 只能进行数据库维护,不能查询数据
-use admin db.createUser( { user: &amp;quot;root&amp;quot;, pwd: &amp;quot;2018&amp;quot;, roles: [ { role: &amp;quot;userAdminAnyDatabase&amp;quot;, db: &amp;quot;admin&amp;quot; } ] } )  设置系统安全认证 vi /etc/mongd.conf
-security: authorization: enabled  重启
-单库分别管理 一个连接只能进行一次 auth 认证, 无法使用多库连接池, 不采用.
- 建立用户  // 普通用户 use admin db.auth(&amp;quot;root&amp;quot;, &amp;quot;2018&amp;quot;) use db1 db.createUser( { user:&amp;quot;mywood&amp;quot;, pwd:&amp;quot;2018&amp;quot;, roles:[{ role: &amp;quot;readWrite&amp;quot;, db: &amp;quot;db1&amp;quot; }] } ) use db2 db.createUser( { user:&amp;quot;mywood&amp;quot;, pwd:&amp;quot;2018&amp;quot;, roles:[{ role: &amp;quot;readWrite&amp;quot;, db: &amp;quot;db2&amp;quot; }] } )   登录操作  登录 db1</description>
-    </item>
-    
-    <item>
       <title>归档</title>
-      <link>https://funnyang.github.io/archives/</link>
+      <link>https://tlog.cc/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://funnyang.github.io/archives/</guid>
+      <guid>https://tlog.cc/archives/</guid>
       <description></description>
     </item>
     
