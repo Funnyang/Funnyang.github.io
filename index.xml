@@ -6,10 +6,20 @@
     <description>Recent content on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 20 Jul 2019 13:35:16 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jul 2019 18:52:17 +0800</lastBuildDate>
     
 	<atom:link href="https://tlog.cc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>尝试在 vue 指令中阻止事件触发</title>
+      <link>https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/</link>
+      <pubDate>Sun, 28 Jul 2019 18:52:17 +0800</pubDate>
+      
+      <guid>https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/</guid>
+      <description>尝试在 vue 指令中阻止事件触发 通常，大家都是在指令中绑定事件，而我遇到一种场景是希望在阻止事件触发，准确地讲，是阻止元素或组件绑定的事件 handler 的执行。
+这个场景是基于权限控制诞生的，网上能查到资料，不少的实践中，都使用自定义指令控制按钮级别的权限控制。而这些实践中，多数都是控制按钮的显隐，这点不难实现。但实际中，可能也会有点击按钮，然后通过提示告知用户无权限操作的需求。因此我希望权限指令 v-permission 也能适应这种场景。</description>
+    </item>
     
     <item>
       <title>如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</title>
