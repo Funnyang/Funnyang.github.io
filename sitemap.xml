@@ -4,19 +4,48 @@
   
   <url>
     <loc>https://tlog.cc/categories/</loc>
-    <lastmod>2019-07-28T18:52:17+08:00</lastmod>
+    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/posts/</loc>
-    <lastmod>2019-07-28T18:52:17+08:00</lastmod>
+    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/tags/</loc>
-    <lastmod>2019-07-28T18:52:17+08:00</lastmod>
+    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/</loc>
+    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/journal/2019-08-10-%E6%88%91%E7%9C%8B%E5%8D%8E%E4%B8%BA%E6%99%BA%E6%85%A7%E5%B1%8F/</loc>
+    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/%E6%99%BA%E6%85%A7%E5%B1%8F/</loc>
+    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/%E6%9C%AA%E6%9D%A5/</loc>
+    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/categories/%E7%A7%91%E6%8A%80/</loc>
+    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -28,12 +57,6 @@
   
   <url>
     <loc>https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2019-07-28T18:52:17+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/</loc>
     <lastmod>2019-07-28T18:52:17+08:00</lastmod>
     <priority>0</priority>
   </url>
