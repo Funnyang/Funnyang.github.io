@@ -3,26 +3,61 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://tlog.cc/tags/anki/</loc>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/macos/anki-%E4%B8%8E-popclip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</loc>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://tlog.cc/categories/</loc>
-    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/popclip/</loc>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/posts/</loc>
-    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/tags/</loc>
-    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/categories/macos/</loc>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/</loc>
-    <lastmod>2019-08-10T15:55:38+08:00</lastmod>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/%E6%95%88%E7%8E%87/</loc>
+    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -68,12 +103,6 @@
   
   <url>
     <loc>https://tlog.cc/tags/timemachine/</loc>
-    <lastmod>2019-07-20T13:35:16+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/categories/macos/</loc>
     <lastmod>2019-07-20T13:35:16+08:00</lastmod>
     <priority>0</priority>
   </url>
