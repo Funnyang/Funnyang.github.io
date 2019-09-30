@@ -6,10 +6,21 @@
     <description>Recent content in Posts on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 25 Aug 2019 11:03:50 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Sep 2019 18:51:54 +0800</lastBuildDate>
     
 	<atom:link href="https://tlog.cc/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Grafana 学习笔记</title>
+      <link>https://tlog.cc/posts/grafana/grafana-get-start/</link>
+      <pubDate>Sun, 29 Sep 2019 18:51:54 +0800</pubDate>
+      
+      <guid>https://tlog.cc/posts/grafana/grafana-get-start/</guid>
+      <description>在学习一款软件之前，我最热衷的事件就是搜索这款软件名字的含义。
+关于 Grafana 名字的来历：
+ It does not mean anything.</description>
+    </item>
     
     <item>
       <title>Anki 与 PopClip 工作流建设</title>

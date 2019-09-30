@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 25 Aug 2019 11:03:50 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Sep 2019 18:51:54 +0800</lastBuildDate>
     
 	<atom:link href="https://tlog.cc/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Grafana</title>
+      <link>https://tlog.cc/tags/grafana/</link>
+      <pubDate>Sun, 29 Sep 2019 18:51:54 +0800</pubDate>
+      
+      <guid>https://tlog.cc/tags/grafana/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Anki</title>

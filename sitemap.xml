@@ -3,6 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://tlog.cc/categories/</loc>
+    <lastmod>2019-09-29T18:51:54+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/grafana/</loc>
+    <lastmod>2019-09-29T18:51:54+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/grafana/grafana-get-start/</loc>
+    <lastmod>2019-09-29T18:51:54+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/</loc>
+    <lastmod>2019-09-29T18:51:54+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/</loc>
+    <lastmod>2019-09-29T18:51:54+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/</loc>
+    <lastmod>2019-09-29T18:51:54+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/</loc>
+    <lastmod>2019-09-29T18:51:54+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://tlog.cc/tags/anki/</loc>
     <lastmod>2019-08-25T11:03:50+08:00</lastmod>
     <priority>0</priority>
@@ -14,25 +55,7 @@
   </url>
   
   <url>
-    <loc>https://tlog.cc/categories/</loc>
-    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://tlog.cc/tags/popclip/</loc>
-    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/posts/</loc>
-    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/tags/</loc>
     <lastmod>2019-08-25T11:03:50+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -45,12 +68,6 @@
   
   <url>
     <loc>https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2019-08-25T11:03:50+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/</loc>
     <lastmod>2019-08-25T11:03:50+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -171,13 +188,13 @@
   </url>
   
   <url>
-    <loc>https://tlog.cc/categories/golang/</loc>
+    <loc>https://tlog.cc/tags/golang/</loc>
     <lastmod>2019-04-03T11:43:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://tlog.cc/tags/golang/</loc>
+    <loc>https://tlog.cc/categories/golang/</loc>
     <lastmod>2019-04-03T11:43:25+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -349,13 +366,13 @@
   </url>
   
   <url>
-    <loc>https://tlog.cc/categories/%E6%84%9F%E6%83%B3/</loc>
+    <loc>https://tlog.cc/tags/%E6%84%9F%E6%83%B3/</loc>
     <lastmod>2015-04-11T09:56:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://tlog.cc/tags/%E6%84%9F%E6%83%B3/</loc>
+    <loc>https://tlog.cc/categories/%E6%84%9F%E6%83%B3/</loc>
     <lastmod>2015-04-11T09:56:00+08:00</lastmod>
     <priority>0</priority>
   </url>
