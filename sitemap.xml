@@ -4,8 +4,54 @@
   
   <url>
     <loc>https://tlog.cc/categories/</loc>
-    <lastmod>2019-10-18T14:12:06+08:00</lastmod>
+    <lastmod>2019-10-24T21:39:51+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/docker/</loc>
+    <lastmod>2019-10-24T21:39:51+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/k8s/</loc>
+    <lastmod>2019-10-24T21:39:51+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/</loc>
+    <lastmod>2019-10-24T21:39:51+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/</loc>
+    <lastmod>2019-10-24T21:39:51+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/notes/k8s-docker-network/</loc>
+    <lastmod>2019-10-24T21:39:51+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/</loc>
+    <lastmod>2019-10-24T21:39:51+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/categories/%E9%A2%98%E5%BA%93/</loc>
+    <lastmod>2019-10-24T21:39:51+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/notes/interview-question-01/</loc>
+    <lastmod>2019-10-24T17:34:14+08:00</lastmod>
   </url>
   
   <url>
@@ -14,25 +60,7 @@
   </url>
   
   <url>
-    <loc>https://tlog.cc/posts/</loc>
-    <lastmod>2019-10-18T14:12:06+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://tlog.cc/tags/sre/</loc>
-    <lastmod>2019-10-18T14:12:06+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/tags/</loc>
-    <lastmod>2019-10-18T14:12:06+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/</loc>
     <lastmod>2019-10-18T14:12:06+08:00</lastmod>
     <priority>0</priority>
   </url>
