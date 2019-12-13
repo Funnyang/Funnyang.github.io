@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shell on 小 ceng 的时间日志</title>
+    <link>https://tlog.cc/tags/shell/</link>
+    <description>Recent content in shell on 小 ceng 的时间日志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 13 Dec 2019 14:47:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://tlog.cc/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>getopts 的用法</title>
+      <link>https://tlog.cc/posts/shell/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Fri, 13 Dec 2019 14:47:00 +0800</pubDate>
+      
+      <guid>https://tlog.cc/posts/shell/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</guid>
+      <description>Linux 下很多命令都带有选项，比如：
+ls -l ~/ sort -n tail -f XXX.</description>
+    </item>
+    
+  </channel>
+</rss>
