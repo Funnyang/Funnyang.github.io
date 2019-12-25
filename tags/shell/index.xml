@@ -13,10 +13,10 @@
     
     <item>
       <title>getopts 的用法</title>
-      <link>https://tlog.cc/posts/shell/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</link>
+      <link>https://tlog.cc/posts/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</link>
       <pubDate>Fri, 13 Dec 2019 14:47:00 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/shell/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</guid>
+      <guid>https://tlog.cc/posts/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</guid>
       <description>Linux 下很多命令都带有选项，比如：
 ls -l ~/ sort -n tail -f XXX.</description>
     </item>

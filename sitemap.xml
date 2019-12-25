@@ -4,24 +4,59 @@
   
   <url>
     <loc>https://tlog.cc/categories/</loc>
-    <lastmod>2019-12-13T14:47:00+08:00</lastmod>
+    <lastmod>2019-12-25T13:13:15+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/posts/</loc>
-    <lastmod>2019-12-13T14:47:00+08:00</lastmod>
+    <lastmod>2019-12-25T13:13:15+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tlog.cc/tags/</loc>
+    <lastmod>2019-12-25T13:13:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/categories/linux/</loc>
+    <lastmod>2019-12-25T13:13:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/linux/</loc>
+    <lastmod>2019-12-25T13:13:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/nohup/</loc>
+    <lastmod>2019-12-25T13:13:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2019-12-25T13:13:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/</loc>
+    <lastmod>2019-12-25T13:13:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tlog.cc/tags/getopts/</loc>
     <lastmod>2019-12-13T14:47:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://tlog.cc/posts/shell/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</loc>
+    <loc>https://tlog.cc/posts/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</loc>
     <lastmod>2019-12-13T14:47:00+08:00</lastmod>
   </url>
   
@@ -33,12 +68,6 @@
   
   <url>
     <loc>https://tlog.cc/tags/shell/</loc>
-    <lastmod>2019-12-13T14:47:00+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tlog.cc/</loc>
     <lastmod>2019-12-13T14:47:00+08:00</lastmod>
     <priority>0</priority>
   </url>
