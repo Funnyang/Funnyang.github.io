@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -92,58 +92,33 @@
                         
                         
                         <div class="post-content">
-                            
-
-<p>本文主要梳理宿主机上容器之间通信的细节。</p>
-
-<h2 id="单台宿主机上-这些隔离的容器进程之间是如何通信的">单台宿主机上，这些隔离的容器进程之间是如何通信的？</h2>
-
+                            <p>本文主要梳理宿主机上容器之间通信的细节。</p>
+<h2 id="单台宿主机上这些隔离的容器进程之间是如何通信的">单台宿主机上，这些隔离的容器进程之间是如何通信的？</h2>
 <p>容器处于不同的网络命名空间，它们之间无法直接通信，而是利用了一种名为 <code>Veth Pair</code> 的虚拟设备，它就像一根网线，一头连在宿主机，一头连在容器中。宿主机上的那一头还被插在了 <code>docker0</code> 网桥上。<code>docker0</code> 相当于一个二层交换机的作用，所以容器之间的通信是依赖二层网络通信的。</p>
-
 <h2 id="通信的细节">通信的细节</h2>
-
 <blockquote>
 <p>container1: 172.17.0.2</p>
-
-<p>container2: 172.17.0.3</p>
 </blockquote>
-
-<p>1.&nbsp;首先容器中有一条直接路由规则，如图。<code>172.17.0.0</code> 网段（这个网段是宿主机上容器 ip的网段）都走 <code>eth0</code>，也就是直接通过<strong>二层网络</strong>发送。
-<img src="/images/15719318402449.jpg" alt="" /></p>
-
-<p>2.&nbsp;我们知道 <code>eth0</code> 是一个 Veth 设备，它的另一头连着宿主机，就是它。
-<img src="/images/15719321241772.jpg" alt="-w831" /></p>
-
-<p>3.&nbsp;而这个 <code>vethe7a5a9f</code> 实际上被插在了 <code>docker0</code> 这个网桥上（另外一个是另一个容器的）。
-<img src="/images/15719323452381.jpg" alt="-w559" /></p>
-
-<p>4.&nbsp;由于是通过二层网络到达另一个容器，我们需要获得对方的 MAC 地址。怎么弄到呢？ARP 广播。<code>docker0</code> 作为二层交换机的角色，会将 ARP 广播转发到所有容器的虚拟网卡，然后我们就可以拿到 MAC 地址了。</p>
-
-<p>5.&nbsp;最后就可以愉快地通信啦。</p>
-
+<p>container2: 172.17.0.3</p>
+<p>1. 首先容器中有一条直接路由规则，如图。<code>172.17.0.0</code> 网段（这个网段是宿主机上容器 ip的网段）都走 <code>eth0</code>，也就是直接通过<strong>二层网络</strong>发送。
+<img src="/images/15719318402449.jpg" alt=""></p>
+<p>2. 我们知道 <code>eth0</code> 是一个 Veth 设备，它的另一头连着宿主机，就是它。
+<img src="/images/15719321241772.jpg" alt="-w831"></p>
+<p>3. 而这个 <code>vethe7a5a9f</code> 实际上被插在了 <code>docker0</code> 这个网桥上（另外一个是另一个容器的）。
+<img src="/images/15719323452381.jpg" alt="-w559"></p>
+<p>4. 由于是通过二层网络到达另一个容器，我们需要获得对方的 MAC 地址。怎么弄到呢？ARP 广播。<code>docker0</code> 作为二层交换机的角色，会将 ARP 广播转发到所有容器的虚拟网卡，然后我们就可以拿到 MAC 地址了。</p>
+<p>5. 最后就可以愉快地通信啦。</p>
 <p>总结一下数据流：</p>
-
 <pre><code>container1(eth0) --&gt; container1 对应的 veth --&gt; docker0 --&gt; container2 对应的 veth --&gt; container2(eth0)
-</code></pre>
-
-<h2 id="问答部分">问答部分</h2>
-
+</code></pre><h2 id="问答部分">问答部分</h2>
 <h3 id="1-如何找到容器和宿主机上-veth-设备的对应关系呢">1. 如何找到容器和宿主机上 veth 设备的对应关系呢？</h3>
-
 <p>目前没有找到比较直接的办法，这个方法是需要进入容器的。</p>
-
 <pre><code># 在宿主机上执行
 ip link | grep veth
-</code></pre>
-
-<p><img src="/images/15719249668687.jpg" alt="-w960" /></p>
-
+</code></pre><p><img src="/images/15719249668687.jpg" alt="-w960"></p>
 <pre><code># 在 docker 中执行
 cat /sys/class/net/eth0/iflink
-</code></pre>
-
-<p><img src="/images/15719250563324.jpg" alt="-w340" /></p>
-
+</code></pre><p><img src="/images/15719250563324.jpg" alt="-w340"></p>
 <p>都是 20，说明二者满足对应关系。</p>
 
                         </div>
@@ -216,6 +191,10 @@ cat /sys/class/net/eth0/iflink
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -232,7 +211,7 @@ cat /sys/class/net/eth0/iflink
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -249,10 +228,6 @@ cat /sys/class/net/eth0/iflink
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -328,6 +303,10 @@ cat /sys/class/net/eth0/iflink
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -400,6 +379,8 @@ cat /sys/class/net/eth0/iflink
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -411,6 +392,8 @@ cat /sys/class/net/eth0/iflink
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -431,7 +414,7 @@ cat /sys/class/net/eth0/iflink
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -93,62 +93,51 @@
                         
                         <div class="post-content">
                             <p>通常，大家都是在指令中绑定事件，而我遇到一种场景是希望阻止事件触发，准确地讲，是阻止元素或组件绑定的事件 <code>handler</code> 的执行。</p>
-
 <p>这个场景是基于权限控制诞生的，网上能查到资料，不少的实践中，都使用自定义指令控制按钮级别的权限控制。而这些实践中，多数都是控制按钮的显隐，这点不难实现。但实际中，可能也会有点击按钮，然后通过提示告知用户无权限操作的需求。因此我希望权限指令 <code>v-permission</code> 也能适应这种场景。</p>
-
 <p>实现的思路其实也很简单，即先移除原有事件监听，再添加新的监听。问题就在于第一步比较难实现。</p>
-
 <p>经过一番研究，最后我将这个问题分为两种情况：</p>
-
 <ul>
 <li><code>vue</code> 自定义事件</li>
 <li>原生事件</li>
 </ul>
-
 <p><code>vue</code> 自定义事件是可以禁用的，但是原生事件比较麻烦，想要移除原生事件的监听，需要提供原有绑定的函数，而这个信息无法在指令的 <code>hook</code> 中获取到（本来寄希望于 <code>vnode</code>, 然而多次尝试后无果）。所以最终是没有完全实现我想要的功能，只实现了一个半血版。demo 如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">on</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;element-ui/src/utils/dom&#39;</span>
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Message</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;element-ui&#39;</span>
 
-<pre><code class="language-javascript">import { on } from 'element-ui/src/utils/dom'
-import { Message } from 'element-ui'
-
-Vue.directive('permission', {
-  inserted: (el, binding, vnode) =&gt; {
-      // 禁用 click 兼容性检测
-      if (!vnode.componentInstance) {
-        alert(&quot;v-permission 不支持用在普通dom元素&quot;)
-        return
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">directive</span>(<span style="color:#e6db74">&#39;permission&#39;</span>, {
+  <span style="color:#a6e22e">inserted</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">el</span>, <span style="color:#a6e22e">binding</span>, <span style="color:#a6e22e">vnode</span>) =&gt; {
+      <span style="color:#75715e">// 禁用 click 兼容性检测
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">componentInstance</span>) {
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;v-permission 不支持用在普通dom元素&#34;</span>)
+        <span style="color:#66d9ef">return</span>
       }
-      if (vnode.data.nativeOn &amp;&amp; vnode.data.nativeOn.click) {
-        alert(&quot;v-permission 不支持 click.native&quot;)
-        return
-      }
-
-      // 禁用点击事件(组件）
-      if (vnode.componentInstance) {
-        vnode.componentInstance.$off('click')
+      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">nativeOn</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">nativeOn</span>.<span style="color:#a6e22e">click</span>) {
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;v-permission 不支持 click.native&#34;</span>)
+        <span style="color:#66d9ef">return</span>
       }
 
-      on(el, 'click', function (e) {
-        e.preventDefault()
-        e.stopPropagation()
-        Message.error(&quot;您无权进行此操作&quot;)
+      <span style="color:#75715e">// 禁用点击事件(组件）
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">componentInstance</span>) {
+        <span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">componentInstance</span>.<span style="color:#a6e22e">$off</span>(<span style="color:#e6db74">&#39;click&#39;</span>)
+      }
+
+      <span style="color:#a6e22e">on</span>(<span style="color:#a6e22e">el</span>, <span style="color:#e6db74">&#39;click&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">e</span>) {
+        <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>()
+        <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">stopPropagation</span>()
+        <span style="color:#a6e22e">Message</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;您无权进行此操作&#34;</span>)
       })
   }
 })
-</code></pre>
-
-<p>使用示例：</p>
-
-<pre><code class="language-html">// 支持
-&lt;el-button v-permission @click=&quot;handleClick()&quot;&gt;&lt;/el-button&gt;
+</code></pre></div><p>使用示例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">// 支持
+&lt;<span style="color:#f92672">el-button</span> <span style="color:#a6e22e">v-permission</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#f92672">el-button</span>&gt;
 
 // 不支持，因为使用了 .native 修饰符，无法移除原有事件监听，即无法阻止 handleClick 的执行
-&lt;el-button v-permission @click.native=&quot;handleClick()&quot;&gt;&lt;/el-button&gt;
+&lt;<span style="color:#f92672">el-button</span> <span style="color:#a6e22e">v-permission</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">native</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#f92672">el-button</span>&gt;
 
 // 不支持，因为是元素dom，无法移除原有事件监听，即无法阻止 handleClick 的执行
-&lt;button v-permission @click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
-</code></pre>
-
-<p>若朋友想到其他的实现思路，欢迎赐教。</p>
+&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">v-permission</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#f92672">button</span>&gt;
+</code></pre></div><p>若朋友想到其他的实现思路，欢迎赐教。</p>
 
                         </div>
 
@@ -218,6 +207,10 @@ Vue.directive('permission', {
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -234,7 +227,7 @@ Vue.directive('permission', {
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -251,10 +244,6 @@ Vue.directive('permission', {
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -330,6 +319,10 @@ Vue.directive('permission', {
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -402,6 +395,8 @@ Vue.directive('permission', {
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -413,6 +408,8 @@ Vue.directive('permission', {
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -433,7 +430,7 @@ Vue.directive('permission', {
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

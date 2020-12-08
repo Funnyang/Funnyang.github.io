@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -95,35 +95,25 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
-<p>联通的客户端实在有点贱，任何虚拟网卡都不能开。但想着它还是借着本机系统的宽带连接功能，所以就想能不能绕过客户端软件，直接使用系统的宽带连接来拨号。<br />
+<p>联通的客户端实在有点贱，任何虚拟网卡都不能开。但想着它还是借着本机系统的宽带连接功能，所以就想能不能绕过客户端软件，直接使用系统的宽带连接来拨号。<br>
 拨号的时候会生成一个<code>phonebook.pbk</code>文件</p>
-
-<p><img src="/images/2015/12/phonebook.png" alt="phonebook" /></p>
-
-<p>打开点击连接，就会看到我们的真实宽带账号，尝试使用原有密码，发现并不能成功，看来密码也被处理过。<br />
+<p><img src="/images/2015/12/phonebook.png" alt="phonebook"></p>
+<p>打开点击连接，就会看到我们的真实宽带账号，尝试使用原有密码，发现并不能成功，看来密码也被处理过。<br>
 抱着试一试的心态，使用wireshark抓包，在<code>Packet detail</code>和<code>Packet bytes</code>找了半天，然后我傻逼了。看图！</p>
-
-<p><img src="/images/2015/12/packet.png" alt="packet" /></p>
-
+<p><img src="/images/2015/12/packet.png" alt="packet"></p>
 <p>发现密码是<code>\001</code>后跟原有密码，再次尝试，失败！
 觉得这个<code>\001</code>应该是某个代号，并不能直接加<code>\001</code>，没有头绪。直到…</p>
-
-<p>先感谢万能的谷歌，让我发现了一位和我做着同样的事，但水平更高的少年。<br />
+<p>先感谢万能的谷歌，让我发现了一位和我做着同样的事，但水平更高的少年。<br>
 剩下的内容直接链接过去吧！  <a href="http://www.lynx.im/posts/1796.html">他的博客</a></p>
-
-<p>附录：<br>
-[1].<a href="/posts/newifi-mini/">路由器python自动登陆脚本</a><br>
+<p>附录：<!-- raw HTML omitted -->
+[1].<a href="/posts/newifi-mini/">路由器python自动登陆脚本</a><!-- raw HTML omitted -->
 [2].<a href="https://github.com/Funnyang/chinaunicom201/blob/master/ChinaUnicom201.bat">批处理登陆脚本</a></p>
-
-<pre><code class="language-bash">@echo off
-for /f &quot;tokens=2 delims=:&quot; %%i in ('ipconfig ^| find /i &quot;ipv4&quot; ^| find &quot;172&quot;') do set ip=%%i
-set ip=%ip:~1%
-curl -A &quot;User-Agent':'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5&quot; -d &quot;wlanuserip=%ip%&amp;localIp=&amp;basip=61.148.2.82&amp;lpsUserName=用户名&amp;lpsPwd=密码&quot; -v &quot;http://114.247.41.52:808/protalAction!portalAuth.action?&quot; | find /i &quot;false&quot;
-if %errorlevel%==0 pause
-</code></pre>
-
-<p><del>[3].soh.txt</del></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">@echo off
+<span style="color:#66d9ef">for</span> /f <span style="color:#e6db74">&#34;tokens=2 delims=:&#34;</span> %%i in <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;ipconfig ^| find /i &#34;ipv4&#34; ^| find &#34;172&#34;&#39;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">do</span> set ip<span style="color:#f92672">=</span>%%i
+set ip<span style="color:#f92672">=</span>%ip:~1%
+curl -A <span style="color:#e6db74">&#34;User-Agent&#39;:&#39;Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5&#34;</span> -d <span style="color:#e6db74">&#34;wlanuserip=%ip%&amp;localIp=&amp;basip=61.148.2.82&amp;lpsUserName=用户名&amp;lpsPwd=密码&#34;</span> -v <span style="color:#e6db74">&#34;http://114.247.41.52:808/protalAction!portalAuth.action?&#34;</span> | find /i <span style="color:#e6db74">&#34;false&#34;</span>
+<span style="color:#66d9ef">if</span> %errorlevel%<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span> pause
+</code></pre></div><p><del>[3].soh.txt</del></p>
                         </div>
 
                         
@@ -192,6 +182,10 @@ if %errorlevel%==0 pause
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -208,7 +202,7 @@ if %errorlevel%==0 pause
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -225,10 +219,6 @@ if %errorlevel%==0 pause
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -304,6 +294,10 @@ if %errorlevel%==0 pause
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -376,6 +370,8 @@ if %errorlevel%==0 pause
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -387,6 +383,8 @@ if %errorlevel%==0 pause
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -407,7 +405,7 @@ if %errorlevel%==0 pause
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

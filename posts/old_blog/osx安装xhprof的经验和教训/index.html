@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -95,201 +95,161 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
 <p><strong>2015/10/25更新：</strong><code>OSX</code>下使用<code>xhprof</code>在某些情况下会致使网站崩掉 ，建议还是不要在<code>OSX</code>下玩这个扩展。</p>
-
-<p><strong>写在前面：</strong>鉴于我遇到非常多奇葩的问题，我决定好好写这篇文章，把经验分享给别人。遇到这些问题的原因，可能是系统原因，也可能是软件原因，因为编译过程漫长，本人不愿意花太多时间在上面，仅在过程中记下认为的原因。</p>
-
-<p>鉴于本人在查这方面资料的时候，很多人连同<code>Apache</code>，<code>nginx</code>的安装也一同写在教程里，让我有点乱。所以提醒一下，实际上<strong><code>XHProf</code></strong>与它们关系不大，它<strong>只是</strong>一个<strong><code>php扩展</code></strong>而已。</p>
-
+<p>**写在前面：**鉴于我遇到非常多奇葩的问题，我决定好好写这篇文章，把经验分享给别人。遇到这些问题的原因，可能是系统原因，也可能是软件原因，因为编译过程漫长，本人不愿意花太多时间在上面，仅在过程中记下认为的原因。</p>
+<p>鉴于本人在查这方面资料的时候，很多人连同<code>Apache</code>，<code>nginx</code>的安装也一同写在教程里，让我有点乱。所以提醒一下，实际上**<code>XHProf</code>**与它们关系不大，它**只是**一个**<code>php扩展</code>**而已。</p>
 <p>接下来，我们就一步一步来安装吧！</p>
-
 <h2 id="基本部分">基本部分</h2>
-
 <ol>
-<li>下载xhprof，并解压。<br />
-<em>注</em> 1：版本可以下载最新的<code>0.9.4</code>版本，但本人下载<code>0.9.4</code>版本安装后，使用<code>phpinfo()</code>函数查看时，显示为<code>0.9.2</code>，不知道谁骗了偶(:<br />
-<em>注</em> 2：OSX默认没有wget，你可以自己安装或在用浏览器下载。
-<code>bash
-wget http://pecl.php.net/get/xhprof-0.9.3.tgztar -zxvf xhprof-0.9.3.tgz
-</code></li>
-<li>编译安装
-<code>bash
-cd ./xhprof-0.9.3/extension/phpize./configure --with-php-config=tmpmakesudo make installmake test
-</code>
-这里需要注意几点：<br />
-(1) 执行<code>phpize</code>时，可能会报错，结果如下：
-&gt;Configuring for:PHP Api Version:         20121113Zend Module Api No:      20121212Zend Extension Api No:   220121212Cannot find autoconf. Please check your autoconf installation and the$PHP_AUTOCONF environment variable. Then, rerun this script.</li>
+<li>下载xhprof，并解压。<br>
+<em>注</em> 1：版本可以下载最新的<code>0.9.4</code>版本，但本人下载<code>0.9.4</code>版本安装后，使用<code>phpinfo()</code>函数查看时，显示为<code>0.9.2</code>，不知道谁骗了偶(:<br>
+<em>注</em> 2：OSX默认没有wget，你可以自己安装或在用浏览器下载。</li>
 </ol>
-
-<p>这是什么原因呢？因为*<code>autoconf</code><em>没有装，</em><code>autoconf</code><em>是什么？<br />
- 跟<code>Linux/Unix</code>开发有关系，我也不太理解，你可以看看<a href="http://www.laruence.com/2009/11/18/1154.html">这篇博文</a>。<br />
- 实际上需要装两个东西，</em><code>autoconf</code><em>和</em><code>m4</code>*，那安装吧！<br />
- 地址：<a href="http://ftp.gnu.org/gnu/autoconf/">http://ftp.gnu.org/gnu/autoconf/</a>和<a href="http://ftp.gnu.org/gnu/m4/">http://ftp.gnu.org/gnu/m4/</a></p>
-
-<pre><code class="language-bash">wget http://ftp.gnu.org/gnu/m4/m4-1.4.17.tar.gz
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://pecl.php.net/get/xhprof-0.9.3.tgztar -zxvf xhprof-0.9.3.tgz
+</code></pre></div><ol>
+<li>编译安装</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ./xhprof-0.9.3/extension/phpize./configure --with-php-config<span style="color:#f92672">=</span>tmpmakesudo make installmake test
+</code></pre></div><p>这里需要注意几点：<br>
+(1) 执行<code>phpize</code>时，可能会报错，结果如下：</p>
+<blockquote>
+<p>Configuring for:PHP Api Version:         20121113Zend Module Api No:      20121212Zend Extension Api No:   220121212Cannot find autoconf. Please check your autoconf installation and the$PHP_AUTOCONF environment variable. Then, rerun this script.</p>
+</blockquote>
+<p>这是什么原因呢？因为*<code>autoconf</code>*没有装，*<code>autoconf</code>*是什么？<br>
+跟<code>Linux/Unix</code>开发有关系，我也不太理解，你可以看看<a href="http://www.laruence.com/2009/11/18/1154.html">这篇博文</a>。<br>
+实际上需要装两个东西，*<code>autoconf</code>*和*<code>m4</code>*，那安装吧！<br>
+地址：<a href="http://ftp.gnu.org/gnu/autoconf/">http://ftp.gnu.org/gnu/autoconf/</a>和<a href="http://ftp.gnu.org/gnu/m4/">http://ftp.gnu.org/gnu/m4/</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://ftp.gnu.org/gnu/m4/m4-1.4.17.tar.gz
 tar -zvxf m4-1.4.17.tar.gz
 cd m4-1.4.17/
-./configure &amp;&amp; make &amp;&amp; sudo make install
+./configure <span style="color:#f92672">&amp;&amp;</span> make <span style="color:#f92672">&amp;&amp;</span> sudo make install
 cd ../
 wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz
 tar -zvxf autoconf-2.69.tar.gz
 cd autoconf-2.69/
-./configure &amp;&amp; make &amp;&amp; sudo make install
-</code></pre>
-
-<p>(2)<code>--with-php-config=</code>后的目录是什么目录呢？不知道的话，执行:</p>
-
-<pre><code class="language-bash">which php-config
-</code></pre>
-
-<p>我这里是<code>/usr/bin/php-config</code></p>
-
+./configure <span style="color:#f92672">&amp;&amp;</span> make <span style="color:#f92672">&amp;&amp;</span> sudo make install
+</code></pre></div><p>(2)<code>--with-php-config=</code>后的目录是什么目录呢？不知道的话，执行:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">which php-config
+</code></pre></div><p>我这里是<code>/usr/bin/php-config</code></p>
 <p>3.修改<code>php.ini</code>。在最后加上</p>
-
-<pre><code class="language-PHP">extension=xhprof.soxhprof.output_dir=输出目录`
-</code></pre>
-
-<p>输出目录，默认为/tmp，你可以自己修改，一定要注意<strong>该目录的必须有*写权限</strong>*，直接777吧！本人在这吃过亏。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PHP" data-lang="PHP"><span style="color:#a6e22e">extension</span><span style="color:#f92672">=</span><span style="color:#a6e22e">xhprof</span><span style="color:#f92672">.</span><span style="color:#a6e22e">soxhprof</span><span style="color:#f92672">.</span><span style="color:#a6e22e">output_dir</span><span style="color:#f92672">=</span><span style="color:#a6e22e">输出目录</span><span style="color:#960050;background-color:#1e0010">`</span>
+</code></pre></div><p>输出目录，默认为/tmp，你可以自己修改，一定要注意<strong>该目录的必须有<em>写权限</em></strong>，直接777吧！本人在这吃过亏。</p>
 <p>到这里你的xhprof就算安装完毕了。不过实际上还没完。</p>
-
 <h2 id="使用部分">使用部分</h2>
-
-<p>xhprof既然是php扩展，我们就要理解什么是扩展，本人就把它理解成多了几个牛逼的函数。这里多了四个：<br />
-<code>xhprof_enable()</code><br />
-<code>xhprof_disable()</code><br />
-<code>xhprof_sample_enable()</code><br />
-<code>xhprof_sample_disable()</code><br />
- 详细可以看这里：<a href="http://php.net/manual/zh/book.xhprof.php">http://php.net/manual/zh/book.xhprof.php</a><br />
- 带<code>simple</code>的是更轻量级版本，所以其实就多了两个。然后怎么用？<br />
- 先看一下我的目录结构：<br />
-<a href="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png"><img src="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png" alt="" /></a></p>
-
-<p>在网站根目录创建<code>xhprof</code>文件夹<br />
-<code>examples</code>、<code>xhprof_html</code>、<code>xhprof_lib</code>文件夹是从源代码包里直接复制过来的。<br />
-<code>examples</code>是使用示例文件<br />
-<code>xhprof_html</code>是呈现分析结果的web界面<br />
-<code>xhprof_lib</code>是性能分析需要的库<br />
+<p>xhprof既然是php扩展，我们就要理解什么是扩展，本人就把它理解成多了几个牛逼的函数。这里多了四个：<br>
+<code>xhprof_enable()</code><br>
+<code>xhprof_disable()</code><br>
+<code>xhprof_sample_enable()</code><br>
+<code>xhprof_sample_disable()</code><br>
+详细可以看这里：<a href="http://php.net/manual/zh/book.xhprof.php">http://php.net/manual/zh/book.xhprof.php</a><br>
+带<code>simple</code>的是更轻量级版本，所以其实就多了两个。然后怎么用？<br>
+先看一下我的目录结构：<br>
+<a href="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png"><img src="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png" alt=""></a></p>
+<p>在网站根目录创建<code>xhprof</code>文件夹<br>
+<code>examples</code>、<code>xhprof_html</code>、<code>xhprof_lib</code>文件夹是从源代码包里直接复制过来的。<br>
+<code>examples</code>是使用示例文件<br>
+<code>xhprof_html</code>是呈现分析结果的web界面<br>
+<code>xhprof_lib</code>是性能分析需要的库<br>
 再来看一下示例文件<code>sample.php</code>，英文注释已删，并做了一些简单修改。</p>
-
-<pre><code class="language-php">&lt;?php
-//foo()是要分析的函数
-function bar($x) {
-  if ($x &gt; 0) {
-    bar($x - 1);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+<span style="color:#75715e">//foo()是要分析的函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">bar</span>($x) {
+  <span style="color:#66d9ef">if</span> ($x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+    <span style="color:#a6e22e">bar</span>($x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
   }
 }
 
-function foo() {
-  for ($idx = 0; $idx &lt; 5; $idx++) {
-    bar($idx);
-    $x = strlen(&quot;abc&quot;);
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>() {
+  <span style="color:#66d9ef">for</span> ($idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; $idx <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>; $idx<span style="color:#f92672">++</span>) {
+    <span style="color:#a6e22e">bar</span>($idx);
+    $x <span style="color:#f92672">=</span> <span style="color:#a6e22e">strlen</span>(<span style="color:#e6db74">&#34;abc&#34;</span>);
   }
 }
 
-// 开始分析，在xhprof_enable()和xhprof_disable()之间的是要分析的代码部分
-xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
+<span style="color:#75715e">// 开始分析，在xhprof_enable()和xhprof_disable()之间的是要分析的代码部分
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">xhprof_enable</span>(<span style="color:#a6e22e">XHPROF_FLAGS_CPU</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">XHPROF_FLAGS_MEMORY</span>);
 
-foo();
+<span style="color:#a6e22e">foo</span>();
 
-//这里就结束分析了，可见之分析了foo()的执行过程，xhprof_disable()会返回分析的结果
-$xhprof_data = xhprof_disable();
-print_r($xhprof_data);
+<span style="color:#75715e">//这里就结束分析了，可见之分析了foo()的执行过程，xhprof_disable()会返回分析的结果
+</span><span style="color:#75715e"></span>$xhprof_data <span style="color:#f92672">=</span> <span style="color:#a6e22e">xhprof_disable</span>();
+<span style="color:#a6e22e">print_r</span>($xhprof_data);
 
-//获取xhprof所在的路径
-$XHPROF_ROOT = realpath(dirname(__FILE__) .'/..');
+<span style="color:#75715e">//获取xhprof所在的路径
+</span><span style="color:#75715e"></span>$XHPROF_ROOT <span style="color:#f92672">=</span> <span style="color:#a6e22e">realpath</span>(<span style="color:#a6e22e">dirname</span>(<span style="color:#66d9ef">__FILE__</span>) <span style="color:#f92672">.</span><span style="color:#e6db74">&#39;/..&#39;</span>);
 
-include_once $XHPROF_ROOT . &quot;/xhprof_lib/utils/xhprof_lib.php&quot;;
-include_once $XHPROF_ROOT . &quot;/xhprof_lib/utils/xhprof_runs.php&quot;;
+<span style="color:#66d9ef">include_once</span> $XHPROF_ROOT <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;/xhprof_lib/utils/xhprof_lib.php&#34;</span>;
+<span style="color:#66d9ef">include_once</span> $XHPROF_ROOT <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;/xhprof_lib/utils/xhprof_runs.php&#34;</span>;
 
-$xhprof_runs = new XHProfRuns_Default();
-$run_id = $xhprof_runs-&gt;save_run($xhprof_data, &quot;xhprof_foo&quot;);
+$xhprof_runs <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XHProfRuns_Default</span>();
+$run_id <span style="color:#f92672">=</span> $xhprof_runs<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">save_run</span>($xhprof_data, <span style="color:#e6db74">&#34;xhprof_foo&#34;</span>);
 
-//访问http://&lt;xhprof-ui-address&gt;/index.php？run=$run_id&amp;source=xhprof_foo 就可以看到统计列表
-//&lt;xhprof-ui-address&gt;是指xhprof_html的路径地址，如下示例：
-
-echo '&lt;a href=&quot;http://localhost/xhprof/xhprof_html/index.php?run='.$run_id.'&amp;source=xhprof_foo&quot; target=&quot;_blank&quot;&gt;count&lt;/a&gt;';
-</code></pre>
-
-<p>现在我们来访问<a href="http://localhost/xhprof/examples/sample.php">http://localhost/xhprof/examples/sample.php</a> 会得到这样的结果：
-<a href="/images/2015/12/9f3ba58b6a1927cef603494a52134439.png" title="osx-xhprof-1"><img style="width:710px;"src="/images/2015/12/9f3ba58b6a1927cef603494a52134439.png" alt="osx-xhprof-1" title="osx-xhprof-1" /></a>
-点count<br />
-<a href="/images/2015/12/632e6637abd76fa95e7c20f6c4adcc74.png" title="osx-xhprof-2"><img style="width:710px;"src="/images/2015/12/632e6637abd76fa95e7c20f6c4adcc74.png" alt="osx-xhprof-2" title="osx-xhprof-2"/></a>
- 这里就是分析结果啦！如果想要以图象形式显示，点[View Full Callgraph]，当然你还需要安装Graphviz，装这个，本人遇到大坑（如果你和我都是OSX10.11，其它版本未测）。先看效果：<br />
-<a href="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png"><img src="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png" alt="" /></a></p>
-
-<p>安装Graphviz可以去它官网下载。<br />
- 一定要下载<strong><code>graphviz-2.39.20151005.2011.pkg</code></strong><br />
- 一定要下载<strong><code>graphviz-2.39.20151005.2011.pkg</code></strong><br />
- 一定要下载<strong><code>graphviz-2.39.20151005.2011.pkg</code></strong><br />
- 如果你和博主一样，作死下源码编译，或者下载graphviz-2.38.0.pkg，你会遇到一下各种错误，一部分而已，抱歉博主没有整理完全部的错误，有的错误一去不复返，再也找不回。</p>
-
-<p>错误1:
-&gt; failed to execute cmd: ” dot -Tpng”. stderr: Format: “png” not recognized. Use one of: canon cmap cmapx cmapx_np dot eps fig gv imap imap_np ismap pic plain plain-ext pov ps ps2 svg svgz tk vml vmlz xdot xdot1.2 xdot1.4 ‘`</p>
-
-<p>错误2：</p>
-
-<blockquote>
-<p>failed to execute cmd: ” dot -Tpng”. stderr: `Format: “png” not recognized. Use one of: canon cmap cmapx cmapx_np dot eps fig gv imap imap_np ismap pic plain plain-ext pov ps ps2 svg svgz tk vml vmlz xdot ‘</p>
-</blockquote>
-
-<p>编译错误：<br />
-<code>graphviz-2.30.0</code> or <code>graphviz-2.32.0</code>以前会报这个错：</p>
-
-<blockquote>
-<p>Undefined symbols for architecture x86_64</p>
-</blockquote>
-
-<p><code>graphviz-2.30.0</code> or <code>graphviz-2.32.0</code>到<code>graphviz-2.36.0</code>，会报这个：</p>
-
-<blockquote>
-<p>ln: graphviz/tcl: Operation not permitted<br />
- make[5]: *** [install-data-hook] Error 1<br />
- make[4]: *** [install-data-am] Error 2<br />
- make[3]: *** [install-am] Error 2<br />
- make[2]: *** [install-recursive] Error 1<br />
- make[1]: *** [install-recursive] Error 1<br />
- make: *** [install] Error 2</p>
-</blockquote>
-
-<p><code>graphviz-2.38.0</code> 编译不会报错，但是点[View Full Callgraph]出现：</p>
-
+<span style="color:#75715e">//访问http://&lt;xhprof-ui-address&gt;/index.php？run=$run_id&amp;source=xhprof_foo 就可以看到统计列表
+</span><span style="color:#75715e">//&lt;xhprof-ui-address&gt;是指xhprof_html的路径地址，如下示例：
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#39;&lt;a href=&#34;http://localhost/xhprof/xhprof_html/index.php?run=&#39;</span><span style="color:#f92672">.</span>$run_id<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;&amp;source=xhprof_foo&#34; target=&#34;_blank&#34;&gt;count&lt;/a&gt;&#39;</span>;
+</code></pre></div><p>现在我们来访问<a href="http://localhost/xhprof/examples/sample.php">http://localhost/xhprof/examples/sample.php</a> 会得到这样的结果：
+<!-- raw HTML omitted -->&lt;img style=&ldquo;width:710px;&ldquo;src=&quot;/images/2015/12/9f3ba58b6a1927cef603494a52134439.png&rdquo; alt=&ldquo;osx-xhprof-1&rdquo; title=&ldquo;osx-xhprof-1&rdquo; /&gt;<!-- raw HTML omitted -->
+点count<br>
+<!-- raw HTML omitted -->&lt;img style=&ldquo;width:710px;&ldquo;src=&quot;/images/2015/12/632e6637abd76fa95e7c20f6c4adcc74.png&rdquo; alt=&ldquo;osx-xhprof-2&rdquo; title=&ldquo;osx-xhprof-2&rdquo;/&gt;<!-- raw HTML omitted -->
+这里就是分析结果啦！如果想要以图象形式显示，点[View Full Callgraph]，当然你还需要安装Graphviz，装这个，本人遇到大坑（如果你和我都是OSX10.11，其它版本未测）。先看效果：<br>
+<a href="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png"><img src="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png" alt=""></a></p>
+<p>安装Graphviz可以去它官网下载。<br>
+一定要下载**<code>graphviz-2.39.20151005.2011.pkg</code>**<br>
+一定要下载**<code>graphviz-2.39.20151005.2011.pkg</code>**<br>
+一定要下载**<code>graphviz-2.39.20151005.2011.pkg</code>**<br>
+如果你和博主一样，作死下源码编译，或者下载graphviz-2.38.0.pkg，你会遇到一下各种错误，一部分而已，抱歉博主没有整理完全部的错误，有的错误一去不复返，再也找不回。</p>
+<p>错误1:</p>
 <blockquote>
 <p>failed to execute cmd: ” dot -Tpng”. stderr: Format: “png” not recognized. Use one of: canon cmap cmapx cmapx_np dot eps fig gv imap imap_np ismap pic plain plain-ext pov ps ps2 svg svgz tk vml vmlz xdot xdot1.2 xdot1.4 ‘`</p>
 </blockquote>
-
-<p>如果出现下面这种：</p>
-
+<p>错误2：</p>
 <blockquote>
-<p>/usr/include/tk.h:78:11: fatal error: ‘X11/Xlib.h’ file not found<br />
- #include <X11/Xlib.h><br />
- 1 error generated.<br />
- make[3]: *** [tkStubLib.lo] Error 1<br />
- make[2]: *** [all-recursive] Error 1<br />
- make[1]: *** [all-recursive] Error 1<br />
- make: *** [all] Error 2</p>
+<p>failed to execute cmd: ” dot -Tpng”. stderr: `Format: “png” not recognized. Use one of: canon cmap cmapx cmapx_np dot eps fig gv imap imap_np ismap pic plain plain-ext pov ps ps2 svg svgz tk vml vmlz xdot ‘</p>
 </blockquote>
-
+<p>编译错误：<br>
+<code>graphviz-2.30.0</code> or <code>graphviz-2.32.0</code>以前会报这个错：</p>
+<blockquote>
+<p>Undefined symbols for architecture x86_64</p>
+</blockquote>
+<p><code>graphviz-2.30.0</code> or <code>graphviz-2.32.0</code>到<code>graphviz-2.36.0</code>，会报这个：</p>
+<blockquote>
+<p>ln: graphviz/tcl: Operation not permitted<br>
+make[5]: *** [install-data-hook] Error 1<br>
+make[4]: *** [install-data-am] Error 2<br>
+make[3]: *** [install-am] Error 2<br>
+make[2]: *** [install-recursive] Error 1<br>
+make[1]: *** [install-recursive] Error 1<br>
+make: *** [install] Error 2</p>
+</blockquote>
+<p><code>graphviz-2.38.0</code> 编译不会报错，但是点[View Full Callgraph]出现：</p>
+<blockquote>
+<p>failed to execute cmd: ” dot -Tpng”. stderr: Format: “png” not recognized. Use one of: canon cmap cmapx cmapx_np dot eps fig gv imap imap_np ismap pic plain plain-ext pov ps ps2 svg svgz tk vml vmlz xdot xdot1.2 xdot1.4 ‘`</p>
+</blockquote>
+<p>如果出现下面这种：</p>
+<blockquote>
+<p>/usr/include/tk.h:78:11: fatal error: ‘X11/Xlib.h’ file not found<br>
+#include &lt;X11/Xlib.h&gt;<br>
+1 error generated.<br>
+make[3]: *** [tkStubLib.lo] Error 1<br>
+make[2]: *** [all-recursive] Error 1<br>
+make[1]: *** [all-recursive] Error 1<br>
+make: *** [all] Error 2</p>
+</blockquote>
 <p>可以这样解决：</p>
-
-<pre><code class="language-bash">ln -s /opt/X11/include/X11 /usr/local/include/X11
-</code></pre>
-
-<p>对于非OSX用户，如遇以上错误1错误2，可以考虑一下方面：</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ln -s /opt/X11/include/X11 /usr/local/include/X11
+</code></pre></div><p>对于非OSX用户，如遇以上错误1错误2，可以考虑一下方面：</p>
 <ol>
 <li><code>graphviz-gd</code>是否安装；</li>
 <li><code>graphviz</code>版本可以适当降低</li>
-<li><code>libpng</code>可以适当降低<br />
-网上成功过的为<code>graphviz-2.24.0</code> + <code>libpng-1.5.19</code>，作为参考吧！<br />
-看到有人说出现类似上述错误1错误2，是因为<code>Graphviz</code>没安装，其实不是，没安装的话，会是 <code>Command Not Found</code>.<br />
+<li><code>libpng</code>可以适当降低<br>
+网上成功过的为<code>graphviz-2.24.0</code> + <code>libpng-1.5.19</code>，作为参考吧！<br>
+看到有人说出现类似上述错误1错误2，是因为<code>Graphviz</code>没安装，其实不是，没安装的话，会是 <code>Command Not Found</code>.<br>
 最后提醒大家，设置的<code>xhprof.output_dir目录</code>一定要具有写权限，本地直接给权限<code>777</code>就ok。</li>
 </ol>
-
-<p>附几篇参考博文：<br />
-<a href="http://blog.sina.com.cn/s/blog_721cd3390102uzx8.html">http://blog.sina.com.cn/s/blog_721cd3390102uzx8.html</a><br />
-<a href="http://www.cnblogs.com/casatwy/archive/2013/01/17/2865241.html">http://www.cnblogs.com/casatwy/archive/2013/01/17/2865241.html</a><br />
+<p>附几篇参考博文：<br>
+<a href="http://blog.sina.com.cn/s/blog_721cd3390102uzx8.html">http://blog.sina.com.cn/s/blog_721cd3390102uzx8.html</a><br>
+<a href="http://www.cnblogs.com/casatwy/archive/2013/01/17/2865241.html">http://www.cnblogs.com/casatwy/archive/2013/01/17/2865241.html</a><br>
 <a href="http://www.chenjie.info/1587">http://www.chenjie.info/1587</a></p>
                         </div>
 
@@ -370,6 +330,10 @@ echo '&lt;a href=&quot;http://localhost/xhprof/xhprof_html/index.php?run='.$run_
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -386,7 +350,7 @@ echo '&lt;a href=&quot;http://localhost/xhprof/xhprof_html/index.php?run='.$run_
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -403,10 +367,6 @@ echo '&lt;a href=&quot;http://localhost/xhprof/xhprof_html/index.php?run='.$run_
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -482,6 +442,10 @@ echo '&lt;a href=&quot;http://localhost/xhprof/xhprof_html/index.php?run='.$run_
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -554,6 +518,8 @@ echo '&lt;a href=&quot;http://localhost/xhprof/xhprof_html/index.php?run='.$run_
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -565,6 +531,8 @@ echo '&lt;a href=&quot;http://localhost/xhprof/xhprof_html/index.php?run='.$run_
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -585,7 +553,7 @@ echo '&lt;a href=&quot;http://localhost/xhprof/xhprof_html/index.php?run='.$run_
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

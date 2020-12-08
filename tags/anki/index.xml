@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Anki on 小 ceng 的时间日志</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Anki on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 25 Aug 2019 11:03:50 +0800</lastBuildDate>
-    
-	<atom:link href="https://tlog.cc/tags/anki/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 25 Aug 2019 11:03:50 +0800</lastBuildDate><atom:link href="https://tlog.cc/tags/anki/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Anki 与 PopClip 工作流建设</title>
       <link>https://tlog.cc/posts/macos/anki-%E4%B8%8E-popclip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</link>

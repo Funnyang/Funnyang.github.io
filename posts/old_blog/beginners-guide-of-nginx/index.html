@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -88,83 +88,65 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
-<p>整理自：<a href="https://nginx.org/en/docs/beginners_guide.html">https://nginx.org/en/docs/beginners_guide.html</a></p>
-
+<p>整理自：https://nginx.org/en/docs/beginners_guide.html</p>
 <h3 id="0x1-概念">0x1 概念</h3>
-
 <ol>
 <li>nginx由被指定指令控制的模块组成。</li>
 <li>指令包括<strong>简单指令</strong>和<strong>块指令</strong>。</li>
 <li>简单指令包括<strong>指令名称</strong>和<strong>参数</strong>，参数和名称用<strong>空格分隔</strong>，一条指令以<strong>分号结束</strong>。</li>
 <li>块指令是以<strong>花括号</strong>包含简单指令的指令，若一个块指令包含其他的块指令称之为 <code>context</code>，如：<code>events</code>, <code>http</code>, <code>server</code> 和 <code>location</code>。
-<img src="https://funnyang-10022886.file.myqcloud.com/ghost-img/main%20context.png" alt="" /></li>
+<img src="https://funnyang-10022886.file.myqcloud.com/ghost-img/main%20context.png" alt=""></li>
 <li><code>#</code>用于单行注释</li>
 </ol>
-
 <h3 id="0x2-处理静态内容">0x2 处理静态内容</h3>
-
 <p>对于一个提供静态内容服务的 web 服务器，<code>nginx</code> 配置文件的基本结构如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">http{</span>
 
-<pre><code class="language-nginx">http{
-
-	server {
-		listen 80
-	    location / {
-	        root /data/www;
+	<span style="color:#e6db74">server</span> {
+		<span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>
+	    <span style="color:#e6db74">location</span> <span style="color:#e6db74">/</span> {
+	        <span style="color:#f92672">root</span> <span style="color:#e6db74">/data/www</span>;
 	    }
 	
-	    location /images/ {
-	        root /data;
+	    <span style="color:#f92672">location</span> <span style="color:#e6db74">/images/</span> {
+	        <span style="color:#f92672">root</span> <span style="color:#e6db74">/data</span>;
 	    }
 	}
-}
-</code></pre>
-
-<ol>
+<span style="color:#66d9ef">}</span>
+</code></pre></div><ol>
 <li><code>listen</code> 不写的情况下，<strong>默认监听 80 端口</strong>。</li>
 <li>若具有多个 <code>location</code> 块，<code>nginx</code> 选择前缀最长的那一个。即对于 URL 以 <code>/images/</code> 开头的请求，nginx 会映射到 <code>/data/images/</code>，而非 <code>/data/www/images</code>。</li>
 </ol>
-
 <h3 id="0x3-简单的代理服务器">0x3 简单的代理服务器</h3>
-
 <p>代理服务器要用到的最基础的指令是<code>proxy_pass</code>，基本结构如下：</p>
-
-<pre><code class="language-nginx">server {
-    location / {
-        proxy_pass http://localhost:8080/;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+        <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://localhost:8080/</span>;
     }
 
-    location ~ \.(gif|jpg|png)$ {
-        root /data/images;
+    <span style="color:#f92672">location</span> ~ <span style="color:#e6db74">\.(gif|jpg|png)$</span> {
+        <span style="color:#f92672">root</span> <span style="color:#e6db74">/data/images</span>;
     }
 }
-</code></pre>
-
-<ol>
+</code></pre></div><ol>
 <li>基本功能：除了对扩展名为 <code>.gif</code>, <code>.jpg</code> 和 <code>.png</code> 的文件的请求，其他请求均被指向代理服务器<code>http://localhost:8080</code>。</li>
 <li>这里没有 <code>listen</code> 指令，说明默认监听80端口</li>
 <li>第二个 <code>location</code> 块使用了简单的正则匹配，<strong>nginx 中使用正则表达式需以 <code>~</code> 开头</strong>。</li>
 </ol>
-
 <h3 id="0x4-配置fastcgi代理">0x4 配置FastCGI代理</h3>
-
 <p>配置 nginx 与 FastCGi 服务器协同工作，需要两个基本指令 <code>fastcgi_pass</code> 和 <code>fastcgi_param</code>。</p>
-
-<pre><code class="language-nginx">server {
-    location / {
-        fastcgi_pass  localhost:9000;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param QUERY_STRING    $query_string;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+        <span style="color:#f92672">fastcgi_pass</span>  localhost:<span style="color:#ae81ff">9000</span>;
+        <span style="color:#f92672">fastcgi_param</span> <span style="color:#e6db74">SCRIPT_FILENAME</span> $document_root$fastcgi_script_name;
+        <span style="color:#f92672">fastcgi_param</span> <span style="color:#e6db74">QUERY_STRING</span>    $query_string;
     }
 
-    location ~ \.(gif|jpg|png)$ {
-        root /data/images;
+    <span style="color:#f92672">location</span> ~ <span style="color:#e6db74">\.(gif|jpg|png)$</span> {
+        <span style="color:#f92672">root</span> <span style="color:#e6db74">/data/images</span>;
     }
 }
-</code></pre>
-
-<ol>
+</code></pre></div><ol>
 <li>这是一个最简单的基于 PHP 的配置，若是有 POST 请求还需要配置其他 <code>fastcgi_param</code> 参数</li>
 <li>在 PHP 中，<code>SCRIPT_FILENAME</code> 用于获取脚本名称，<code>QUERY_STRING</code> 用于传递请求的参数。</li>
 </ol>
@@ -232,6 +214,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -248,7 +234,7 @@
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -265,10 +251,6 @@
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -344,6 +326,10 @@
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -416,6 +402,8 @@
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -427,6 +415,8 @@
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -447,7 +437,7 @@
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

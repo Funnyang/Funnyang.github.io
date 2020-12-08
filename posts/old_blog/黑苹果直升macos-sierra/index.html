@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -88,41 +88,42 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
 <p>看到苹果最新的操作系统<strong>macOS Sierra</strong>已经正式发布更新，我也就顺手升级了。正好最近学校的201宽带莫名其妙的变快了好多，10M的带宽已直逼100M，不到20分钟便下好系统镜像。然后根据提示下一步！😄</p>
-
 <p>迎接我的第一个是类似于一个五国的黑屏错误，抱歉没有保存下珍贵的错误记录。这个时候就要冷静，首先升级<code>clover</code>，貌似没有用。接着发现忘记在<code>clover</code>里新建<code>10.12</code>文件夹，建之，并将<code>10.11</code>中驱动复制到其中，重启问题依旧。于远景爬帖，发现一标题，大致是说n卡安装<code>10.12</code>会黑屏，连帖子内容都没看，直接到<code>BIOS</code>里屏蔽独显。正打算这次重启若出错便拍下错误界面，然而没有机会了，欣喜的看到了安装界面，顺利升级。
-<a href="https://oe0k3rdhy.qnssl.com/image/a/bc/c51765a33b20049819b121db40147.jpg" title="安装界面"><img style="width:710px;"src="https://oe0k3rdhy.qnssl.com/image/a/bc/c51765a33b20049819b121db40147.jpg" alt="安装界面" title="安装界面" /></a>
+<!-- raw HTML omitted -->&lt;img style=&ldquo;width:710px;&ldquo;src=&ldquo;<a href="https://oe0k3rdhy.qnssl.com/image/a/bc/c51765a33b20049819b121db40147.jpg%22">https://oe0k3rdhy.qnssl.com/image/a/bc/c51765a33b20049819b121db40147.jpg&quot;</a> alt=&ldquo;安装界面&rdquo; title=&ldquo;安装界面&rdquo; /&gt;<!-- raw HTML omitted -->
 升级之后呢？这次升级之后非常完美，驱动完全没有问题哦！！上篇已经讲了，Y480的适配情况本来就不错，每次出问题主要在声卡和蓝牙，声卡已经改用<a href="https://github.com/vit9696/AppleALC">AppleALC</a>驱动，这次果然没有出问题，如果你升级后发现声卡不能用，请升级一下<a href="https://github.com/vit9696/AppleALC">AppleALC</a>驱动。蓝牙驱动这次也没有失效，关键在于折腾<code>handoff</code>的时候发现了一个新的驱动——<a href="https://bitbucket.org/RehabMan/os-x-brcmpatchram">BrcmPatchRAM</a>，也是RehabMan大神的作品。使用这个驱动好处在于其效果相当于原生，因此有可能可以用上苹果的<strong>Continuity</strong>功能。简单介绍一下<code>BrcmPatchRAM</code>的使用方法。</p>
-
-<p>1.&nbsp;下载最新版本的<a href="https://bitbucket.org/RehabMan/os-x-brcmpatchram/downloads">BrcmPatchRAM</a>。
-2.&nbsp;解压后会发现有6个驱动文件，实际使用只需要两个。</p>
-
-<pre><code class="language-bash">funnyangs-MacBook-Pro% ls Release\
-BrcmFirmwareData.kext	BrcmNonPatchRAM.kext	BrcmPatchRAM.kext
+<p>1. 下载最新版本的<a href="https://bitbucket.org/RehabMan/os-x-brcmpatchram/downloads">BrcmPatchRAM</a>。
+2. 解压后会发现有6个驱动文件，实际使用只需要两个。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">funnyangs-MacBook-Pro% ls Release<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>BrcmFirmwareData.kext	BrcmNonPatchRAM.kext	BrcmPatchRAM.kext
 BrcmFirmwareRepo.kext	BrcmNonPatchRAM2.kext	BrcmPatchRAM2.kext
-</code></pre>
-
-<p>3.&nbsp;安装
-BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。
-&gt;* BrcmPatchRAM.kext 适用于10.10之前
-* BrcmPatchRAM2.kext: 适用于10.11之后
-* BrcmFirmwareRepo.kext 适用于安装在/System/Library/Extensions
-* BrcmFirmwareData.kext 适用于安装在EFI/Clover/kexts</p>
-
+</code></pre></div><p>3. 安装
+BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。</p>
+<blockquote>
+<ul>
+<li>BrcmPatchRAM.kext 适用于10.10之前</li>
+</ul>
+</blockquote>
+<ul>
+<li>BrcmPatchRAM2.kext: 适用于10.11之后</li>
+<li>BrcmFirmwareRepo.kext 适用于安装在/System/Library/Extensions</li>
+<li>BrcmFirmwareData.kext 适用于安装在EFI/Clover/kexts</li>
+</ul>
 <p>这里我选择将<code>BrcmPatchRAM2.kext</code>和<code>BrcmFirmwareRepo.kext</code>这两个驱动通过<code>Kext Utility</code>安装到系统。</p>
-
 <p>然而，当我开机之后再重启，进度条走到一半时，一道雷电一闪而过，机器陷入了无限的自动重启。思前想后应该是<code>Clover</code>配置的问题，排查一番觉得最有可能是这个地方出的问题。
-<a href="https://oe0k3rdhy.qnssl.com/image/1/f9/f18280952333f741920289e3b1d1d.png" title="clover_config"><img style="width:710px;"src="https://oe0k3rdhy.qnssl.com/image/1/f9/f18280952333f741920289e3b1d1d.png" alt="clover_config" title="clover_config" /></a>
+<!-- raw HTML omitted -->&lt;img style=&ldquo;width:710px;&ldquo;src=&ldquo;<a href="https://oe0k3rdhy.qnssl.com/image/1/f9/f18280952333f741920289e3b1d1d.png%22">https://oe0k3rdhy.qnssl.com/image/1/f9/f18280952333f741920289e3b1d1d.png&quot;</a> alt=&ldquo;clover_config&rdquo; title=&ldquo;clover_config&rdquo; /&gt;<!-- raw HTML omitted -->
 这是之前用于解决HD4000第二阶段花屏的补丁，删除之，果然好了。</p>
-
-<p>最后总结一下升级工作：
-&gt;1. 在BIOS中屏蔽独立显卡
-2. 升级一下Clover，并在Clover中新建10.12的驱动文件夹，并放入相应驱动
-3. 删除Clover 配置文件中的第二阶段花屏补丁代码</p>
-
+<p>最后总结一下升级工作：</p>
+<blockquote>
+<ol>
+<li>在BIOS中屏蔽独立显卡</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>升级一下Clover，并在Clover中新建10.12的驱动文件夹，并放入相应驱动</li>
+<li>删除Clover 配置文件中的第二阶段花屏补丁代码</li>
+</ol>
 <p>当然升级之后也会有些小问题，比如Fn键调节音量和亮度的快捷键都失效了。</p>
-
 <p>祝君折腾愉快～</p>
                         </div>
 
@@ -188,6 +189,10 @@ BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -204,7 +209,7 @@ BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -221,10 +226,6 @@ BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -300,6 +301,10 @@ BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -372,6 +377,8 @@ BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -383,6 +390,8 @@ BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -403,7 +412,7 @@ BrcmPatchRAM的安装有一些讲究，不像其他驱动放在哪都可以。
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

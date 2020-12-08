@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>逆向工程 on 小 ceng 的时间日志</title>
+    <link>https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/</link>
+    <description>Recent content in 逆向工程 on 小 ceng 的时间日志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 08 Dec 2020 14:00:44 +0800</lastBuildDate><atom:link href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 IDA Pro 动态调试安卓 so 文件</title>
+      <link>https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Tue, 08 Dec 2020 14:00:44 +0800</pubDate>
+      
+      <guid>https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/</guid>
+      <description>因为需要破解一个 App 的签名算法，开始学习逆向。本人没有逆向经验，也没有安卓开发经验，甚至没有 Java 开发经验。因此花了不少时间才完成任务，故整理了此文章，作为一个备忘。
+由于是第一次实战，因此参考了很多文章，但是每篇文章都有一些没有提到的点（对新手而言），因此个人结合自己的情况，重新整理了一下遗漏的部分。
+先上参考资料，建议每篇精读，你遇到的大部分问题可能文章已经提及。
+  看雪论坛的《[原创]新手关于ida动态调试so的一些坑总结》 在学习的过程，主要步骤都是参考该文章，因此本文也以该文章为骨架。</description>
+    </item>
+    
+  </channel>
+</rss>

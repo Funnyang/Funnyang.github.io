@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PHP on 小 ceng 的时间日志</title>
@@ -6,11 +6,7 @@
     <description>Recent content in PHP on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 07 Oct 2015 21:04:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://tlog.cc/tags/php/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 07 Oct 2015 21:04:00 +0800</lastBuildDate><atom:link href="https://tlog.cc/tags/php/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OSX 10.11 中 Apache&#43;PHP&#43;MySQL 环境搭建</title>
       <link>https://tlog.cc/posts/old_blog/osx%E4%B8%ADapache&#43;php&#43;mysql%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>

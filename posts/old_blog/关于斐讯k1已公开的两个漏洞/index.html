@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -88,40 +88,29 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
-<p><a href="/images/2016/02/--k1.jpg" title="phicomm-k1"><img style="width:710px;"src="/images/2016/02/--k1.jpg" alt="phicomm-k1" title="phicomm-k1" /></a>
+<p><!-- raw HTML omitted -->&lt;img style=&ldquo;width:710px;&ldquo;src=&quot;/images/2016/02/&ndash;k1.jpg&rdquo; alt=&ldquo;phicomm-k1&rdquo; title=&ldquo;phicomm-k1&rdquo; /&gt;<!-- raw HTML omitted -->
 封面图片来源：<a href="http://www.leikeji.com/article/3731">雷科技</a></p>
-
 <p>前阵子斐讯搞活动，免费送路由器，本人也弄了一台玩玩，主要放在父母厂子里做中继用，方便爸妈上网。俗话说天下没有免费的午餐，果然！</p>
-
-<p>简单介绍一下这款路由器：
-&gt;型号：K1 PSG1208                          <br>
-网络标准: 802.11b 802.11g 802.11n         <br>
-无线网络支持频率: 2.4G&amp;5G                  <br>
-闪存：8M                                  <br>
-内存：64M                                 <br>
+<p>简单介绍一下这款路由器：</p>
+<blockquote>
+<p>型号：K1 PSG1208                          <!-- raw HTML omitted -->
+网络标准: 802.11b 802.11g 802.11n         <!-- raw HTML omitted -->
+无线网络支持频率: 2.4G&amp;5G                  <!-- raw HTML omitted -->
+闪存：8M                                  <!-- raw HTML omitted -->
+内存：64M                                 <!-- raw HTML omitted -->
 CPU: mt7620</p>
-
+</blockquote>
 <p>客观的讲，这款路由并没有网上各位说的那么差，原厂固件也是蛮稳定的，尤其中继的设置十分简单方便。对于一般需求，并不需要刷其他固件，尤其一些人把华硕固件吹的神乎其神，正如看到某位网友的评测，原厂固件和华硕固件的信号是差不多的，没有谁强谁弱，而且亲测华硕固件在中继这方面和原厂固件是没法比的。</p>
-
-<p>然而<span style="color:red;"><strong>原厂固件存在严重的漏洞</strong></span>，不排除故意留下后门的可能，如下：<br>
-<a href="http://wooyun.org/bugs/wooyun-2015-0163398">WooYun-2015-163398</a> <br>
+<p>然而<!-- raw HTML omitted --><strong>原厂固件存在严重的漏洞</strong><!-- raw HTML omitted -->，不排除故意留下后门的可能，如下：<!-- raw HTML omitted -->
+<a href="http://wooyun.org/bugs/wooyun-2015-0163398">WooYun-2015-163398</a> <!-- raw HTML omitted -->
 <a href="http://wooyun.org/bugs/wooyun-2015-0163398">wooyun-2015-0163402</a></p>
-
 <p>更可气的是，漏洞提交的日期是<strong>2015年12月22日</strong>，但至今斐讯官方<strong>仍没有修复</strong>。</p>
-
 <p>权限问题依然存在，处在局域网的用户可以轻松获取管理权限。这点其实考虑到父母厂里人多半不懂网络，有wifi密码这一层拦着，还可以忍受。</p>
-
 <p><strong>但是</strong>对于收集用户信息这一点，出现了更搞笑也更<strong>可气</strong>的一幕，官方对ftp上传服务器权限做了严格限制，杜绝了除了上传以外的所有权限，包括列目录这些权限也没有。在本次漏洞验证中，本人对该服务器的上传操作其实并没有成功，也许是网络原因，也许有其他限制，但根据返回的提示推断应该是存在这项权限的。为了验证路由器是否还在上传客户的浏览记录，本人想了一个巧妙地验证方法，那就是伪造上传服务器。</p>
-
 <p>先在本地搭建一个ftp服务器，添加一个和<code>config.dat</code>中一样的账户，然后telnet连接路由器，修改路由器<code>hosts</code>文件，使<code>soho.wifibase.ftp.phicomm.com</code>指向我的ftp服务器，果然收到了相关的文件，按照乌云上白帽子给的解密方法，成功解密！是的，我们的斐讯公司仍然在收集用户隐私信息，古人云“知错能改，善莫大焉”，然而我们看不到其一点诚意。</p>
-
 <p>这让我想到另一个现象，为什么老掉牙的骗术依然会有人上当，原因很简单，骗子们只是想逮着一个算一个，如此足矣！</p>
-
 <p>可能有人疑问为何不直接修改<code>config.dat</code>里的服务器地址，在路由器中恢复即可。本人当然尝试过，不过会返回错误。</p>
-
 <p>至此，不得已我也要刷固件了。</p>
-
 <p>不过，我还是愿意相信，也许有一天，灿烂的阳光能照进黑暗森林。</p>
                         </div>
 
@@ -187,6 +176,10 @@ CPU: mt7620</p>
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -203,7 +196,7 @@ CPU: mt7620</p>
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -220,10 +213,6 @@ CPU: mt7620</p>
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -299,6 +288,10 @@ CPU: mt7620</p>
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -371,6 +364,8 @@ CPU: mt7620</p>
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -382,6 +377,8 @@ CPU: mt7620</p>
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -402,7 +399,7 @@ CPU: mt7620</p>
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

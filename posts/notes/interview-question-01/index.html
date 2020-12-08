@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -93,97 +93,61 @@
                         
                         <div class="post-content">
                             <p>看到一些试题，融合自己的理解，做了一些补充，慢慢总结更新。</p>
-
-<h3 id="1-简述客户端请求网页里-a-css-的过程">1. 简述客户端请求网页里 a.css 的过程</h3>
-
+<h3 id="1-简述客户端请求网页里-acss-的过程">1. 简述客户端请求网页里 a.css 的过程</h3>
 <p>这个问题主要要结合缓存说一下，那么就涉及协商缓存和强缓存。</p>
-
 <p>每个 header 详细的作用规则，其实很难记住的。我找了两张图</p>
-
-<p><img src="/images/15719103412299.jpg" alt="" /></p>
-
+<p><img src="/images/15719103412299.jpg" alt=""></p>
 <p>这个图讲了大致的过程，没有什么要解释的。</p>
-
-<p><img src="/images/15719104355750.png" alt="" /></p>
-
+<p><img src="/images/15719104355750.png" alt=""></p>
 <p>这个是原博主的一个参考答案</p>
-
 <p>其实两个答案都不算严谨，当然我也给不出严谨的答案。因为细节涉及其实挺多的，涉及 HTTP 协议的版本，浏览器的实现，以及多个缓存相关字段如何相互作用等。每次遇到这种问题，都是针对性的去梳理逻辑。</p>
-
 <p>简单梳理了一下涉及到缓存的一些 Header:</p>
-
 <p><strong>通用 Header</strong></p>
-
 <ul>
 <li>Cache-Control（1.1 之后）</li>
 <li>Pragma(1.1 之前）</li>
 </ul>
-
 <p><strong>请求 Header</strong></p>
-
 <ul>
 <li>If-Match/If-None-Match</li>
 <li>If-Modified-Since/If-Unmodified-Since</li>
 </ul>
-
 <p><strong>响应 Header</strong></p>
-
 <ul>
 <li>Etag</li>
 <li>Expires</li>
 <li>Last-Modified</li>
 </ul>
-
 <h3 id="2-linux-如何查看某个进程的线程">2. Linux 如何查看某个进程的线程？</h3>
-
 <ol>
 <li><code>ps -T -p pid</code>，结果中 spid 就是线程号</li>
 <li><code>top -H -p pid</code> 或 <code>top -p pid</code> 然后按「H」</li>
 <li><code>pstree -p pid</code></li>
 </ol>
-
-<h3 id="3-软连接的原文件删除-能否编辑此软链接">3. 软连接的原文件删除，能否编辑此软链接？</h3>
-
+<h3 id="3-软连接的原文件删除能否编辑此软链接">3. 软连接的原文件删除，能否编辑此软链接？</h3>
 <p>可以编辑，编辑之后保存，相当于创建了新的文件，文件名和原文件相同。</p>
-
 <h3 id="4-如何识别文件是否是硬链接">4. 如何识别文件是否是硬链接</h3>
-
-<p><img src="/images/15719129951508.jpg" alt="-w487" /></p>
-
+<p><img src="/images/15719129951508.jpg" alt="-w487"></p>
 <p>索引数大于 2，就存在硬链接。</p>
-
 <h3 id="5-什么场景会造成-cpu-低而负载很高">5. 什么场景会造成 CPU 低而负载很高？</h3>
-
 <p>首先负载应该是指 Load Average 吧，Load Average 是指单位时间内，系统处于<strong>可运行状态</strong>和<strong>不可中断状态</strong>的平均进程数。</p>
-
 <p>可运行状态进程包含两种：</p>
-
 <ul>
 <li>正在使用 CPU 的进程</li>
 <li>等待使用 CPU 的进程</li>
 </ul>
-
 <p>不可中断状态进程：</p>
-
 <ul>
 <li>正处于内核关键流程中的进程，这些进程不可打断。常见的就是等待硬件设备的 IO 响应</li>
 </ul>
-
 <p>所以 CPU 低而负载很高，一般就是“等待使用 CPU 的进程”多，对应 CPU 抢占的情况。或者“不可中断状态进程”多，一般就是 IO 操作密集，或磁盘故障。</p>
-
-<h3 id="6-为什么普通用户没有-etc-passwd-的写权限-却可以修改密码">6. 为什么普通用户没有 <code>/etc/passwd</code> 的写权限，却可以修改密码？</h3>
-
+<h3 id="6-为什么普通用户没有-etcpasswd-的写权限却可以修改密码">6. 为什么普通用户没有 <code>/etc/passwd</code> 的写权限，却可以修改密码？</h3>
 <p>因为 <code>passwd</code> 命令设置了 SetUID 权限。</p>
-
 <p>相关命令</p>
-
 <pre><code>chmod u+s myfile # 设置 SetUID 权限
 chmod g+s myfile # 设置 SetGID 权限
 chmod o+t mydir  # 设置粘滞位（stick bit) 权限
-</code></pre>
-
-<h3 id="7-查看-linux-版本">7. 查看 Linux 版本</h3>
-
+</code></pre><h3 id="7-查看-linux-版本">7. 查看 Linux 版本</h3>
 <pre><code>cat /etc/issue
 </code></pre>
                         </div>
@@ -250,6 +214,10 @@ chmod o+t mydir  # 设置粘滞位（stick bit) 权限
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -266,7 +234,7 @@ chmod o+t mydir  # 设置粘滞位（stick bit) 权限
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -283,10 +251,6 @@ chmod o+t mydir  # 设置粘滞位（stick bit) 权限
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -362,6 +326,10 @@ chmod o+t mydir  # 设置粘滞位（stick bit) 权限
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -434,6 +402,8 @@ chmod o+t mydir  # 设置粘滞位（stick bit) 权限
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -445,6 +415,8 @@ chmod o+t mydir  # 设置粘滞位（stick bit) 权限
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -465,7 +437,7 @@ chmod o+t mydir  # 设置粘滞位（stick bit) 权限
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

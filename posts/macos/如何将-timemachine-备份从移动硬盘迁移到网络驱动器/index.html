@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -92,74 +92,61 @@
                         
                         
                         <div class="post-content">
-                            
-
-<p>不喜欢唠叨的，直接进入<a href="#技术总结">技术总结</a>。</p>
-
+                            <p>不喜欢唠叨的，直接进入<a href="#%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93">技术总结</a>。</p>
 <p><strong>建议还是看一下全文，避免误操作。</strong></p>
-
 <p>TimeMachine (后文简称 TM）是 Apple 自家一款很强大的系统级别的备份软件，个人非常喜欢，虽然不是实时备份，但是当你用得时间长了，真的会有一种坐时光机的感觉。当然不是每个人都喜欢这种全面备份，所以也就不过多吹嘘，毕竟没有一件东西是完美的。</p>
-
 <p>TM 备份方式比较灵活，可以选择外接硬盘备份，也可以使用网络驱动器备份。过去，我使用的一直是外接硬盘的方式，原因是简单。硬盘、键盘等都插在显示器的 USB hub 上，每天上班只要接上，便会自动备份。以这种方式使用快两年，直到最近，硬盘出现只读问题，不得不考虑迁移数据。</p>
-
 <p>备份数据大小在 750GB 左右，考虑到小文件较多的原因，迁移时间不会太短，这不是什么大问题。问题是我没有多余的移动硬盘（也没有多余的 type c 转接头，公司有，但迁移数据肯定不能占用上班时间），于是想着在黑群晖上开辟 1T 空间来做这件事。好了，终于引出了本文重点记录的问题：<strong>如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</strong>。</p>
-
 <p>我本以为这个问题是很简单的，不就是复制文件。然而，我不了解的是，<strong>TM 本地备份和网络备份的方式略有差异</strong>。</p>
-
 <h2 id="tm-本地备份和网络备份有什么不同">TM 本地备份和网络备份有什么不同？</h2>
-
 <p>使用过 TM 备份的同学，应该能发现，移动硬盘备份后的硬盘数据大概是这个样子：
-<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2012.11.15.png" alt="屏幕快照 2019-07-20 12.11.15" />
+<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2012.11.15.png" alt="屏幕快照 2019-07-20 12.11.15">
 目录结构是 <code>/Backups.backupdb/主机名/日期</code>，因此我就想直接复制文件到网络驱动盘不就行了。如果你也这样做，可得到这样一个提示。
-<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2012.32.18.png" alt="屏幕快照 2019-07-20 12.32.18" />
+<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2012.32.18.png" alt="屏幕快照 2019-07-20 12.32.18">
 格式不对？自然能想到是文件系统格式不对，然而网络驱动器如何能解决文件系统格式的问题呢？想不通。</p>
-
 <p>这个时候其实搜索了一些资料，但是没啥有价值的信息（搜索 TimeMachine 这些关键词的确范围有限）。于是就测试了一下使用网络驱动器备份，想了解这种情况是如何存储的，如下：
-<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2012.40.45.png" alt="屏幕快照 2019-07-20 12.40.45" />
+<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2012.40.45.png" alt="屏幕快照 2019-07-20 12.40.45">
 原来是使用镜像文件存储的，双击挂载这个镜像，会发现目录结构和之前外接硬盘一致。</p>
-
 <p>总结：<strong>外接硬盘备份时，数据以目录形式存放；网络驱动器备份，使用了一层镜像文件封装，来保证文件系统格式一致</strong>。</p>
-
 <h2 id="大小写带来的问题">大小写带来的问题</h2>
-
 <p>根据之前的研究，<strong>迁移资料的方法就是先挂载虚拟镜像文件，然后将 <code>Backups.backupdb</code> 复制进去</strong>。如果你也这么操作了，你可能会得到这条提示：</p>
-
 <blockquote>
 <p>该宗卷发生大小写错误，无法用于备份</p>
 </blockquote>
-
 <p>这是因为 <code>sparsebundle</code> 镜像内的文件系统默认是<strong>区分大小写的</strong>，也就是下图红框圈出的，而原有备份是不区分大小写的文件系统格式，两者不兼容，导致无法直接复制。</p>
-
-<p><img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2012.55.19.png" alt="屏幕快照 2019-07-20 12.55.19" /></p>
-
+<p><img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2012.55.19.png" alt="屏幕快照 2019-07-20 12.55.19"></p>
 <p>解决办法：<strong>重新格式化 <code>sparsebundle</code> 的文件系统格式。</strong></p>
-
 <p>这会导致数据丢失，我这里本来就没有数据，就无所谓了。若你的网络驱动器中已有备份数据，想合并数据，目前似乎是无解的。有方法的同学可以交流。</p>
-
 <h2 id="技术总结">技术总结</h2>
-
 <p>将 TimeMachine 备份从移动硬盘迁移到网络驱动器的步骤：</p>
-
 <ol>
-<li>配置 TimeMachine 备份目标为你的网络驱动器，并等待开始备份。</li>
-<li>当网络驱动器中生成了 <code>sparsebundle</code> 文件时，取消备份。（中间过程 sparsebundle 文件会经历一次重命名，文件名第一次为 mac 的硬件UUID，第二次为 mac 主机名时，等到文件名为主机名再取消备份。）</li>
-<li>用 Finder 双击挂载这个新的 <code>sparsebundle</code> 文件</li>
-<li>此时在 Finder 和磁盘工具都能看到一个「时间机器备份」的磁盘。</li>
-<li>若遇到大小写问题，进入磁盘工具。抹掉该磁盘为不区分大小写的文件系统格式。
-<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2013.19.44.png" alt="屏幕快照 2019-07-20 13.19.44" /></li>
-
-<li><p>设置权限，取消勾选「忽略此卷宗上的所有权」
-<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2023.43.20.png" alt="屏幕快照 2019-07-20 23.43.20" /></p></li>
-
-<li><p>复制 <code>Backups.backupdb</code> 目录到「时间机器备份」根目录。</p></li>
+<li>
+<p>配置 TimeMachine 备份目标为你的网络驱动器，并等待开始备份。</p>
+</li>
+<li>
+<p>当网络驱动器中生成了 <code>sparsebundle</code> 文件时，取消备份。（中间过程 sparsebundle 文件会经历一次重命名，文件名第一次为 mac 的硬件UUID，第二次为 mac 主机名时，等到文件名为主机名再取消备份。）</p>
+</li>
+<li>
+<p>用 Finder 双击挂载这个新的 <code>sparsebundle</code> 文件</p>
+</li>
+<li>
+<p>此时在 Finder 和磁盘工具都能看到一个「时间机器备份」的磁盘。</p>
+</li>
+<li>
+<p>若遇到大小写问题，进入磁盘工具。抹掉该磁盘为不区分大小写的文件系统格式。
+<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2013.19.44.png" alt="屏幕快照 2019-07-20 13.19.44"></p>
+</li>
+<li>
+<p>设置权限，取消勾选「忽略此卷宗上的所有权」
+<img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-20%2023.43.20.png" alt="屏幕快照 2019-07-20 23.43.20"></p>
+</li>
+<li>
+<p>复制 <code>Backups.backupdb</code> 目录到「时间机器备份」根目录。</p>
+</li>
 </ol>
-
 <h2 id="题外">题外</h2>
-
 <p>使用 Finder 复制准备时间较长，可能长达七八个小时。建议使用一款叫做 <a href="https://www.shirt-pocket.com">SuperDuper</a> 的软件，我用它了也大概花了二十七八个小时才完成复制，所以一定要合理安排时间，同时注意不要让电脑进入休眠。</p>
-
 <h2 id="参考资料">参考资料</h2>
-
 <p><a href="https://www.baligu.com/pondini/TM/18.html">How can I copy my TM backups to a different location</a></p>
 
                         </div>
@@ -232,6 +219,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -248,7 +239,7 @@
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -265,10 +256,6 @@
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -344,6 +331,10 @@
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -416,6 +407,8 @@
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -427,6 +420,8 @@
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -447,7 +442,7 @@
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

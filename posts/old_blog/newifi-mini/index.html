@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -95,103 +95,90 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
 <p>在校园里总是有一些奇葩需求。</p>
-
 <p>新校区可以办理联通宽带，果断办理，校园网的不稳定和按流量收费的政策着实不让本人满意。根据之前得到的消息，联通 201 宽带是不可共享的（对于懂点网络的人当然将信将疑），人家价格便宜嘛，这种做法也可以原谅啦！</p>
-
 <p>于是寝室几个人合伙买了个路由器，学生党挑来挑去选了个便宜的 newifi mini，果断入坑，网上说固件很烂我还不信，寝室方圆之内信号居然不是满格</p>
-
 <p>只有刷第三方固件了，听人说老毛子改的华硕固件不错，刷完之后信号果然好了许多，不过寝室的打 LOL 的兄弟直呼比校园网还卡，然而本人下东西没问题啊，不折腾了。为什么不想折腾呢？因为在寝室路由器用的是交换机模式，很多智能路由的功能用不到，稳定是关键。</p>
-
 <p>该做的事迟早要做，你逃不掉。</p>
-
 <p>后来我上网也开始卡，百度都不能秒开，渐渐地我也发现这简直不是10M带宽应有的体验。所以我猜这固件可能并不稳定，寝室路由器大家一起用贵在稳定，不能自己没事就折腾，故放弃 openwrt 之类的固件，刷了小米固件（本人半个米粉）。小米还算有良心，买的这坑路由器终于像个正常的路由器了(‘・ω・’)</p>
-
 <p>然后的问题是，这特么是智能路由器啊！当个交换机太可惜了。然后我做了如下事情：</p>
-
 <ol>
-<li>关闭 DHCP 功能，修改 lan 口 IP 为 <code>10.0.0.1</code>（为了绕过联通的限制）<br /></li>
-<li>光猫接出来两根网线分别接路由器 LAN 口和 WAN 口<br /></li>
+<li>关闭 DHCP 功能，修改 lan 口 IP 为 <code>10.0.0.1</code>（为了绕过联通的限制）</li>
+<li>光猫接出来两根网线分别接路由器 LAN 口和 WAN 口</li>
 </ol>
-
-<p>舍友们上网，直接连上 WiFi，拨号即可。<br />
+<p>舍友们上网，直接连上 WiFi，拨号即可。<br>
 本人连的时候就改改IP为 <code>10.0.0.x</code> 即可。
 然后我就一个人霸占了它的智能，远程下载，迅雷加速什么的都可以啦！</p>
-
 <p>附录：北京联通 201 python 自动登陆脚本，适用于 newifi mini 的小米固件，其他未测试</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#! /extdisks/sda4/opkg/usr/bin python</span>
+<span style="color:#75715e">#date: 2015/11/09</span>
+<span style="color:#75715e">#For Autologin ChinaUnicom 201</span>
+<span style="color:#75715e">#Code by Funnyang</span>
 
-<pre><code class="language-python">#! /extdisks/sda4/opkg/usr/bin python
-#date: 2015/11/09
-#For Autologin ChinaUnicom 201
-#Code by Funnyang
-
-import sys
-import re
-import urllib2
-import urllib
-import requests
-import cookielib
-import socket                                          
-import fcntl                                           
-import struct
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> re
+<span style="color:#f92672">import</span> urllib2
+<span style="color:#f92672">import</span> urllib
+<span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> cookielib
+<span style="color:#f92672">import</span> socket                                          
+<span style="color:#f92672">import</span> fcntl                                           
+<span style="color:#f92672">import</span> struct
 
 reload(sys)
-sys.setdefaultencoding(&quot;utf-8&quot;)
+sys<span style="color:#f92672">.</span>setdefaultencoding(<span style="color:#e6db74">&#34;utf-8&#34;</span>)
 
-#get local ip
-def get_ip_address(ifname):  
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  
-    return socket.inet_ntoa(fcntl.ioctl(      
-         s.fileno(),         
-         0x8915,  # SIOCGIFADDR                 
-         struct.pack('256s', ifname[:15])                         
-    )[20:24])                                  
+<span style="color:#75715e">#get local ip</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_ip_address</span>(ifname):  
+    s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_DGRAM)  
+    <span style="color:#66d9ef">return</span> socket<span style="color:#f92672">.</span>inet_ntoa(fcntl<span style="color:#f92672">.</span>ioctl(      
+         s<span style="color:#f92672">.</span>fileno(),         
+         <span style="color:#ae81ff">0x8915</span>,  <span style="color:#75715e"># SIOCGIFADDR                 </span>
+         struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#39;256s&#39;</span>, ifname[:<span style="color:#ae81ff">15</span>])                         
+    )[<span style="color:#ae81ff">20</span>:<span style="color:#ae81ff">24</span>])                                  
 
-#login
-loginurl = 'http://114.247.41.52:808/protalAction!portalAuth.action?'
+<span style="color:#75715e">#login</span>
+loginurl <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://114.247.41.52:808/protalAction!portalAuth.action?&#39;</span>
 
-class Login(object):
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Login</span>(object):
 
-    def __init__(self):
-        self.wlanuserip = ''
-        self.localIp = ''
-        self.basip = ''
-        self.lpsUserName = ''
-        self.lpsPwd = ''
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>wlanuserip <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+        self<span style="color:#f92672">.</span>localIp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+        self<span style="color:#f92672">.</span>basip <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+        self<span style="color:#f92672">.</span>lpsUserName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+        self<span style="color:#f92672">.</span>lpsPwd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
 
-        self.cj = cookielib.LWPCookieJar()
-        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cj))
-        urllib2.install_opener(self.opener)
+        self<span style="color:#f92672">.</span>cj <span style="color:#f92672">=</span> cookielib<span style="color:#f92672">.</span>LWPCookieJar()
+        self<span style="color:#f92672">.</span>opener <span style="color:#f92672">=</span> urllib2<span style="color:#f92672">.</span>build_opener(urllib2<span style="color:#f92672">.</span>HTTPCookieProcessor(self<span style="color:#f92672">.</span>cj))
+        urllib2<span style="color:#f92672">.</span>install_opener(self<span style="color:#f92672">.</span>opener)
         
-    def setLoginInfo(self,wlanusrip,localIp,basip,lpsUserName,lpsPwd):
-        self.wlanuserip = wlanuserip                                       
-        self.localIp = localIp                                            
-        self.basip =  basip                                              
-        self.lpsUserName =  lpsUserName                                       
-        self.lpsPwd = lpsPwd 
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setLoginInfo</span>(self,wlanusrip,localIp,basip,lpsUserName,lpsPwd):
+        self<span style="color:#f92672">.</span>wlanuserip <span style="color:#f92672">=</span> wlanuserip                                       
+        self<span style="color:#f92672">.</span>localIp <span style="color:#f92672">=</span> localIp                                            
+        self<span style="color:#f92672">.</span>basip <span style="color:#f92672">=</span>  basip                                              
+        self<span style="color:#f92672">.</span>lpsUserName <span style="color:#f92672">=</span>  lpsUserName                                       
+        self<span style="color:#f92672">.</span>lpsPwd <span style="color:#f92672">=</span> lpsPwd 
         
-    def login(self):
-        loginparams = {'wlanuserip':self.wlanuserip,'localIp':self.localIp,'basip':self.basip,'lpsUserName':self.lpsUserName,'lpsPwd':self.lpsPwd}
-        headers = {'User-Agent':'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5'}    
-        req = urllib2.Request(loginurl, urllib.urlencode(loginparams),headers=headers)  
-        response = urllib2.urlopen(req)
-        self.operate = self.opener.open(req)
-        thePage = response.read()    
-        print thePage
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>(self):
+        loginparams <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;wlanuserip&#39;</span>:self<span style="color:#f92672">.</span>wlanuserip,<span style="color:#e6db74">&#39;localIp&#39;</span>:self<span style="color:#f92672">.</span>localIp,<span style="color:#e6db74">&#39;basip&#39;</span>:self<span style="color:#f92672">.</span>basip,<span style="color:#e6db74">&#39;lpsUserName&#39;</span>:self<span style="color:#f92672">.</span>lpsUserName,<span style="color:#e6db74">&#39;lpsPwd&#39;</span>:self<span style="color:#f92672">.</span>lpsPwd}
+        headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;User-Agent&#39;</span>:<span style="color:#e6db74">&#39;Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5&#39;</span>}    
+        req <span style="color:#f92672">=</span> urllib2<span style="color:#f92672">.</span>Request(loginurl, urllib<span style="color:#f92672">.</span>urlencode(loginparams),headers<span style="color:#f92672">=</span>headers)  
+        response <span style="color:#f92672">=</span> urllib2<span style="color:#f92672">.</span>urlopen(req)
+        self<span style="color:#f92672">.</span>operate <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>opener<span style="color:#f92672">.</span>open(req)
+        thePage <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>read()    
+        <span style="color:#66d9ef">print</span> thePage
         
-if __name__ == '__main__':
-    userlogin = Login()
-    wlanuserip = get_ip_address('eth0.2') 
-    localIp = ''
-    basip = '61.148.2.82'
-    lpsUserName = '手机号/账户'
-    lpsPwd = '密码'
-    userlogin.setLoginInfo(wlanuserip,localIp,basip,lpsUserName,lpsPwd)
-    userlogin.login()
-</code></pre>
-
-<p>以上未涉及技术的细节，均可直接到newifi官方论坛找到。</p>
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    userlogin <span style="color:#f92672">=</span> Login()
+    wlanuserip <span style="color:#f92672">=</span> get_ip_address(<span style="color:#e6db74">&#39;eth0.2&#39;</span>) 
+    localIp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    basip <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;61.148.2.82&#39;</span>
+    lpsUserName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;手机号/账户&#39;</span>
+    lpsPwd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;密码&#39;</span>
+    userlogin<span style="color:#f92672">.</span>setLoginInfo(wlanuserip,localIp,basip,lpsUserName,lpsPwd)
+    userlogin<span style="color:#f92672">.</span>login()
+</code></pre></div><p>以上未涉及技术的细节，均可直接到newifi官方论坛找到。</p>
                         </div>
 
                         
@@ -256,6 +243,10 @@ if __name__ == '__main__':
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -272,7 +263,7 @@ if __name__ == '__main__':
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -289,10 +280,6 @@ if __name__ == '__main__':
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -368,6 +355,10 @@ if __name__ == '__main__':
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -440,6 +431,8 @@ if __name__ == '__main__':
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -451,6 +444,8 @@ if __name__ == '__main__':
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -471,7 +466,7 @@ if __name__ == '__main__':
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

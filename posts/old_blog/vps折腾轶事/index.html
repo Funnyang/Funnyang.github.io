@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -88,38 +88,23 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
 <p>对于想要入手 VPS 的童鞋，希望本人的经验可以给大家一些借鉴。老鸟可绕过。</p>
-
 <p>事情是这个样子滴，狗爹的虚拟主机快过期了(没错就是75大洋一年的那个)，当初也是小白，买下才知道没有 <code>root</code> 权限，很多事情干不了，尤其那些大家都懂得。后来想了个曲线救国的办法，挂了个 PHP 版的 <code>Goagent</code>，也算凑合了一年。如今，续费不划算，博客迁回了国内，正经备了个案，其实备案没想象得那么麻烦嘛！然而上网这事成了问题。</p>
-
 <p>最初打算学大家搞个搬瓦工，可是人家不卖便宜的了啊！曾经的有一份便宜让我占，可是我没有珍惜。。。不过，又有后来人续上了神话，他就是 AlphaRacks。 3.99$/年的价格还是挺诱人的，然而没有信用卡，没用过 Paypal，付款成了问题。找万能的X宝，由于某种原因，我只发现一家代购，给老板留了几次言，不回我，估计过年去了。后来我又想找找代付，一定是人家嫌钱少，没一家理我！！我感受到了世界深深的恶意!</p>
-
 <p>自己动手丰衣足食，注册 Paypal，先用了一张中国银行的借记卡，F***，也是醉了，太久忘记密码了。接着是一张农行卡，农行的网银跳来跳去，装各种插件，后来特么钱付出去了，Paypal 上却没有交易记录，再一次感到世界深深的恶意！后来 Paypal 的客服告诉我，农行的系统太老，发生的跳转的环节如果出问题就会这样，那笔款项会在7个工作日返回，建议用中国银行，建设银行什么的，他们不会跳转。在遇到一堆不愉快时，我也在找各种 vps 的信息，发现 GitHub 和 DigtalOcean 有合作的学生优惠，而且网上各路大神都说 DigtalOcean 看视频秒开，要不咱试试，加上学生优惠也还能接受的价格。Ok ,转战 DigtalOcean!</p>
-
 <p>DigtalOcean 的优惠是这样的，通过别人邀请注册送 10 美刀，GitHub 给的学生优惠 50 美刀(以前是 100 刀)，主机最低 5 美刀/月，但是激活帐号要先充值 5 美刀，这样就是5美刀 12 个月了，十分的划算了，不过这里有坑，待我细细道来。首先要申请 GitHub 的学生优惠，主要就是证明你的学生身份，GitHub 不认我们学校的邮箱，所以我通过上传学生证的照片，完成认证。期间用着蹩脚的英语跟 GitHub 负责教育支持的人员沟通，总算是承认了我的学生身份。学生认证期间，我抽空完成了 DigtalOcean 的注册，还是用那张农行卡冒着巨大风险充了 5 美刀以激活帐号。当我高高兴兴地把 GitHub 的 <code>Offer Code</code> 输入进去时，他告诉我优惠码无效，只适用于新用户(心中千万匹草泥马飞奔而过，我不是新用户吗!!)。后来我猜想是不是这个帐号需要在优惠码诞生之后诞生，OK，我再注册一个，顺便用了上个帐号的推广，然后为了推广生效，又充了 10 美刀，这样原账户还可以得到 25 刀的推广费，然而我输入折扣码的时候，告诉老子无权访问此页。不仅如此，他还封了我新注册的号，25 刀也没收到，对我进行各种验证，老子的钱还在里面，只能服从。后来我知道了，这是防止恶意推广，一人只能一号。</p>
-
 <p>为了要回我的钱钱，我向客户哥哥求饶了。我用烂得掉渣的英语告诉他，我是新人，我不懂规矩，我有罪，我很抱歉，求你还我钱，不然老子以后再也不用你家的东西了！当然为了表现中国人的素质，我的措辞还是文明的。哈哈，然后我的帐号终于解封了，后来，我还问他是不是 10 美刀和 50 美刀不可兼得，他让我把优惠码发给他，帮我手动激活了，看来可以兼得！所以，其实第一次无法激活时，可能也可以找客服解决。</p>
-
 <p>这一系列艰难历程后，终于可以开始解决上网的事了。先选机房，根据网友的推荐，旧金山的最为稳定，新加坡的也还不错，有的人甚至说新加坡要好于旧金山了。保险起见，还是选择了旧金山。然后 10 多K的网速，你跟我说看视频一点也不卡。我真是这么倒霉嘛！之后我又迁移到新加坡，wget 个 QQ 80 多K的速度，你跟说我看视频一点也不卡。我彻底绝望了，又迁回旧金山。我开始怀疑人生，花钱买个 vps ，还不如网友提供的免费帐号快!幸好这种情况在第二天有了很大改善，高清视频不卡是不可能，不过正常使用是完全没问题。大哥可不要这么一惊一乍的呀！</p>
-
 <p>有空我会再做做优化，希望可以改善，可能有端口干扰，我用的是高端口号。DigtalOcean 支持 IPv6，准备回学校再试试速度，或许能省笔网费呢！</p>
-
 <p><strong>2016/02/17更新：</strong></p>
-
 <p>关于 DigtalOcean 的推广活动，原文是这样：</p>
-
 <blockquote>
 <p>Everyone you refer gets $10 in credit. Once they’ve spent $25 with us, you&rsquo;ll get $25. There is no limit to the amount of credit you can earn through referrals.</p>
 </blockquote>
-
 <p>当时没理解清楚，所以上文有些言辞是有误的。
 也附上推广链接吧！<a href="https://m.do.co/c/e2db9ba7d450">DigtalOcean</a></p>
-
 <p>关于速度，根据目前的使用体验，跟各地运营商及使用时段有关系，早上明显很快，但不能保证随时都有比较好的响应速度。还是建议旧金山，总体要比新加坡稳定，较低的 ping 值并不能说明什么问题，且在全国范围内 ping 值极差很大，也说明这条线路还是不太稳定。入手的朋友可以多多尝试，DigtalOcean 按时计费，而且可以方便的迁移机房，所以不用担心选错。</p>
-
 <p><strong>2016/02/21更新：</strong></p>
-
 <p>关于 Paypal 用中国农业银行支付失败的那5美刀，已经过去 20 多日，仍没有返款。便再次电话联系客服，客服只是核对了一下账户信息，便果断给我申请了 10 美刀的补偿，对于人家的这种态度必须要给一个<code>赞</code>！！！</p>
                         </div>
 
@@ -185,6 +170,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -201,7 +190,7 @@
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -218,10 +207,6 @@
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -297,6 +282,10 @@
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -369,6 +358,8 @@
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -380,6 +371,8 @@
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -400,7 +393,7 @@
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -92,75 +92,54 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h2 id="概念解析">概念解析</h2>
-
+                            <h2 id="概念解析">概念解析</h2>
 <h4 id="xpenology">Xpenology</h4>
-
 <p><code>Xpenology</code> 是群晖操作系统的引导(<code>bootloader</code>)，当然不是官方的。</p>
-
 <p>群晖操作系统叫做 <code>DSM</code> (Disk Station Manager)，<code>DSM</code> 是群晖开发的自定义 <code>Linux</code> 版本，专门针对 NAS 服务进行了很多优化和特性实现。通常 <code>DSM</code> 只能运行在群晖自家设备上，而 <code>Xpenology</code> 创造了一种可能性————在任何 x86 设备上运行 <code>DSM</code> 。</p>
-
 <p>更多细节，看<a href="https://xpenology.org">官方</a>介绍吧！</p>
-
 <h4 id="jun">jun</h4>
-
 <p><a href="https://xpenology.com/forum/profile/23252-jun/">jun</a> 是一个人，他找到了一种安装 DSM 6.x 的方法。</p>
-
 <h4 id="二合一">二合一</h4>
-
 <p>传统的黑群晖安装是<strong>引导和系统分别在两个硬盘</strong>，通常需要使用一个 U 盘作为单独的引导。二合一就是指<strong>引导和系统可以在同一个硬盘</strong>。</p>
-
 <p><a href="http://www.nasyun.com/thread-28751-1-1.html">老骥伏枥的精华帖</a></p>
-
 <p>二合一的问题，爬了半天帖，这其实是个 grub2 引导的问题的。所以本着从源头学起的精神，先去学习 grub2 的语法、特性、原理等，这才是王道。否则看起帖子来根本摸不着头脑，但其实不是什么很难的问题。</p>
-
 <p>老骥伏枥这篇文章，重点收获不在于二合一的理解上，而在于其讲清楚了黑群晖破解的原理以及破解所处的层次，这才是对我有帮助的地方。</p>
-
 <blockquote>
 <p>原话如下：</p>
-
+</blockquote>
+<blockquote>
 <p>所谓黑群晖，其实正真被黑的部分并不是 bootloader。目前主流的 bootloader 都是开源项目。包括我们前面提到过的 SYSLINUX 和 GRUB 它们都是开源的。正真被黑的应该是部分内核 zImage 与位于 initrd ramdisk 中的各种外挂模块。事实上 linux 内核也是开源的。群晖可能会在 zImage 中加入一点检测硬件的代码。最主要的被黑部分是 initrd 中的各种外挂模块。黑群晖 6.02 版之前内核与 initrd 绑定在一个文件 zImage 中。黑群晖 6.02 版内核 zImage 文件与 initrd 分开为 <code>ramdisk.lzma</code> 和 <code>extra.lzma</code> 文件。黑定制版的 linux 系统大致就瞄准这两个文件。</p>
 </blockquote>
-
 <h4 id="洗白">洗白</h4>
-
 <p>只说全洗白，通过修改为正版 sn 和 mac，达到白群晖的效果。</p>
-
 <h4 id="硬改-mac">硬改 mac</h4>
-
 <p>修改网卡的物理 mac，主要用于洗白和网络唤醒同时使用的场景。因为网络唤醒需要真正的物理 mac，而洗白用的是伪造的 mac。</p>
-
 <h2 id="实践文章">实践文章</h2>
-
 <ul>
-<li><p><a href="https://www.nas2x.com/threads/dsm-6-2-1-20190221.29/">黑群辉DSM 6.2.1 系统安装图文教程</a></p></li>
-
-<li><p><a href="https://post.smzdm.com/p/alpzllno/">蜗牛星际之黑群晖硬盘休眠和理顺盘序</a></p></li>
-
-<li><p><a href="https://blog.csdn.net/mi2006/article/details/88873324">蜗牛星际修改 82583V 网卡 MAC 地址</a></p></li>
-
-<li><p><a href="https://download.csdn.net/download/phptits/10658670">mac149F 硬改 mac 工具包</a>
-本文本来想提供一份的，但是想想还是要感谢这位上传者，所以就不提供了。</p></li>
+<li>
+<p><a href="https://www.nas2x.com/threads/dsm-6-2-1-20190221.29/">黑群辉DSM 6.2.1 系统安装图文教程</a></p>
+</li>
+<li>
+<p><a href="https://post.smzdm.com/p/alpzllno/">蜗牛星际之黑群晖硬盘休眠和理顺盘序</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/mi2006/article/details/88873324">蜗牛星际修改 82583V 网卡 MAC 地址</a></p>
+</li>
+<li>
+<p><a href="https://download.csdn.net/download/phptits/10658670">mac149F 硬改 mac 工具包</a>
+本文本来想提供一份的，但是想想还是要感谢这位上传者，所以就不提供了。</p>
+</li>
 </ul>
-
 <h2 id="一些建议">一些建议</h2>
-
 <p>找资源最好在源头找，比如我们知道了引导是
 <a href="https://xpenology.com/forum/profile/23252-jun/">jun</a>
 在维护，那么他就应该是源头，那么最好直接从他那里下。果然可以找到他发布的帖子:
 <a href="https://xpenology.com/forum/topic/12952-dsm-62-loader/?tab=comments#comment-93567">DMS 6.2 Loader</a></p>
-
 <p>二合一本人不是太推荐，但是还是建议下载下来，研究一番它的分区结构。不推荐的原因是，我认为 U 盘更加简洁，维护成本低，买一个闪迪的酷豆 U 盘完美解决占用空间问题。</p>
-
 <p>本文不是一篇教程，只是帮助新手更好上路（我也算是新手吧😄）。</p>
-
 <p><strong>2019 年 8 月 3 日更新：</strong>
 真心不要瞎升级，升级之后无法直接降级，只能重新安装。</p>
-
 <p>今天我没事升级了一下，结果无法联机，是网卡驱动导致的。想改 <code>pat</code> 文件里版本降级，但是里面有签名校验，倒腾了半天，还是重装，真是浪费时间。</p>
-
 <p>最后推荐翻阅 <a href="https://wp.gxnas.com/2450.html">黑群晖常见问题</a></p>
 
                         </div>
@@ -235,6 +214,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -251,7 +234,7 @@
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -268,10 +251,6 @@
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -347,6 +326,10 @@
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -419,6 +402,8 @@
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -430,6 +415,8 @@
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -450,7 +437,7 @@
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

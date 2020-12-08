@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -88,160 +88,152 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
 <blockquote>
-<p>本配置参考资料众多，这里仅列出具有重要指导意义的两处吧！<br>Dolphin 学长的译文：<a href="https://idiotwu.me/high-performance-ghost-configuration-with-nginx/">通过 nginx 代理 Ghost 的高性能配置</a><br>
+<p>本配置参考资料众多，这里仅列出具有重要指导意义的两处吧！<!-- raw HTML omitted -->Dolphin 学长的译文：<a href="https://idiotwu.me/high-performance-ghost-configuration-with-nginx/">通过 nginx 代理 Ghost 的高性能配置</a><!-- raw HTML omitted -->
 屈光宇的博客：<a href="https://imququ.com">JerryQu 的小站</a></p>
 </blockquote>
-
 <p>按理说，出于安全考虑不应该把服务器的配置贴出来的，但是也为了分享和学习，新人就是要多把错误暴露出来嘛！删除了一些敏感项，贴出来让大家指证。黑客哥哥不要来黑偶啊，偶可没有什么被黑的价值，服务器里什么都没有（怎么感觉会产生此地无银三百两的效果，勾起黑客哥哥的好奇心呢！），在腾讯云没有道哥罩，我好怕，我的服务器不想做肉鸡。。。</p>
-
 <p>好了，进入正题：</p>
-
 <p>说明：
 本站<code>https</code>证书使用的是<code>Letsencrypt</code>证书，nginx 基于 Cloudfare 提供 <a href="https://github.com/cloudflare/sslconfig">OpenSSL Patch</a> 编译，Openssl版本为 <a href="https://github.com/openssl/openssl/archive/OpenSSL_1_0_2-stable.zip">OpenSSL_1_0_2-stable</a>，并添加了 <a href="https://github.com/grahamedgecombe/nginx-ct">nginx-ct</a> 模块，</p>
-
-<pre><code class="language-nginx">http {
-    sendfile        on;
-	tcp_nopush		on;
-	tcp_nodelay		on;
-	keepalive_timeout  60;
-	gzip  			on;
-	gzip_vary 		on;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">http</span> {
+    <span style="color:#f92672">sendfile</span>        <span style="color:#66d9ef">on</span>;
+	<span style="color:#f92672">tcp_nopush</span>		<span style="color:#66d9ef">on</span>;
+	<span style="color:#f92672">tcp_nodelay</span>		<span style="color:#66d9ef">on</span>;
+	<span style="color:#f92672">keepalive_timeout</span>  <span style="color:#ae81ff">60</span>;
+	<span style="color:#f92672">gzip</span>  			<span style="color:#66d9ef">on</span>;
+	<span style="color:#f92672">gzip_vary</span> 		<span style="color:#66d9ef">on</span>;
 	
-	gzip_comp_level 6;
-	gzip_buffers    16 8k;
+	<span style="color:#f92672">gzip_comp_level</span> <span style="color:#ae81ff">6</span>;
+	<span style="color:#f92672">gzip_buffers</span>    <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">8k</span>;
 	
-	gzip_min_length 1000;
-	gzip_proxied	any;
-	gzip_disable	&quot;msie6&quot;;
+	<span style="color:#f92672">gzip_min_length</span> <span style="color:#ae81ff">1000</span>;
+	<span style="color:#f92672">gzip_proxied</span>	<span style="color:#e6db74">any</span>;
+	<span style="color:#f92672">gzip_disable</span>	<span style="color:#e6db74">&#34;msie6&#34;</span>;
 	
-	gzip_http_version 1.0;
+	<span style="color:#f92672">gzip_http_version</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">.0</span>;
 	
-	gzip_types         text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+	<span style="color:#f92672">gzip_types</span>         <span style="color:#e6db74">text/plain</span> <span style="color:#e6db74">text/css</span> <span style="color:#e6db74">application/json</span> <span style="color:#e6db74">application/x-javascript</span> <span style="color:#e6db74">text/xml</span> <span style="color:#e6db74">application/xml</span> <span style="color:#e6db74">application/xml+rss</span> <span style="color:#e6db74">text/javascript</span> <span style="color:#e6db74">application/javascript</span>;
 	
-	server_tokens off;
+	<span style="color:#f92672">server_tokens</span> <span style="color:#66d9ef">off</span>;
     
-	server_names_hash_bucket_size 64;
+	<span style="color:#f92672">server_names_hash_bucket_size</span> <span style="color:#ae81ff">64</span>;
 }
 
-upstream ghost_upstream {
-    server unix:/dev/shm/ghost.sock; 
-    keepalive 64;
+<span style="color:#66d9ef">upstream</span> <span style="color:#e6db74">ghost_upstream</span> {
+    <span style="color:#f92672">server</span> <span style="color:#e6db74">unix:/dev/shm/ghost.sock</span>; 
+    <span style="color:#f92672">keepalive</span> <span style="color:#ae81ff">64</span>;
 }
 
-proxy_cache_path /var/www/cache/nginx/proxy_cache_path levels=1:2 keys_zone=STATIC:100m inactive=24h max_size=512m;
-proxy_temp_path  /var/www/cache/nginx/proxy_temp_path;
-proxy_cache_key	 $host$uri$is_args$args;
+<span style="color:#66d9ef">proxy_cache_path</span> <span style="color:#e6db74">/var/www/cache/nginx/proxy_cache_path</span> <span style="color:#e6db74">levels=1:2</span> <span style="color:#e6db74">keys_zone=STATIC:100m</span> <span style="color:#e6db74">inactive=24h</span> <span style="color:#e6db74">max_size=512m</span>;
+<span style="color:#66d9ef">proxy_temp_path</span>  <span style="color:#e6db74">/var/www/cache/nginx/proxy_temp_path</span>;
+<span style="color:#66d9ef">proxy_cache_key</span>	 $host$uri$is_args$args;
 
-server {
-    listen  443 ssl http2 reuseport;
-	server_name www.funnyang.com;
-	ssl on;
-	keepalive_timeout 300;
-	ssl_certificate /var/www/ssl/chained.pem;
-	ssl_certificate_key /var/www/ssl/domain.key;
+<span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">listen</span>  <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span> <span style="color:#e6db74">http2</span> <span style="color:#e6db74">reuseport</span>;
+	<span style="color:#f92672">server_name</span> <span style="color:#e6db74">www.funnyang.com</span>;
+	<span style="color:#f92672">ssl</span> <span style="color:#66d9ef">on</span>;
+	<span style="color:#f92672">keepalive_timeout</span> <span style="color:#ae81ff">300</span>;
+	<span style="color:#f92672">ssl_certificate</span> <span style="color:#e6db74">/var/www/ssl/chained.pem</span>;
+	<span style="color:#f92672">ssl_certificate_key</span> <span style="color:#e6db74">/var/www/ssl/domain.key</span>;
 	
-	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-	#CloudFlare’s cipher suites configuration
-	ssl_ciphers EECDH+CHACHA20:EECDH+CHACHA20-draft:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;
-	ssl_prefer_server_ciphers on;
+	<span style="color:#f92672">ssl_protocols</span> <span style="color:#e6db74">TLSv1</span> <span style="color:#e6db74">TLSv1.1</span> <span style="color:#e6db74">TLSv1.2</span>;
+	<span style="color:#75715e">#CloudFlare’s cipher suites configuration
+</span><span style="color:#75715e"></span>	<span style="color:#f92672">ssl_ciphers</span> <span style="color:#e6db74">EECDH+CHACHA20:EECDH+CHACHA20-draft:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA</span>;
+	<span style="color:#f92672">ssl_prefer_server_ciphers</span> <span style="color:#66d9ef">on</span>;
 	
-	ssl_session_cache 			shared:SSL:10m;
-	ssl_session_timeout 		60m;
+	<span style="color:#f92672">ssl_session_cache</span> 			<span style="color:#e6db74">shared:SSL:10m</span>;
+	<span style="color:#f92672">ssl_session_timeout</span> 		<span style="color:#ae81ff">60m</span>;
 	
-	ssl_session_tickets			on;
+	<span style="color:#f92672">ssl_session_tickets</span>			<span style="color:#66d9ef">on</span>;
 	
-	ssl_buffer_size 			1400;
+	<span style="color:#f92672">ssl_buffer_size</span> 			<span style="color:#ae81ff">1400</span>;
 	
-	ssl_stapling 				on;
-	ssl_stapling_verify 		on;
-	ssl_trusted_certificate		/var/www/ssl/chained.pem;
-	resolver                 	8.8.4.4 8.8.8.8 216.146.35.35 216.146.36.36 valid=300s;
-    resolver_timeout         	10s;
-	ssl_stapling_file 			/var/www/ssl/ocsp/ocsp.resp;
-	ssl_dhparam 				/var/www/ssl/dhparams_2048.pem;
+	<span style="color:#f92672">ssl_stapling</span> 				<span style="color:#66d9ef">on</span>;
+	<span style="color:#f92672">ssl_stapling_verify</span> 		<span style="color:#66d9ef">on</span>;
+	<span style="color:#f92672">ssl_trusted_certificate</span>		<span style="color:#e6db74">/var/www/ssl/chained.pem</span>;
+	<span style="color:#f92672">resolver</span>                 	<span style="color:#ae81ff">8</span><span style="color:#e6db74">.8.4.4</span> <span style="color:#ae81ff">8</span><span style="color:#e6db74">.8.8.8</span> <span style="color:#ae81ff">216</span><span style="color:#e6db74">.146.35.35</span> <span style="color:#ae81ff">216</span><span style="color:#e6db74">.146.36.36</span> <span style="color:#e6db74">valid=300s</span>;
+    <span style="color:#f92672">resolver_timeout</span>         	<span style="color:#e6db74">10s</span>;
+	<span style="color:#f92672">ssl_stapling_file</span> 			<span style="color:#e6db74">/var/www/ssl/ocsp/ocsp.resp</span>;
+	<span style="color:#f92672">ssl_dhparam</span> 				<span style="color:#e6db74">/var/www/ssl/dhparams_2048.pem</span>;
 	
-	ssl_ct               on;
-	ssl_ct_static_scts   /var/www/ssl/SCTS;
+	<span style="color:#f92672">ssl_ct</span>               <span style="color:#66d9ef">on</span>;
+	<span style="color:#f92672">ssl_ct_static_scts</span>   <span style="color:#e6db74">/var/www/ssl/SCTS</span>;
 	
-	add_header 	Strict-Transport-Security 'max-age=63072000; includeSubDomains; preload';
-	add_header X-Frame-Options 				DENY;
-	add_header  X-Content-Type-Options  	nosniff;
-	add_header	X-XSS-Protection			1;
-	add_header 	X-Cache $upstream_cache_status;
+	<span style="color:#f92672">add_header</span> 	<span style="color:#e6db74">Strict-Transport-Security</span> <span style="color:#e6db74">&#39;max-age=63072000</span>; <span style="color:#f92672">includeSubDomains</span>; <span style="color:#f92672">preload&#39;</span>;
+	<span style="color:#f92672">add_header</span> <span style="color:#e6db74">X-Frame-Options</span> 				<span style="color:#e6db74">DENY</span>;
+	<span style="color:#f92672">add_header</span>  <span style="color:#e6db74">X-Content-Type-Options</span>  	<span style="color:#e6db74">nosniff</span>;
+	<span style="color:#f92672">add_header</span>	<span style="color:#e6db74">X-XSS-Protection</span>			<span style="color:#ae81ff">1</span>;
+	<span style="color:#f92672">add_header</span> 	<span style="color:#e6db74">X-Cache</span> $upstream_cache_status;
 	
-	proxy_ignore_headers Set-Cookie;
-    proxy_hide_header Set-Cookie;
-	proxy_hide_header		X-Powered-By;
+	<span style="color:#f92672">proxy_ignore_headers</span> <span style="color:#e6db74">Set-Cookie</span>;
+    <span style="color:#f92672">proxy_hide_header</span> <span style="color:#e6db74">Set-Cookie</span>;
+	<span style="color:#f92672">proxy_hide_header</span>		<span style="color:#e6db74">X-Powered-By</span>;
 	
-	#204 Page for Android
-    location /generate_204 { return 204;}
+	<span style="color:#75715e">#204 Page for Android
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">location</span> <span style="color:#e6db74">/generate_204</span> { <span style="color:#f92672">return</span> <span style="color:#ae81ff">204</span>;}
 	
-	location /content/images {
-        alias /path/to/ghost/content/images;
-        access_log off;
-		etag	on;
-        expires max;        
+	<span style="color:#f92672">location</span> <span style="color:#e6db74">/content/images</span> {
+        <span style="color:#f92672">alias</span> <span style="color:#e6db74">/path/to/ghost/content/images</span>;
+        <span style="color:#f92672">access_log</span> <span style="color:#66d9ef">off</span>;
+		<span style="color:#f92672">etag</span>	<span style="color:#66d9ef">on</span>;
+        <span style="color:#f92672">expires</span> <span style="color:#e6db74">max</span>;        
     }
-    location /assets {
-        alias /path/to/ghost/content/themes/casper/assets;
-        access_log off;
-		etag	on;
-        expires max;         
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/assets</span> {
+        <span style="color:#f92672">alias</span> <span style="color:#e6db74">/path/to/ghost/content/themes/casper/assets</span>;
+        <span style="color:#f92672">access_log</span> <span style="color:#66d9ef">off</span>;
+		<span style="color:#f92672">etag</span>	<span style="color:#66d9ef">on</span>;
+        <span style="color:#f92672">expires</span> <span style="color:#e6db74">max</span>;         
     } 
-    location ~ ^/(?:ghost|signout) {
-        proxy_set_header   X-Real-IP $remote_addr;
-        proxy_set_header   Host      $http_host;
-        proxy_pass http://ghost_upstream;
-        add_header Cache-Control &quot;no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0&quot;;
-        proxy_set_header X-Forwarded-Proto https;
-        proxy_redirect off;
+    <span style="color:#f92672">location</span> ~ <span style="color:#e6db74">^/(?:ghost|signout)</span> {
+        <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Real-IP</span> $remote_addr;
+        <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">Host</span>      $http_host;
+        <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://ghost_upstream</span>;
+        <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Cache-Control</span> <span style="color:#e6db74">&#34;no-cache,</span> <span style="color:#e6db74">private,</span> <span style="color:#e6db74">no-store,</span> <span style="color:#e6db74">must-revalidate,</span> <span style="color:#e6db74">max-stale=0,</span> <span style="color:#e6db74">post-check=0,</span> <span style="color:#e6db74">pre-check=0&#34;</span>;
+        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Forwarded-Proto</span> <span style="color:#e6db74">https</span>;
+        <span style="color:#f92672">proxy_redirect</span> <span style="color:#66d9ef">off</span>;
     }
-    location / {
-        proxy_cache 				STATIC;
-        proxy_cache_valid 		  200 304 30m;
-        proxy_cache_valid 		  404 1m;
-		proxy_cache_lock   			on;
-		proxy_cache_lock_timeout	5s;
-		proxy_cache_use_stale		updating error timeout invalid_header http_500 http_502;
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+        <span style="color:#f92672">proxy_cache</span> 				<span style="color:#e6db74">STATIC</span>;
+        <span style="color:#f92672">proxy_cache_valid</span> 		  <span style="color:#ae81ff">200</span> <span style="color:#ae81ff">304</span> <span style="color:#ae81ff">30m</span>;
+        <span style="color:#f92672">proxy_cache_valid</span> 		  <span style="color:#ae81ff">404</span> <span style="color:#ae81ff">1m</span>;
+		<span style="color:#f92672">proxy_cache_lock</span>   			<span style="color:#66d9ef">on</span>;
+		<span style="color:#f92672">proxy_cache_lock_timeout</span>	<span style="color:#e6db74">5s</span>;
+		<span style="color:#f92672">proxy_cache_use_stale</span>		<span style="color:#e6db74">updating</span> <span style="color:#e6db74">error</span> <span style="color:#e6db74">timeout</span> <span style="color:#e6db74">invalid_header</span> <span style="color:#e6db74">http_500</span> <span style="color:#e6db74">http_502</span>;
 		
-		proxy_http_version			1.1;
+		<span style="color:#f92672">proxy_http_version</span>			<span style="color:#ae81ff">1</span><span style="color:#e6db74">.1</span>;
         
-		proxy_ignore_headers X-Accel-Expires Expires Cache-Control;  
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto https;
-        proxy_pass http://ghost_upstream;
-        expires 10m;
+		<span style="color:#f92672">proxy_ignore_headers</span> <span style="color:#e6db74">X-Accel-Expires</span> <span style="color:#e6db74">Expires</span> <span style="color:#e6db74">Cache-Control</span>;  
+        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Real-IP</span> $remote_addr;
+        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Host</span> $http_host;
+        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Forwarded-For</span> $proxy_add_x_forwarded_for;
+        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Forwarded-Proto</span> <span style="color:#e6db74">https</span>;
+        <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://ghost_upstream</span>;
+        <span style="color:#f92672">expires</span> <span style="color:#ae81ff">10m</span>;
     }
 }
-server {  
-    listen 80;
-    server_name funnyang.com www.funnyang.com;
-	add_header Strict-Transport-Security &quot;max-age=63072000; includeSubDomains; preload&quot;;
+<span style="color:#66d9ef">server</span> {  
+    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">funnyang.com</span> <span style="color:#e6db74">www.funnyang.com</span>;
+	<span style="color:#f92672">add_header</span> <span style="color:#e6db74">Strict-Transport-Security</span> <span style="color:#e6db74">&#34;max-age=63072000</span>; <span style="color:#f92672">includeSubDomains</span>; <span style="color:#f92672">preload&#34;</span>;
 	
-	#204 Page for Android
-	location /generate_204 { return 204; }
+	<span style="color:#75715e">#204 Page for Android
+</span><span style="color:#75715e"></span>	<span style="color:#f92672">location</span> <span style="color:#e6db74">/generate_204</span> { <span style="color:#f92672">return</span> <span style="color:#ae81ff">204</span>; }
 	
-	#Letsencrypt Certs Update Server
-	location ^~ /.well-known/acme-challenge/ {
-        alias /var/www/challenges/;
-        try_files $uri =404;
+	<span style="color:#75715e">#Letsencrypt Certs Update Server
+</span><span style="color:#75715e"></span>	<span style="color:#f92672">location</span> <span style="color:#e6db74">^~</span> <span style="color:#e6db74">/.well-known/acme-challenge/</span> {
+        <span style="color:#f92672">alias</span> <span style="color:#e6db74">/var/www/challenges/</span>;
+        <span style="color:#f92672">try_files</span> $uri =<span style="color:#ae81ff">404</span>;
     }
-	location / { return 301 https://www.funnyang.com$request_uri;}
+	<span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> { <span style="color:#f92672">return</span> <span style="color:#ae81ff">301</span> <span style="color:#e6db74">https://www.funnyang.com</span>$request_uri;}
 	}
-server {
-	listen 443;
-    server_name funnyang.com;
-	add_header Strict-Transport-Security &quot;max-age=63072000; includeSubDomains; preload&quot;;
-    return 301 https://www.funnyang.com$request_uri;
+<span style="color:#66d9ef">server</span> {
+	<span style="color:#f92672">listen</span> <span style="color:#ae81ff">443</span>;
+    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">funnyang.com</span>;
+	<span style="color:#f92672">add_header</span> <span style="color:#e6db74">Strict-Transport-Security</span> <span style="color:#e6db74">&#34;max-age=63072000</span>; <span style="color:#f92672">includeSubDomains</span>; <span style="color:#f92672">preload&#34;</span>;
+    <span style="color:#f92672">return</span> <span style="color:#ae81ff">301</span> <span style="color:#e6db74">https://www.funnyang.com</span>$request_uri;
 }
-</code></pre>
-
-<p>具体为什么这么配置，可参考上面的提供的两处资料来源，尤其在 <a href="https://imququ.com">JerryQu 的小站</a> 学到很多东西，本人就不重复造轮子了，并且部分配置个人还理解不到位，怕误导了人！</p>
-
+</code></pre></div><p>具体为什么这么配置，可参考上面的提供的两处资料来源，尤其在 <a href="https://imququ.com">JerryQu 的小站</a> 学到很多东西，本人就不重复造轮子了，并且部分配置个人还理解不到位，怕误导了人！</p>
 <p>祝君折腾愉快！</p>
                         </div>
 
@@ -307,6 +299,10 @@ server {
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -323,7 +319,7 @@ server {
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -340,10 +336,6 @@ server {
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -419,6 +411,10 @@ server {
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -491,6 +487,8 @@ server {
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -502,6 +500,8 @@ server {
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -522,7 +522,7 @@ server {
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

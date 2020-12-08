@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -88,26 +88,20 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
 <p>上次简单介绍一下，我对个人 Ghost 博客的界面美化。这里再介绍一下<strong>性能优化</strong>方面的东西。本人也是边学边做，如有错误，请<strong>多多指教</strong>！</p>
-
 <p>先给大家看看<code>nginx</code>的配置文件的变化吧！比较折腾的地方都在这里。起初是这样的，基本就是 <a href="http://www.ghostchina.com/">Ghost中国</a> 文档里写的样子。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">funnyang.com</span> <span style="color:#e6db74">www.funnyang.com</span>;
 
-<pre><code class="language-nginx">server {
-    listen 80;
-    server_name funnyang.com www.funnyang.com;
-
-    location / {
-        proxy_set_header   X-Real-IP $remote_addr;
-        proxy_set_header   Host      $http_host;
-        proxy_pass         http://127.0.0.1:2368;
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+        <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Real-IP</span> $remote_addr;
+        <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">Host</span>      $http_host;
+        <span style="color:#f92672">proxy_pass</span>         <span style="color:#e6db74">http://127.0.0.1:2368</span>;
     }
 }
-</code></pre>
-
-<p>现在的样子，去<a href="https://www.funnyang.com/high-performance-nginx-configuration-for-ghost/">这里</a>看吧！</p>
-
-<p>主要的变化有几点：<br>
+</code></pre></div><p>现在的样子，去<a href="https://www.funnyang.com/high-performance-nginx-configuration-for-ghost/">这里</a>看吧！</p>
+<p>主要的变化有几点：<!-- raw HTML omitted -->
 1.启用<code>HTTPS</code>，证书使用<code>Letsencrypt</code>证书;
 2.启用<code>HTTP2</code>协议，显著的优点就是可以实现多路复用;
 3.静态页面缓存，而且缓存比较严重，毕竟博客改动一般都不大;
@@ -116,57 +110,34 @@
 6.图片资源存储在七牛云来加速;
 7.针对HTTPS做了许多优化，包括<code>OSCP stapling</code>及<code>ssl_stapling_file</code>，启用<code>HSTS</code>和<code>CHACHA20_POLY1305</code>等等；
 8.评论异步加载。</p>
-
 <p>大部分优化项目都可以在 <a href="https://imququ.com">JerryQu的小站</a> 找到，记录几点操作上的问题吧！</p>
-
-<h3 id="一-安装最新版的nginx">一、安装最新版的nginx</h3>
-
+<h3 id="一安装最新版的nginx">一、安装最新版的nginx</h3>
 <p><code>nginx</code>分为<code>Mainline Version</code>版和<code>Stable Version</code>，即主线版和稳定版，一般生产环境都使用稳定版，yum源默认也是稳定版。但是目前稳定版不支持HTTP2，个人博客对稳定性的要求没有公司企业那么严格，喜欢尝鲜的个人博主完全可以使用主线版。要使用主线版，修改/etc/yum.repos.d/nginx.repo为以下内容。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nginx.repo</span>
 
-<pre><code class="language-bash"># nginx.repo
-
-[nginx]
-name=nginx repo
-baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
-gpgcheck=0
-enabled=1
-</code></pre>
-
-<p>可以先备份配置文件，然后</p>
-
-<pre><code class="language-bash">yum remove nginx
+<span style="color:#f92672">[</span>nginx<span style="color:#f92672">]</span>
+name<span style="color:#f92672">=</span>nginx repo
+baseurl<span style="color:#f92672">=</span>http://nginx.org/packages/mainline/centos/$releasever/$basearch/
+gpgcheck<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+enabled<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</code></pre></div><p>可以先备份配置文件，然后</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum remove nginx
 yum install nginx
-</code></pre>
-
-<p>如果要编译第三方模块，如nginx-ct，可以下载源码包编译，但不要执行<code>make install</code>,直接复制<code>objs/nginx</code>替换<code>/usr/sbin/nginx</code>。</p>
-
-<h3 id="二-letsencrypt证书申请">二、Letsencrypt证书申请</h3>
-
+</code></pre></div><p>如果要编译第三方模块，如nginx-ct，可以下载源码包编译，但不要执行<code>make install</code>,直接复制<code>objs/nginx</code>替换<code>/usr/sbin/nginx</code>。</p>
+<h3 id="二letsencrypt证书申请">二、Letsencrypt证书申请</h3>
 <p>Letsencrypt证书申请过程并不复杂，依照官方申请工具<a href="https://github.com/letsencrypt/letsencrypt">letsencrypt-auto</a>的说明操作即可。不过个人推荐使用<a href="https://github.com/diafygi/acme-tiny">acme-tiny</a>，因为<code>letsencrypt-auto</code>使用时要占用80端口，意味着每次更新证书都要停用nginx。<code>acme-tiny</code>使用显然更加方便。</p>
-
 <p>如果过程中提示找不到<code>/etc/ssl/openssl.cnf</code>，可以使用命令</p>
-
-<pre><code class="language-bash">find / -name openssl.cnf
-</code></pre>
-
-<p>自行测试可用的<code>openssl.cnf</code></p>
-
-<h3 id="三-certificate-transparency的配置">三、Certificate Transparency的配置</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">find / -name openssl.cnf
+</code></pre></div><p>自行测试可用的<code>openssl.cnf</code></p>
+<h3 id="三certificate-transparency的配置">三、Certificate Transparency的配置</h3>
 <p>什么是Certificate Transparency? 就是这</p>
-
-<p><a href="https://funnyang-10022886.file.myqcloud.com/ghost-img/Certificate%20Transparency.png"><img src="https://funnyang-10022886.file.myqcloud.com/ghost-img/Certificate%20Transparency.png" alt="" /></a></p>
-
+<p><a href="https://funnyang-10022886.file.myqcloud.com/ghost-img/Certificate%20Transparency.png"><img src="https://funnyang-10022886.file.myqcloud.com/ghost-img/Certificate%20Transparency.png" alt=""></a></p>
 <p>获取SCT文件时，实测Letsencrypt证书只有4个CT Logs服务器可用，如下：</p>
-
-<pre><code class="language-bash">ct.googleapis.com/pilot
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ct.googleapis.com/pilot
 ct.googleapis.com/aviator
 ct.googleapis.com/rocketeer
 log.certly.io
-</code></pre>
-
-<p>三个都是谷歌的服务器，意味着你要xx。</p>
-
+</code></pre></div><p>三个都是谷歌的服务器，意味着你要xx。</p>
 <p>好了就写这些吧！有的想不起来了，记起来再更新。</p>
                         </div>
 
@@ -232,6 +203,10 @@ log.certly.io
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -248,7 +223,7 @@ log.certly.io
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -265,10 +240,6 @@ log.certly.io
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -344,6 +315,10 @@ log.certly.io
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -416,6 +391,8 @@ log.certly.io
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -427,6 +404,8 @@ log.certly.io
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -447,7 +426,7 @@ log.certly.io
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

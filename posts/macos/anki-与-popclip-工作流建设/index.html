@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -93,32 +93,21 @@
                         
                         <div class="post-content">
                             <p>想做这件事很久了，边阅读边整理卡片，利用闲散时间强化记忆，可能是比较理想的学习方式了吧。</p>
-
 <p>Anki 的大名可能很多人都听说，我知道其实比较晚，也是最近才慢慢熟悉起来，它的门槛的确有点高，加上我没有刻意学习的习惯，软件也不算特别美观，所以久未提起兴趣。不过慢慢熟悉之后，就越来越喜欢这款软件了，其可贵之处就在于自定义的程度非常之高，如果懂前端，做出精美的卡片不是什么难事。很多人将其用在考研、背单词等场景，而我作为职场人士其实这方面的需求小一些，更希望将其作为日常学习的一种工具。</p>
-
 <p>日常学习就是看到一些零散的知识点，想快速地记下来。最常用的方法就是，写文档或记在笔记中（印象笔记、OneNote)，然而这些记录大多都石沉大海，鲜有重温之时。另一个痛楚就是，既然是零碎的知识，有时就很难作为一篇笔记，分类上就很纠结。作为知识的最小单元，一张卡片可能真的是最合适的。日常学习的第二点，不能花过多时间在制作卡片上，否则不就是本末倒置。</p>
-
 <p>于是，阅读文档的时候，能不能直接划重点呢？</p>
-
 <p>Anki + PopClip 真正实现了这一高效的工作流。Anki 带有一套插件系统，其中 AnkiConnect 真乃神器，它提供了一套 RESTful API 操作 Anki，几乎可以实现能想到的任何操作。再加上 PopClip 的高度自定义化，划重点、加卡片简直一气呵成！</p>
-
 <p>如何实现？</p>
-
 <p>第一步，安装 AnkiConnect，怎么安装看<a href="https://foosoft.net/projects/anki-connect/">这里</a>。</p>
-
 <p>第二步，安装 PopClip 的 Anki 插件，我制作了<a href="/images/attachment/anki.zip">两个插件</a>，两个都是基于 <a href="https://github.com/cdpath/anki_tools">cdpath/anki_tools</a> 做的，原本想自己写，但是提前搜索了一下，就不做无用功了，改起来最快啊。</p>
-
 <ul>
 <li><code>anki.popclipext</code> 基本没改，改了默认选项值（给自己用），fix 了一个 bug，该扩展主要用来添加生词。</li>
 <li><code>anki-gui.popclipext</code> 主要用来记录阅读文档时的知识点，选中添加时，会拉起添加卡片的 gui，自动填充某个字段，然后手动输入问题来添加卡片。</li>
 </ul>
-
 <p>说起来并没有做什么工作，主要是想介绍一下这种思路。因为脚本都比较简单，大家也可以快速的自定义一个自己想实现的功能，因为 AnkiConnect 的接口实在是比较强大和人性化，比如添加完毕，自动关闭这种设置都有。</p>
-
 <p>使用之前需要先配置一下目标记忆库、卡片类型、目标字段等信息。</p>
-
 <p>效果：
-<img src="/images/anki-popclip.gif" alt="anki-popclip" /></p>
+<img src="/images/anki-popclip.gif" alt="anki-popclip"></p>
 
                         </div>
 
@@ -194,6 +183,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -210,7 +203,7 @@
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -227,10 +220,6 @@
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -306,6 +295,10 @@
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -378,6 +371,8 @@
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -389,6 +384,8 @@
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -409,7 +406,7 @@
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         

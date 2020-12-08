@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.55.0" />
+    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -88,96 +88,64 @@
                             <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
-
 <h3 id="一-序言">一 、序言</h3>
-
 <p>vsftpd 是一种 Linux 中非常安全且快速的 FTP 服务器，目前已经被许多大型站点所采用。vsftpd 支持将用户名和口令保存在数据库文件或数据库服务器中。vsftpd 称这种形式的用户为虚拟用户。相对于 FTP 的本地（系统）用户来说，虚拟用户只是 FTP 服务器的专有用户，虚拟用户只能访问 FTP 服务器所提供的资源，这大大增强系统本身的安全性。相对于匿名用户而言，虚拟用户需要用户名和密码才能获取 FTP 服务器中的文件，增加了对用户和下载的可管理性。</p>
-
 <p>vsftpd 的用户分为三种：</p>
-
-<p>匿名用户    &mdash;   都明白吧 <br>
-本地用户    &mdash;   linux 系统上的存在的用户 <br>
+<p>匿名用户    &mdash;   都明白吧 <!-- raw HTML omitted -->
+本地用户    &mdash;   linux 系统上的存在的用户 <!-- raw HTML omitted -->
 虚拟用户    &mdash;   通过映射一个 linux 本地用户来登录 ftp 的账户，即不存在系统上。</p>
-
 <p><strong>推荐使用虚拟用户，安全，而且更好管理。</strong></p>
-
 <blockquote>
 <p>说明：</p>
 </blockquote>
-
 <ol>
-<li><p>但是对于一些特殊需求，虚拟用户无法满足，只能使用本地用户。比如要求登录用户对根目录下的不同子目录具有不同的权限（未实践，若有需求，自行尝试）</p></li>
-
-<li><p>设置了虚拟用户，本地用户一般不能再登录（可进行特殊设置，参考<a href="http://suchalin.blog.163.com/blog/static/55304677201266104536534/">vsftpd 虚拟用户和本地用户不能共存的解决方法</a></p></li>
+<li>
+<p>但是对于一些特殊需求，虚拟用户无法满足，只能使用本地用户。比如要求登录用户对根目录下的不同子目录具有不同的权限（未实践，若有需求，自行尝试）</p>
+</li>
+<li>
+<p>设置了虚拟用户，本地用户一般不能再登录（可进行特殊设置，参考<a href="http://suchalin.blog.163.com/blog/static/55304677201266104536534/">vsftpd 虚拟用户和本地用户不能共存的解决方法</a></p>
+</li>
 </ol>
-
-<h3 id="二-安装和配置">二、安装和配置</h3>
-
+<h3 id="二安装和配置">二、安装和配置</h3>
 <h5 id="1-安装">1. 安装</h5>
-
-<pre><code class="language-bash">apt-get install vsftpd
-apt-get install db4.8-util #生成密码数据库的工具
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apt-get install vsftpd
+apt-get install db4.8-util <span style="color:#75715e">#生成密码数据库的工具</span>
 mkdir /etc/vsftpd
-</code></pre>
-
-<p>注：本次安装使用的是 debian6，db4.8-util 安装会遇到源的问题，可以使用内部源来解决</p>
-
-<h5 id="2-创建一个-vuser-txt-文件-用完最好删除-在里面写入虚拟用户的用户名和密码-格式参照如下">2. 创建一个 vuser.txt 文件（用完最好删除），在里面写入虚拟用户的用户名和密码，格式参照如下：</h5>
-
-<pre><code class="language-bash">vim vuser.txt
+</code></pre></div><p>注：本次安装使用的是 debian6，db4.8-util 安装会遇到源的问题，可以使用内部源来解决</p>
+<h5 id="2-创建一个-vusertxt-文件用完最好删除在里面写入虚拟用户的用户名和密码格式参照如下">2. 创建一个 vuser.txt 文件（用完最好删除），在里面写入虚拟用户的用户名和密码，格式参照如下：</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim vuser.txt
 user1
 password1
 user2
 password2
 ......
-</code></pre>
-
-<h5 id="3-生成密码数据库文件">3. 生成密码数据库文件</h5>
-
-<pre><code class="language-bash">db4.8_load -T -t hash -f vuser.txt /etc/vsftpd/vsftpd_login.db
-</code></pre>
-
-<h5 id="4-配置-pam-模块认证">4. 配置 pam 模块认证</h5>
-
+</code></pre></div><h5 id="3-生成密码数据库文件">3. 生成密码数据库文件</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">db4.8_load -T -t hash -f vuser.txt /etc/vsftpd/vsftpd_login.db
+</code></pre></div><h5 id="4-配置-pam-模块认证">4. 配置 pam 模块认证</h5>
 <p>进入 <code>/etc/pam.d/</code> 中创建 vsftpd.vuser 写入以下信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">auth required /lib64/security/pam_userdb.so db<span style="color:#f92672">=</span>/etc/vsftpd/vsftpd_login  <span style="color:#f92672">(</span>32位系统是/lib/目录<span style="color:#f92672">)</span>  
+account required /lib64/security/pam_userdb.so db<span style="color:#f92672">=</span>/etc/vsftpd/vsftpd_login  <span style="color:#f92672">(</span>32位系统是/lib/目录<span style="color:#f92672">)</span>  
 
-<pre><code class="language-bash">auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd_login  (32位系统是/lib/目录)  
-account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd_login  (32位系统是/lib/目录)  
-
-#注：db= 后的路径即上一步生成数据库文件的路径
-</code></pre>
-
-<h5 id="5-修改-etc-vsftpd-conf-以支持使用虚拟用户">5. 修改 <code>/etc/vsftpd.conf</code>，以支持使用虚拟用户：</h5>
-
-<pre><code class="language-bash">anonymous_enable=NO             #禁止匿名登录
-local_enable=YES                #（必须置YES，因为虚拟用户是映射到某个本地用户来访问的）
-guest_enable=yes                #启用虚拟用户     
-guest_username=ftp              #虚拟用户映射到的系统账号（可以自行创建，如创建deployer）
-pam_service_name=vsftpd.vuser                      #PAM认证文件，第四步创建的
-user_config_dir=/etc/vsftpd/vsftpd_vuser_conf      #虚拟用户配置文件存放目录（下一步创建）
-</code></pre>
-
-<h5 id="6-创建虚拟用户配置文件夹">6. 创建虚拟用户配置文件夹</h5>
-
-<pre><code class="language-bash">mkdir /etc/vsftpd/vsftpd_vuser_conf
-</code></pre>
-
-<h5 id="7-进入-etc-vsftpd-vsftpd-vuser-conf-目录-创建与虚拟用户名相同名称的文件-虚拟用户名-vuser-txt-中的用户名名-比如创建-user1">7. 进入 <code>/etc/vsftpd/vsftpd_vuser_conf</code> 目录，创建与虚拟用户名相同名称的文件（虚拟用户名 vuser.txt 中的用户名名），比如创建 user1</h5>
-
-<pre><code class="language-bash">local_root=/var/www/user1
-    anon_world_readable_only=NO
-    write_enable=YES （写权限）
-    anon_mkdir_write_enable=YES (新建目录权限)
-    anon_upload_enable=YES（上传权限）
-    anon_other_write_enable=YES（删除/重命名的权限）
-</code></pre>
-
-<h5 id="8-重启-vsftpd-服务器">8. 重启 vsftpd 服务器</h5>
-
+<span style="color:#75715e">#注：db= 后的路径即上一步生成数据库文件的路径</span>
+</code></pre></div><h5 id="5-修改-etcvsftpdconf以支持使用虚拟用户">5. 修改 <code>/etc/vsftpd.conf</code>，以支持使用虚拟用户：</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">anonymous_enable<span style="color:#f92672">=</span>NO             <span style="color:#75715e">#禁止匿名登录</span>
+local_enable<span style="color:#f92672">=</span>YES                <span style="color:#75715e">#（必须置YES，因为虚拟用户是映射到某个本地用户来访问的）</span>
+guest_enable<span style="color:#f92672">=</span>yes                <span style="color:#75715e">#启用虚拟用户     </span>
+guest_username<span style="color:#f92672">=</span>ftp              <span style="color:#75715e">#虚拟用户映射到的系统账号（可以自行创建，如创建deployer）</span>
+pam_service_name<span style="color:#f92672">=</span>vsftpd.vuser                      <span style="color:#75715e">#PAM认证文件，第四步创建的</span>
+user_config_dir<span style="color:#f92672">=</span>/etc/vsftpd/vsftpd_vuser_conf      <span style="color:#75715e">#虚拟用户配置文件存放目录（下一步创建）</span>
+</code></pre></div><h5 id="6-创建虚拟用户配置文件夹">6. 创建虚拟用户配置文件夹</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir /etc/vsftpd/vsftpd_vuser_conf
+</code></pre></div><h5 id="7-进入-etcvsftpdvsftpd_vuser_conf-目录创建与虚拟用户名相同名称的文件虚拟用户名-vusertxt-中的用户名名比如创建-user1">7. 进入 <code>/etc/vsftpd/vsftpd_vuser_conf</code> 目录，创建与虚拟用户名相同名称的文件（虚拟用户名 vuser.txt 中的用户名名），比如创建 user1</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">local_root<span style="color:#f92672">=</span>/var/www/user1
+    anon_world_readable_only<span style="color:#f92672">=</span>NO
+    write_enable<span style="color:#f92672">=</span>YES （写权限）
+    anon_mkdir_write_enable<span style="color:#f92672">=</span>YES <span style="color:#f92672">(</span>新建目录权限<span style="color:#f92672">)</span>
+    anon_upload_enable<span style="color:#f92672">=</span>YES（上传权限）
+    anon_other_write_enable<span style="color:#f92672">=</span>YES（删除/重命名的权限）
+</code></pre></div><h5 id="8-重启-vsftpd-服务器">8. 重启 vsftpd 服务器</h5>
 <p>总结：客户端根据创建的虚拟用户连接服务器，虚拟用户映射到系统账号 vuser 登录 ftp，然后 FTP 根据配置文件<code>vsftpd.conf</code> 的设置（<code>user_config_dir=/etc/vsftpd/vsftpd_vuser_conf</code>）找到虚拟用户配置文件的存放目录，然后根据虚拟用户的配置文件指定的目录路径（<code>local_root=/usr/local/amp/apache/htdocs/demo</code>）访问到指定的目录。</p>
-
 <p><strong>注：虚拟用户访问到的文件根目录属主需要改成 vuser</strong></p>
-
 <p>其他conf配置参见官方手册：<a href="https://security.appspot.com/vsftpd/vsftpd_conf.html">vsftpd_conf</a>，<a href="https://www.cnblogs.com/weiji100/p/3596985.html">中文翻译</a></p>
                         </div>
 
@@ -243,6 +211,10 @@ user_config_dir=/etc/vsftpd/vsftpd_vuser_conf      #虚拟用户配置文件存�
 <ul class="widget-list">
     
     <li>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
     </li>
     
@@ -259,7 +231,7 @@ user_config_dir=/etc/vsftpd/vsftpd_vuser_conf      #虚拟用户配置文件存�
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/journal/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -276,10 +248,6 @@ user_config_dir=/etc/vsftpd/vsftpd_vuser_conf      #虚拟用户配置文件存�
     
     <li>
         <a href="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
-    </li>
-    
-    <li>
-        <a href="https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/" title="如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器">如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</a>
     </li>
     
 </ul>
@@ -355,6 +323,10 @@ user_config_dir=/etc/vsftpd/vsftpd_vuser_conf      #虚拟用户配置文件存�
     </li>
     
     <li>
+        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
+    </li>
+    
+    <li>
         <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
     </li>
     
@@ -427,6 +399,8 @@ user_config_dir=/etc/vsftpd/vsftpd_vuser_conf      #虚拟用户配置文件存�
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
     <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
     
     <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
@@ -438,6 +412,8 @@ user_config_dir=/etc/vsftpd/vsftpd_vuser_conf      #虚拟用户配置文件存�
     <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
     
     <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
     
     <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
     
@@ -458,7 +434,7 @@ user_config_dir=/etc/vsftpd/vsftpd_vuser_conf      #虚拟用户配置文件存�
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2019 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         
