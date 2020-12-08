@@ -3,42 +3,45 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
 
     <title>OSX 10.11安装XHProf的经验和教训 | 小 ceng 的时间日志</title>
     <meta property="og:title" content="OSX 10.11安装XHProf的经验和教训 - 小 ceng 的时间日志">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2015-10-10T12:53:08&#43;08:00">
+    <meta property="article:published_time" content='2015-10-10T12:53:08&#43;08:00'>
         
         
-    <meta property="article:modified_time" content="2015-10-10T12:53:08&#43;08:00">
+    <meta property="article:modified_time" content='2015-10-10T12:53:08&#43;08:00'>
         
     <meta name="Keywords" content="">
     <meta name="description" content="OSX 10.11安装XHProf的经验和教训">
         
     <meta name="author" content="lon3r">
-    <meta property="og:url" content="https://tlog.cc/posts/old_blog/osx%E5%AE%89%E8%A3%85xhprof%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta property="og:url" content="https://tlog.cc/posts/old_blog/OSX%E5%AE%89%E8%A3%85XHProf%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
-
-
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
     
     
 </head>
 
+
 <body>
-<header id="header" class="clearfix">
+    <header id="header" class="clearfix">
     <div class="container">
         <div class="col-group">
             <div class="site-name ">
@@ -61,38 +64,136 @@
     </div>
 </header>
 
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
 
-<div id="body">
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本部分">基本部分</a></li>
+    <li><a href="#使用部分">使用部分</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">OSX 10.11安装XHProf的经验和教训</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2015年10月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%9D%82%E9%A1%B9'>杂项</a></span>
+            
+        </div>
         
         
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">OSX 10.11安装XHProf的经验和教训</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2015年10月10日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9">杂项</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-meta">
-                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
-                        </div>
-                        
-                        
-                        <div class="post-content">
-                            <blockquote>
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <blockquote>
 <p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
 </blockquote>
 <p><strong>2015/10/25更新：</strong><code>OSX</code>下使用<code>xhprof</code>在某些情况下会致使网站崩掉 ，建议还是不要在<code>OSX</code>下玩这个扩展。</p>
@@ -105,11 +206,11 @@
 <em>注</em> 1：版本可以下载最新的<code>0.9.4</code>版本，但本人下载<code>0.9.4</code>版本安装后，使用<code>phpinfo()</code>函数查看时，显示为<code>0.9.2</code>，不知道谁骗了偶(:<br>
 <em>注</em> 2：OSX默认没有wget，你可以自己安装或在用浏览器下载。</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://pecl.php.net/get/xhprof-0.9.3.tgztar -zxvf xhprof-0.9.3.tgz
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://pecl.php.net/get/xhprof-0.9.3.tgztar -zxvf xhprof-0.9.3.tgz
 </code></pre></div><ol>
 <li>编译安装</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ./xhprof-0.9.3/extension/phpize./configure --with-php-config<span style="color:#f92672">=</span>tmpmakesudo make installmake test
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#0086b3">cd</span> ./xhprof-0.9.3/extension/phpize./configure --with-php-config<span style="color:#000;font-weight:bold">=</span>tmpmakesudo make installmake <span style="color:#0086b3">test</span>
 </code></pre></div><p>这里需要注意几点：<br>
 (1) 执行<code>phpize</code>时，可能会报错，结果如下：</p>
 <blockquote>
@@ -119,20 +220,20 @@
 跟<code>Linux/Unix</code>开发有关系，我也不太理解，你可以看看<a href="http://www.laruence.com/2009/11/18/1154.html">这篇博文</a>。<br>
 实际上需要装两个东西，*<code>autoconf</code>*和*<code>m4</code>*，那安装吧！<br>
 地址：<a href="http://ftp.gnu.org/gnu/autoconf/">http://ftp.gnu.org/gnu/autoconf/</a>和<a href="http://ftp.gnu.org/gnu/m4/">http://ftp.gnu.org/gnu/m4/</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://ftp.gnu.org/gnu/m4/m4-1.4.17.tar.gz
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://ftp.gnu.org/gnu/m4/m4-1.4.17.tar.gz
 tar -zvxf m4-1.4.17.tar.gz
-cd m4-1.4.17/
-./configure <span style="color:#f92672">&amp;&amp;</span> make <span style="color:#f92672">&amp;&amp;</span> sudo make install
-cd ../
+<span style="color:#0086b3">cd</span> m4-1.4.17/
+./configure <span style="color:#000;font-weight:bold">&amp;&amp;</span> make <span style="color:#000;font-weight:bold">&amp;&amp;</span> sudo make install
+<span style="color:#0086b3">cd</span> ../
 wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz
 tar -zvxf autoconf-2.69.tar.gz
-cd autoconf-2.69/
-./configure <span style="color:#f92672">&amp;&amp;</span> make <span style="color:#f92672">&amp;&amp;</span> sudo make install
+<span style="color:#0086b3">cd</span> autoconf-2.69/
+./configure <span style="color:#000;font-weight:bold">&amp;&amp;</span> make <span style="color:#000;font-weight:bold">&amp;&amp;</span> sudo make install
 </code></pre></div><p>(2)<code>--with-php-config=</code>后的目录是什么目录呢？不知道的话，执行:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">which php-config
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">which php-config
 </code></pre></div><p>我这里是<code>/usr/bin/php-config</code></p>
 <p>3.修改<code>php.ini</code>。在最后加上</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PHP" data-lang="PHP"><span style="color:#a6e22e">extension</span><span style="color:#f92672">=</span><span style="color:#a6e22e">xhprof</span><span style="color:#f92672">.</span><span style="color:#a6e22e">soxhprof</span><span style="color:#f92672">.</span><span style="color:#a6e22e">output_dir</span><span style="color:#f92672">=</span><span style="color:#a6e22e">输出目录</span><span style="color:#960050;background-color:#1e0010">`</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PHP" data-lang="PHP">extension<span style="color:#000;font-weight:bold">=</span>xhprof<span style="color:#000;font-weight:bold">.</span>soxhprof<span style="color:#000;font-weight:bold">.</span>output_dir<span style="color:#000;font-weight:bold">=</span>输出目录<span style="color:#a61717;background-color:#e3d2d2">`</span>
 </code></pre></div><p>输出目录，默认为/tmp，你可以自己修改，一定要注意<strong>该目录的必须有<em>写权限</em></strong>，直接777吧！本人在这吃过亏。</p>
 <p>到这里你的xhprof就算安装完毕了。不过实际上还没完。</p>
 <h2 id="使用部分">使用部分</h2>
@@ -144,56 +245,64 @@ cd autoconf-2.69/
 详细可以看这里：<a href="http://php.net/manual/zh/book.xhprof.php">http://php.net/manual/zh/book.xhprof.php</a><br>
 带<code>simple</code>的是更轻量级版本，所以其实就多了两个。然后怎么用？<br>
 先看一下我的目录结构：<br>
-<a href="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png"><img src="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png" alt=""></a></p>
+<a href="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png">
+        <a data-fancybox="gallery" href="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png">
+            <img class="mx-auto" alt="" src="/images/2015/12/00c61f3ae093e42c8bd0d3a108a45ffe.png" />
+        </a>
+    </a></p>
 <p>在网站根目录创建<code>xhprof</code>文件夹<br>
 <code>examples</code>、<code>xhprof_html</code>、<code>xhprof_lib</code>文件夹是从源代码包里直接复制过来的。<br>
 <code>examples</code>是使用示例文件<br>
 <code>xhprof_html</code>是呈现分析结果的web界面<br>
 <code>xhprof_lib</code>是性能分析需要的库<br>
 再来看一下示例文件<code>sample.php</code>，英文注释已删，并做了一些简单修改。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#75715e">//foo()是要分析的函数
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">bar</span>($x) {
-  <span style="color:#66d9ef">if</span> ($x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
-    <span style="color:#a6e22e">bar</span>($x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#000;font-weight:bold">&lt;?</span>php
+<span style="color:#998;font-style:italic">//foo()是要分析的函数
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">function</span> <span style="color:#900;font-weight:bold">bar</span>(<span style="color:#008080">$x</span>) {
+  <span style="color:#000;font-weight:bold">if</span> (<span style="color:#008080">$x</span> <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span>) {
+    bar(<span style="color:#008080">$x</span> <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>);
   }
 }
 
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>() {
-  <span style="color:#66d9ef">for</span> ($idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; $idx <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>; $idx<span style="color:#f92672">++</span>) {
-    <span style="color:#a6e22e">bar</span>($idx);
-    $x <span style="color:#f92672">=</span> <span style="color:#a6e22e">strlen</span>(<span style="color:#e6db74">&#34;abc&#34;</span>);
+<span style="color:#000;font-weight:bold">function</span> <span style="color:#900;font-weight:bold">foo</span>() {
+  <span style="color:#000;font-weight:bold">for</span> (<span style="color:#008080">$idx</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; <span style="color:#008080">$idx</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">5</span>; <span style="color:#008080">$idx</span><span style="color:#000;font-weight:bold">++</span>) {
+    bar(<span style="color:#008080">$idx</span>);
+    <span style="color:#008080">$x</span> <span style="color:#000;font-weight:bold">=</span> strlen(<span style="color:#d14">&#34;abc&#34;</span>);
   }
 }
 
-<span style="color:#75715e">// 开始分析，在xhprof_enable()和xhprof_disable()之间的是要分析的代码部分
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">xhprof_enable</span>(<span style="color:#a6e22e">XHPROF_FLAGS_CPU</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">XHPROF_FLAGS_MEMORY</span>);
+<span style="color:#998;font-style:italic">// 开始分析，在xhprof_enable()和xhprof_disable()之间的是要分析的代码部分
+</span><span style="color:#998;font-style:italic"></span>xhprof_enable(XHPROF_FLAGS_CPU <span style="color:#000;font-weight:bold">+</span> XHPROF_FLAGS_MEMORY);
 
-<span style="color:#a6e22e">foo</span>();
+foo();
 
-<span style="color:#75715e">//这里就结束分析了，可见之分析了foo()的执行过程，xhprof_disable()会返回分析的结果
-</span><span style="color:#75715e"></span>$xhprof_data <span style="color:#f92672">=</span> <span style="color:#a6e22e">xhprof_disable</span>();
-<span style="color:#a6e22e">print_r</span>($xhprof_data);
+<span style="color:#998;font-style:italic">//这里就结束分析了，可见之分析了foo()的执行过程，xhprof_disable()会返回分析的结果
+</span><span style="color:#998;font-style:italic"></span><span style="color:#008080">$xhprof_data</span> <span style="color:#000;font-weight:bold">=</span> xhprof_disable();
+print_r(<span style="color:#008080">$xhprof_data</span>);
 
-<span style="color:#75715e">//获取xhprof所在的路径
-</span><span style="color:#75715e"></span>$XHPROF_ROOT <span style="color:#f92672">=</span> <span style="color:#a6e22e">realpath</span>(<span style="color:#a6e22e">dirname</span>(<span style="color:#66d9ef">__FILE__</span>) <span style="color:#f92672">.</span><span style="color:#e6db74">&#39;/..&#39;</span>);
+<span style="color:#998;font-style:italic">//获取xhprof所在的路径
+</span><span style="color:#998;font-style:italic"></span><span style="color:#008080">$XHPROF_ROOT</span> <span style="color:#000;font-weight:bold">=</span> realpath(dirname(<span style="color:#008080">__FILE__</span>) <span style="color:#000;font-weight:bold">.</span><span style="color:#d14">&#39;/..&#39;</span>);
 
-<span style="color:#66d9ef">include_once</span> $XHPROF_ROOT <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;/xhprof_lib/utils/xhprof_lib.php&#34;</span>;
-<span style="color:#66d9ef">include_once</span> $XHPROF_ROOT <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;/xhprof_lib/utils/xhprof_runs.php&#34;</span>;
+<span style="color:#000;font-weight:bold">include_once</span> <span style="color:#008080">$XHPROF_ROOT</span> <span style="color:#000;font-weight:bold">.</span> <span style="color:#d14">&#34;/xhprof_lib/utils/xhprof_lib.php&#34;</span>;
+<span style="color:#000;font-weight:bold">include_once</span> <span style="color:#008080">$XHPROF_ROOT</span> <span style="color:#000;font-weight:bold">.</span> <span style="color:#d14">&#34;/xhprof_lib/utils/xhprof_runs.php&#34;</span>;
 
-$xhprof_runs <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XHProfRuns_Default</span>();
-$run_id <span style="color:#f92672">=</span> $xhprof_runs<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">save_run</span>($xhprof_data, <span style="color:#e6db74">&#34;xhprof_foo&#34;</span>);
+<span style="color:#008080">$xhprof_runs</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> XHProfRuns_Default();
+<span style="color:#008080">$run_id</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#008080">$xhprof_runs</span><span style="color:#000;font-weight:bold">-&gt;</span><span style="color:#008080">save_run</span>(<span style="color:#008080">$xhprof_data</span>, <span style="color:#d14">&#34;xhprof_foo&#34;</span>);
 
-<span style="color:#75715e">//访问http://&lt;xhprof-ui-address&gt;/index.php？run=$run_id&amp;source=xhprof_foo 就可以看到统计列表
-</span><span style="color:#75715e">//&lt;xhprof-ui-address&gt;是指xhprof_html的路径地址，如下示例：
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#39;&lt;a href=&#34;http://localhost/xhprof/xhprof_html/index.php?run=&#39;</span><span style="color:#f92672">.</span>$run_id<span style="color:#f92672">.</span><span style="color:#e6db74">&#39;&amp;source=xhprof_foo&#34; target=&#34;_blank&#34;&gt;count&lt;/a&gt;&#39;</span>;
+<span style="color:#998;font-style:italic">//访问http://&lt;xhprof-ui-address&gt;/index.php？run=$run_id&amp;source=xhprof_foo 就可以看到统计列表
+</span><span style="color:#998;font-style:italic">//&lt;xhprof-ui-address&gt;是指xhprof_html的路径地址，如下示例：
+</span><span style="color:#998;font-style:italic"></span>
+<span style="color:#000;font-weight:bold">echo</span> <span style="color:#d14">&#39;&lt;a href=&#34;http://localhost/xhprof/xhprof_html/index.php?run=&#39;</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">$run_id</span><span style="color:#000;font-weight:bold">.</span><span style="color:#d14">&#39;&amp;source=xhprof_foo&#34; target=&#34;_blank&#34;&gt;count&lt;/a&gt;&#39;</span>;
 </code></pre></div><p>现在我们来访问<a href="http://localhost/xhprof/examples/sample.php">http://localhost/xhprof/examples/sample.php</a> 会得到这样的结果：
 <!-- raw HTML omitted -->&lt;img style=&ldquo;width:710px;&ldquo;src=&quot;/images/2015/12/9f3ba58b6a1927cef603494a52134439.png&rdquo; alt=&ldquo;osx-xhprof-1&rdquo; title=&ldquo;osx-xhprof-1&rdquo; /&gt;<!-- raw HTML omitted -->
 点count<br>
 <!-- raw HTML omitted -->&lt;img style=&ldquo;width:710px;&ldquo;src=&quot;/images/2015/12/632e6637abd76fa95e7c20f6c4adcc74.png&rdquo; alt=&ldquo;osx-xhprof-2&rdquo; title=&ldquo;osx-xhprof-2&rdquo;/&gt;<!-- raw HTML omitted -->
 这里就是分析结果啦！如果想要以图象形式显示，点[View Full Callgraph]，当然你还需要安装Graphviz，装这个，本人遇到大坑（如果你和我都是OSX10.11，其它版本未测）。先看效果：<br>
-<a href="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png"><img src="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png" alt=""></a></p>
+<a href="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png">
+        <a data-fancybox="gallery" href="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png">
+            <img class="mx-auto" alt="" src="/images/2015/12/d7b1b4f61d3d3f60553713f102a83f9e.png" />
+        </a>
+    </a></p>
 <p>安装Graphviz可以去它官网下载。<br>
 一定要下载**<code>graphviz-2.39.20151005.2011.pkg</code>**<br>
 一定要下载**<code>graphviz-2.39.20151005.2011.pkg</code>**<br>
@@ -237,7 +346,7 @@ make[1]: *** [all-recursive] Error 1<br>
 make: *** [all] Error 2</p>
 </blockquote>
 <p>可以这样解决：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ln -s /opt/X11/include/X11 /usr/local/include/X11
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ln -s /opt/X11/include/X11 /usr/local/include/X11
 </code></pre></div><p>对于非OSX用户，如遇以上错误1错误2，可以考虑一下方面：</p>
 <ol>
 <li><code>graphviz-gd</code>是否安装；</li>
@@ -251,13 +360,13 @@ make: *** [all] Error 2</p>
 <a href="http://blog.sina.com.cn/s/blog_721cd3390102uzx8.html">http://blog.sina.com.cn/s/blog_721cd3390102uzx8.html</a><br>
 <a href="http://www.cnblogs.com/casatwy/archive/2013/01/17/2865241.html">http://www.cnblogs.com/casatwy/archive/2013/01/17/2865241.html</a><br>
 <a href="http://www.chenjie.info/1587">http://www.chenjie.info/1587</a></p>
-                        </div>
+        </div>
 
-                        
+        
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong><a rel="author" href="https://tlog.cc/">lon3r</a></li>
-        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://tlog.cc/posts/old_blog/osx%E5%AE%89%E8%A3%85xhprof%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/">https://tlog.cc/posts/old_blog/osx%E5%AE%89%E8%A3%85xhprof%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://tlog.cc/posts/old_blog/OSX%E5%AE%89%E8%A3%85XHProf%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/">https://tlog.cc/posts/old_blog/OSX%E5%AE%89%E8%A3%85XHProf%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</a></li>
         <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
     </ul>
 </div>
@@ -265,31 +374,31 @@ make: *** [all] Error 2</p>
 
 
 
-                        
+        
 
 <div class="post-archive">
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/posts/old_blog/osx%E4%B8%ADapache&#43;php&#43;mysql%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">OSX 10.11 中 Apache&#43;PHP&#43;MySQL 环境搭建</a></li>
+        <li><a href="/posts/old_blog/OSX%E4%B8%ADApache&#43;PHP&#43;MySQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">OSX 10.11 中 Apache&#43;PHP&#43;MySQL 环境搭建</a></li>
         
     </ul>
 </div>
 
 
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="https://tlog.cc/tags/xhprof">XHProf</a></li>
-                                
-                                <li><a href="https://tlog.cc/tags/osx">OSX</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/XHProf'>XHProf</a></li>
+                
+                <li><a href='/tags/OSX'>OSX</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
     <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
@@ -313,11 +422,65 @@ make: *** [all] Error 2</p>
 
     
     
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-139549186-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
                 </div>
-            </div>
-            <div id="secondary">
+
+                <div id="secondary">
     <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://tlog.cc/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
       <input type="hidden" name="sitesearch" value="https://tlog.cc/">
@@ -330,7 +493,7 @@ make: *** [all] Error 2</p>
 <ul class="widget-list">
     
     <li>
-        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
     </li>
     
     <li>
@@ -346,11 +509,11 @@ make: *** [all] Error 2</p>
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/notes/interview-question-01/" title="刷题">刷题</a>
+        <a href="https://tlog.cc/posts/notes/Interview-Question-01/" title="刷题">刷题</a>
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -358,7 +521,7 @@ make: *** [all] Error 2</p>
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/macos/anki-%E4%B8%8E-popclip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/" title="Anki 与 PopClip 工作流建设">Anki 与 PopClip 工作流建设</a>
+        <a href="https://tlog.cc/posts/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/" title="Anki 与 PopClip 工作流建设">Anki 与 PopClip 工作流建设</a>
     </li>
     
     <li>
@@ -390,95 +553,83 @@ make: *** [all] Error 2</p>
 
 
     <section class="widget">
-        <h3 class="widget-title">分类</h3>
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li>
-        <a href="https://tlog.cc/categories/golang/">golang(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/Golang/">Golang (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/linux/">linux(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/linux/">linux (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/macos/">macos(2)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/macOS/">macOS (2)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/shell/">shell(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/shell/">shell (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/">前端(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/">前端 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%84%9F%E6%83%B3/">感想(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%84%9F%E6%83%B3/">感想 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%97%A5%E5%BF%97/">日志(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%97%A5%E5%BF%97/">日志 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9/">杂项(4)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9/">杂项 (4)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E7%A7%91%E6%8A%80/">科技(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E7%A7%91%E6%8A%80/">科技 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/">运维(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/">运维 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库 (2)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%BB%91/">黑(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%BB%91/">黑 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果 (1)</a></li>
     
 </ul>
     </section>
 
     <section class="widget">
-        <h3 class="widget-title">标签</h3>
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://tlog.cc/tags/anki/">anki</a>
+    <a href="https://tlog.cc/tags/Anki/">Anki</a>
     
-    <a href="https://tlog.cc/tags/apache/">apache</a>
+    <a href="https://tlog.cc/tags/Apache/">Apache</a>
     
-    <a href="https://tlog.cc/tags/dns/">dns</a>
+    <a href="https://tlog.cc/tags/DNS/">DNS</a>
     
-    <a href="https://tlog.cc/tags/docker/">docker</a>
+    <a href="https://tlog.cc/tags/Docker/">Docker</a>
+    
+    <a href="https://tlog.cc/tags/Go/">Go</a>
+    
+    <a href="https://tlog.cc/tags/Golang/">Golang</a>
+    
+    <a href="https://tlog.cc/tags/Grafana/">Grafana</a>
+    
+    <a href="https://tlog.cc/tags/K8S/">K8S</a>
+    
+    <a href="https://tlog.cc/tags/MySQL/">MySQL</a>
+    
+    <a href="https://tlog.cc/tags/OSX/">OSX</a>
+    
+    <a href="https://tlog.cc/tags/PHP/">PHP</a>
+    
+    <a href="https://tlog.cc/tags/PopClip/">PopClip</a>
+    
+    <a href="https://tlog.cc/tags/SRE/">SRE</a>
+    
+    <a href="https://tlog.cc/tags/Synology/">Synology</a>
+    
+    <a href="https://tlog.cc/tags/TimeMachine/">TimeMachine</a>
+    
+    <a href="https://tlog.cc/tags/XHProf/">XHProf</a>
+    
+    <a href="https://tlog.cc/tags/Xpenology/">Xpenology</a>
     
     <a href="https://tlog.cc/tags/getopts/">getopts</a>
-    
-    <a href="https://tlog.cc/tags/go/">go</a>
-    
-    <a href="https://tlog.cc/tags/golang/">golang</a>
-    
-    <a href="https://tlog.cc/tags/grafana/">grafana</a>
     
     <a href="https://tlog.cc/tags/hackintosh/">hackintosh</a>
     
@@ -486,35 +637,15 @@ make: *** [all] Error 2</p>
     
     <a href="https://tlog.cc/tags/iris/">iris</a>
     
-    <a href="https://tlog.cc/tags/k8s/">k8s</a>
-    
     <a href="https://tlog.cc/tags/linux/">linux</a>
     
-    <a href="https://tlog.cc/tags/macos/">macos</a>
-    
-    <a href="https://tlog.cc/tags/mysql/">mysql</a>
+    <a href="https://tlog.cc/tags/macOS/">macOS</a>
     
     <a href="https://tlog.cc/tags/nohup/">nohup</a>
     
-    <a href="https://tlog.cc/tags/osx/">osx</a>
-    
-    <a href="https://tlog.cc/tags/php/">php</a>
-    
-    <a href="https://tlog.cc/tags/popclip/">popclip</a>
-    
     <a href="https://tlog.cc/tags/shell/">shell</a>
     
-    <a href="https://tlog.cc/tags/sre/">sre</a>
-    
-    <a href="https://tlog.cc/tags/synology/">synology</a>
-    
-    <a href="https://tlog.cc/tags/timemachine/">timemachine</a>
-    
     <a href="https://tlog.cc/tags/vuejs/">vuejs</a>
-    
-    <a href="https://tlog.cc/tags/xhprof/">xhprof</a>
-    
-    <a href="https://tlog.cc/tags/xpenology/">xpenology</a>
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
@@ -548,57 +679,9 @@ make: *** [all] Error 2</p>
         </ul>
     </section>
 </div>
+            </div>
         </div>
     </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        
-        (function () {
-            $("pre code").parent().addClass("line-numbers")
-        }());
-
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-139549186-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
 </body>
+
 </html>

@@ -2,21 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TimeMachine on 小 ceng 的时间日志</title>
-    <link>https://tlog.cc/tags/timemachine/</link>
+    <link>https://tlog.cc/tags/TimeMachine/</link>
     <description>Recent content in TimeMachine on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 20 Jul 2019 13:35:16 +0800</lastBuildDate><atom:link href="https://tlog.cc/tags/timemachine/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Jul 2019 13:35:16 +0800</lastBuildDate><atom:link href="https://tlog.cc/tags/TimeMachine/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</title>
-      <link>https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/</link>
+      <link>https://tlog.cc/posts/macOS/%E5%A6%82%E4%BD%95%E5%B0%86-TimeMachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/</link>
       <pubDate>Sat, 20 Jul 2019 13:35:16 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/macos/%E5%A6%82%E4%BD%95%E5%B0%86-timemachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/</guid>
-      <description>不喜欢唠叨的，直接进入技术总结。
-建议还是看一下全文，避免误操作。
-TimeMachine (后文简称 TM）是 Apple 自家一款很强大的系统级别的备份软件，个人非常喜欢，虽然不是实时备份，但是当你用得时间长了，真的会有一种坐时光机的感觉。当然不是每个人都喜欢这种全面备份，所以也就不过多吹嘘，毕竟没有一件东西是完美的。
-TM 备份方式比较灵活，可以选择外接硬盘备份，也可以使用网络驱动器备份。过去，我使用的一直是外接硬盘的方式，原因是简单。硬盘、键盘等都插在显示器的 USB hub 上，每天上班只要接上，便会自动备份。以这种方式使用快两年，直到最近，硬盘出现只读问题，不得不考虑迁移数据。</description>
+      <guid>https://tlog.cc/posts/macOS/%E5%A6%82%E4%BD%95%E5%B0%86-TimeMachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/</guid>
+      <description>不喜欢唠叨的，直接进入技术总结。 建议还是看一下全文，避免误操作。 TimeMachine (后文简称 TM）是 Apple 自家一款很强大的系统级别的备份软件，个人非常喜欢，虽然不是实时备份，但是当你用得时间长了，真的会有一种坐时光机的感觉。当然不是每个人都喜欢这种全面备份，所以也就不过多吹嘘，毕竟没有一件东西是完美</description>
     </item>
     
   </channel>

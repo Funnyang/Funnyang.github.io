@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PopClip on 小 ceng 的时间日志</title>
-    <link>https://tlog.cc/tags/popclip/</link>
+    <link>https://tlog.cc/tags/PopClip/</link>
     <description>Recent content in PopClip on 小 ceng 的时间日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 25 Aug 2019 11:03:50 +0800</lastBuildDate><atom:link href="https://tlog.cc/tags/popclip/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Aug 2019 11:03:50 +0800</lastBuildDate><atom:link href="https://tlog.cc/tags/PopClip/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Anki 与 PopClip 工作流建设</title>
-      <link>https://tlog.cc/posts/macos/anki-%E4%B8%8E-popclip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</link>
+      <link>https://tlog.cc/posts/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</link>
       <pubDate>Sun, 25 Aug 2019 11:03:50 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/macos/anki-%E4%B8%8E-popclip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</guid>
-      <description>想做这件事很久了，边阅读边整理卡片，利用闲散时间强化记忆，可能是比较理想的学习方式了吧。
-Anki 的大名可能很多人都听说，我知道其实比较晚，也是最近才慢慢熟悉起来，它的门槛的确有点高，加上我没有刻意学习的习惯，软件也不算特别美观，所以久未提起兴趣。不过慢慢熟悉之后，就越来越喜欢这款软件了，其可贵之处就在于自定义的程度非常之高，如果懂前端，做出精美的卡片不是什么难事。很多人将其用在考研、背单词等场景，而我作为职场人士其实这方面的需求小一些，更希望将其作为日常学习的一种工具。
-日常学习就是看到一些零散的知识点，想快速地记下来。最常用的方法就是，写文档或记在笔记中（印象笔记、OneNote)，然而这些记录大多都石沉大海，鲜有重温之时。另一个痛楚就是，既然是零碎的知识，有时就很难作为一篇笔记，分类上就很纠结。作为知识的最小单元，一张卡片可能真的是最合适的。日常学习的第二点，不能花过多时间在制作卡片上，否则不就是本末倒置。
-于是，阅读文档的时候，能不能直接划重点呢？
-Anki + PopClip 真正实现了这一高效的工作流。Anki 带有一套插件系统，其中 AnkiConnect 真乃神器，它提供了一套 RESTful API 操作 Anki，几乎可以实现能想到的任何操作。再加上 PopClip 的高度自定义化，划重点、加卡片简直一气呵成！</description>
+      <guid>https://tlog.cc/posts/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</guid>
+      <description>想做这件事很久了，边阅读边整理卡片，利用闲散时间强化记忆，可能是比较理想的学习方式了吧。 Anki 的大名可能很多人都听说，我知道其实比较晚，也是最近才慢慢熟悉起来，它的门槛的确有点高，加上我没有刻意学习的习惯，软件也不算特别美观，所以久未提起兴趣。不过慢慢熟悉之后，就越来越喜欢这款软件了</description>
     </item>
     
   </channel>

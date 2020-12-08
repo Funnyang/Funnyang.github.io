@@ -3,42 +3,45 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
 
     <title>使用 IDA Pro 动态调试安卓 so 文件 | 小 ceng 的时间日志</title>
     <meta property="og:title" content="使用 IDA Pro 动态调试安卓 so 文件 - 小 ceng 的时间日志">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2020-12-08T14:00:44&#43;08:00">
+    <meta property="article:published_time" content='2020-12-08T14:00:44&#43;08:00'>
         
         
-    <meta property="article:modified_time" content="2020-12-08T14:00:44&#43;08:00">
+    <meta property="article:modified_time" content='2020-12-08T14:00:44&#43;08:00'>
         
     <meta name="Keywords" content="">
     <meta name="description" content="使用 IDA Pro 动态调试安卓 so 文件">
         
     <meta name="author" content="lon3r">
-    <meta property="og:url" content="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta property="og:url" content="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
-
-
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
     
     
 </head>
 
+
 <body>
-<header id="header" class="clearfix">
+    <header id="header" class="clearfix">
     <div class="container">
         <div class="col-group">
             <div class="site-name ">
@@ -61,38 +64,144 @@
     </div>
 </header>
 
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
 
-<div id="body">
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#系统环境">系统环境</a></li>
+    <li><a href="#工具准备">工具准备</a></li>
+    <li><a href="#工具安装">工具安装</a></li>
+    <li><a href="#动态调试步骤">动态调试步骤</a>
+      <ul>
+        <li><a href="#手机端准备">手机端准备</a></li>
+        <li><a href="#电脑端">电脑端</a></li>
+        <li><a href="#开始调试">开始调试</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">使用 IDA Pro 动态调试安卓 so 文件</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月8日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B'>逆向工程</a></span>
+            
+        </div>
         
         
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">使用 IDA Pro 动态调试安卓 so 文件</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2020年12月8日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B">逆向工程</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-meta">
-                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
-                        </div>
-                        
-                        
-                        <div class="post-content">
-                            <p>因为需要破解一个 App 的签名算法，开始学习逆向。本人没有逆向经验，也没有安卓开发经验，甚至没有 <code>Java</code> 开发经验。因此花了不少时间才完成任务，故整理了此文章，作为一个备忘。</p>
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p>因为需要破解一个 App 的签名算法，开始学习逆向。本人没有逆向经验，也没有安卓开发经验，甚至没有 <code>Java</code> 开发经验。因此花了不少时间才完成任务，故整理了此文章，作为一个备忘。</p>
 <p>由于是第一次实战，因此参考了很多文章，但是每篇文章都有一些没有提到的点（对新手而言），因此个人结合自己的情况，重新整理了一下遗漏的部分。</p>
 <p>先上参考资料，建议每篇精读，你遇到的大部分问题可能文章已经提及。</p>
 <ol>
@@ -125,11 +234,11 @@ IDA Pro 动态调试操作部分参考了该文章，写的很详细，适合刚
 <li>Android Studio（主要需要用到一个叫 ddms(monitor) 的工具）</li>
 <li>jdb</li>
 </ul>
-<h3 id="工具安装">工具安装</h3>
+<h2 id="工具安装">工具安装</h2>
 <p>这部分只是记录我安装过程遇到的问题，大家可以根据自己的情况安装。</p>
 <p>1.安装 <code>adb</code></p>
-<pre><code>brew cask install android-platform-tools
-</code></pre><p>2.安装 <code>jadx</code>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew cask install android-platform-tools
+</code></pre></div><p>2.安装 <code>jadx</code>
 Github 下载：https://github.com/skylot/jadx/releases</p>
 <p>3.安装 Android Studio
 在官网下载，直接安装即可。不过在使用 <code>ddms(monitor)</code> 时，遇到了一个报错：</p>
@@ -150,10 +259,18 @@ sudo ln -s ../jre/lib/server/libjvm.dylib libserver.dylib
 <li><code>-s</code> 只显示系统应用的包名</li>
 <li><code>-3</code> 只显示第三方应用的包名</li>
 </ul>
-<p><img src="/images/16074092148672.jpg" alt="-w450"></p>
+<p>
+        <a data-fancybox="gallery" href="/images/16074092148672.jpg">
+            <img class="mx-auto" alt="-w450" src="/images/16074092148672.jpg" />
+        </a>
+    </p>
 <h4 id="2-确定启动入口-lunch-activity">2. 确定启动入口 Lunch Activity</h4>
 <p>使用 <code>jadx</code> 反编译 apk，找到 <code>AndroidManifest.xml</code> 查看程序入口。
-<img src="/images/16074092566829.png" alt=""></p>
+
+        <a data-fancybox="gallery" href="/images/16074092566829.png">
+            <img class="mx-auto" alt="" src="/images/16074092566829.png" />
+        </a>
+    </p>
 <blockquote>
 <p>图片来源：https://www.cnblogs.com/bmjoker/p/11891123.html
 其中包名为：<code>demo2.jni.com.myapplication</code>
@@ -184,28 +301,64 @@ Listening on 0.0.0.0:23946...
 </code></pre><h4 id="5-用-am-启动被调试应用">5. 用 am 启动被调试应用</h4>
 <pre><code>am start -D -n demo2.jni.com.myapplication/.MainActivity
 </code></pre><p>启动后设备会出现类似如下界面，等待调试器的连接。
-<img src="/images/16074092831791.jpg" alt="-w360"></p>
+
+        <a data-fancybox="gallery" href="/images/16074092831791.jpg">
+            <img class="mx-auto" alt="-w360" src="/images/16074092831791.jpg" />
+        </a>
+    </p>
 <h3 id="电脑端">电脑端</h3>
 <h4 id="1-ida-pro-配置">1. IDA Pro 配置</h4>
 <p>1.用 IDA 打开想要调试的 <code>so</code> 库
 2.设置调试器
-<img src="/images/16074093040951.png" alt=""></p>
+
+        <a data-fancybox="gallery" href="/images/16074093040951.png">
+            <img class="mx-auto" alt="" src="/images/16074093040951.png" />
+        </a>
+    </p>
 <p>3.设置调试选项
-<img src="/images/16074093158692.png" alt="">
-<img src="/images/16074093215927.jpg" alt=""></p>
+
+        <a data-fancybox="gallery" href="/images/16074093158692.png">
+            <img class="mx-auto" alt="" src="/images/16074093158692.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="/images/16074093215927.jpg">
+            <img class="mx-auto" alt="" src="/images/16074093215927.jpg" />
+        </a>
+    </p>
 <p>4.开始 attach 进程</p>
 <p>设置主机和端口：
-<img src="/images/16074093344395.png" alt="">
-<img src="/images/16074093388343.png" alt=""></p>
+
+        <a data-fancybox="gallery" href="/images/16074093344395.png">
+            <img class="mx-auto" alt="" src="/images/16074093344395.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="/images/16074093388343.png">
+            <img class="mx-auto" alt="" src="/images/16074093388343.png" />
+        </a>
+    </p>
 <p>选择要调试的程序：
-<img src="/images/16074093493434.jpg" alt="-w315">
-<img src="/images/16074093595275.png" alt=""></p>
+
+        <a data-fancybox="gallery" href="/images/16074093493434.jpg">
+            <img class="mx-auto" alt="-w315" src="/images/16074093493434.jpg" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="/images/16074093595275.png">
+            <img class="mx-auto" alt="" src="/images/16074093595275.png" />
+        </a>
+    </p>
 <h4 id="2使用-jdb-连接">2.使用 jdb 连接</h4>
 <p>1.确定 port
 打开 <code>ddms</code> 查看</p>
 <pre><code>cd /Users/funnyang/Library/Android/sdk/tools/
 ./monitor
-</code></pre><p><img src="/images/16074093704516.jpg" alt=""></p>
+</code></pre><p>
+        <a data-fancybox="gallery" href="/images/16074093704516.jpg">
+            <img class="mx-auto" alt="" src="/images/16074093704516.jpg" />
+        </a>
+    </p>
 <blockquote>
 <p>这就为什么要下 Android Studio 😂</p>
 </blockquote>
@@ -220,10 +373,10 @@ root@R9sPlus:/data/local/tmp # chmod 755 mprop
 root@R9sPlus:/data/local/tmp # ./mprop ro.debuggable 1
 
 # 获取ro.debuggable 此处应该是 1
-root@R9sPlus:/data/local/tmp # getprop ro.debuggable 
+root@R9sPlus:/data/local/tmp # getprop ro.debuggable
 
 # 重启adbd进程
-root@R9sPlus:/data/local/tmp # stop;start 
+root@R9sPlus:/data/local/tmp # stop;start
 </code></pre><p>2.开始连接</p>
 <pre><code>jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=8700
 </code></pre><blockquote>
@@ -235,31 +388,39 @@ root@R9sPlus:/data/local/tmp # stop;start
 </blockquote>
 <h3 id="开始调试">开始调试</h3>
 <p>不断按 F9，就会触发到断点，直到出现类似如下界面，说明进入了要调试的 so。
-<img src="/images/16074093817435.png" alt=""></p>
-<blockquote>
-<p>调试快捷键：
-<code>F2</code> 下断点
-<code>F7</code> 单步步入
-<code>F8</code> 单步步过
-<code>F9</code> 执行到下个断点
-<code>F4</code> 执行到光标</p>
-</blockquote>
+
+        <a data-fancybox="gallery" href="/images/16074093817435.png">
+            <img class="mx-auto" alt="" src="/images/16074093817435.png" />
+        </a>
+    </p>
+<p><strong>调试快捷键：</strong></p>
+<ul>
+<li><code>F2</code> 下断点</li>
+<li><code>F7</code> 单步步入</li>
+<li><code>F8</code> 单步步过</li>
+<li><code>F9</code> 执行到下个断点</li>
+<li><code>F4</code> 执行到光标</li>
+</ul>
 <p><strong>小 Tips：</strong>
 初期尝试时，可以一步一步按 <code>F9</code>，来熟悉操作。熟悉了之后，可以直接在 <code>so</code> 的代码中打断点，然后按 <code>F4</code>，更快地到达要调试的函数。</p>
 <p>在调试的过程中，可能需要查看寄存器的值，对于新手来说还是挺懵逼的。我也是在阅读《<a href="https://www.cnblogs.com/bmjoker/p/11891123.html">使用IDA进行动态调试与过反调试</a>》之后才学会如何操作的。原来需要先点击 <code>Hex View</code>，再点跳转。同样地，如果要定位 <code>View-PC</code> 的位置，也要先点击 <code>IDA View-PC</code> 窗口。其他窗口跳转方法同理。
-<img src="/images/16074093980893.png" alt=""></p>
+
+        <a data-fancybox="gallery" href="/images/16074093980893.png">
+            <img class="mx-auto" alt="" src="/images/16074093980893.png" />
+        </a>
+    </p>
 <blockquote>
 <p>图片来源：<a href="https://www.cnblogs.com/bmjoker/p/11891123.html">使用IDA进行动态调试与过反调试</a></p>
 </blockquote>
 <p>其他涉及 IDA Pro 的知识，建议阅读推荐文章。</p>
 
-                        </div>
+        </div>
 
-                        
+        
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong><a rel="author" href="https://tlog.cc/">lon3r</a></li>
-        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/">https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/">https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/</a></li>
         <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
     </ul>
 </div>
@@ -267,22 +428,22 @@ root@R9sPlus:/data/local/tmp # stop;start
 
 
 
-                        
+        
 
 
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93">安卓</a></li>
-                                
-                                <li><a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B">逆向工程</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E5%AE%89%E5%8D%93'>安卓</a></li>
+                
+                <li><a href='/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B'>逆向工程</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
     <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
@@ -306,11 +467,65 @@ root@R9sPlus:/data/local/tmp # stop;start
 
     
     
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-139549186-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
                 </div>
-            </div>
-            <div id="secondary">
+
+                <div id="secondary">
     <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://tlog.cc/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
       <input type="hidden" name="sitesearch" value="https://tlog.cc/">
@@ -323,7 +538,7 @@ root@R9sPlus:/data/local/tmp # stop;start
 <ul class="widget-list">
     
     <li>
-        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
     </li>
     
     <li>
@@ -339,11 +554,11 @@ root@R9sPlus:/data/local/tmp # stop;start
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/notes/interview-question-01/" title="刷题">刷题</a>
+        <a href="https://tlog.cc/posts/notes/Interview-Question-01/" title="刷题">刷题</a>
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -351,7 +566,7 @@ root@R9sPlus:/data/local/tmp # stop;start
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/macos/anki-%E4%B8%8E-popclip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/" title="Anki 与 PopClip 工作流建设">Anki 与 PopClip 工作流建设</a>
+        <a href="https://tlog.cc/posts/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/" title="Anki 与 PopClip 工作流建设">Anki 与 PopClip 工作流建设</a>
     </li>
     
     <li>
@@ -383,95 +598,83 @@ root@R9sPlus:/data/local/tmp # stop;start
 
 
     <section class="widget">
-        <h3 class="widget-title">分类</h3>
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li>
-        <a href="https://tlog.cc/categories/golang/">golang(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/Golang/">Golang (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/linux/">linux(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/linux/">linux (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/macos/">macos(2)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/macOS/">macOS (2)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/shell/">shell(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/shell/">shell (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/">前端(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/">前端 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%84%9F%E6%83%B3/">感想(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%84%9F%E6%83%B3/">感想 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%97%A5%E5%BF%97/">日志(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%97%A5%E5%BF%97/">日志 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9/">杂项(4)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9/">杂项 (4)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E7%A7%91%E6%8A%80/">科技(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E7%A7%91%E6%8A%80/">科技 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/">运维(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/">运维 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库 (2)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%BB%91/">黑(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%BB%91/">黑 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果 (1)</a></li>
     
 </ul>
     </section>
 
     <section class="widget">
-        <h3 class="widget-title">标签</h3>
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://tlog.cc/tags/anki/">anki</a>
+    <a href="https://tlog.cc/tags/Anki/">Anki</a>
     
-    <a href="https://tlog.cc/tags/apache/">apache</a>
+    <a href="https://tlog.cc/tags/Apache/">Apache</a>
     
-    <a href="https://tlog.cc/tags/dns/">dns</a>
+    <a href="https://tlog.cc/tags/DNS/">DNS</a>
     
-    <a href="https://tlog.cc/tags/docker/">docker</a>
+    <a href="https://tlog.cc/tags/Docker/">Docker</a>
+    
+    <a href="https://tlog.cc/tags/Go/">Go</a>
+    
+    <a href="https://tlog.cc/tags/Golang/">Golang</a>
+    
+    <a href="https://tlog.cc/tags/Grafana/">Grafana</a>
+    
+    <a href="https://tlog.cc/tags/K8S/">K8S</a>
+    
+    <a href="https://tlog.cc/tags/MySQL/">MySQL</a>
+    
+    <a href="https://tlog.cc/tags/OSX/">OSX</a>
+    
+    <a href="https://tlog.cc/tags/PHP/">PHP</a>
+    
+    <a href="https://tlog.cc/tags/PopClip/">PopClip</a>
+    
+    <a href="https://tlog.cc/tags/SRE/">SRE</a>
+    
+    <a href="https://tlog.cc/tags/Synology/">Synology</a>
+    
+    <a href="https://tlog.cc/tags/TimeMachine/">TimeMachine</a>
+    
+    <a href="https://tlog.cc/tags/XHProf/">XHProf</a>
+    
+    <a href="https://tlog.cc/tags/Xpenology/">Xpenology</a>
     
     <a href="https://tlog.cc/tags/getopts/">getopts</a>
-    
-    <a href="https://tlog.cc/tags/go/">go</a>
-    
-    <a href="https://tlog.cc/tags/golang/">golang</a>
-    
-    <a href="https://tlog.cc/tags/grafana/">grafana</a>
     
     <a href="https://tlog.cc/tags/hackintosh/">hackintosh</a>
     
@@ -479,35 +682,15 @@ root@R9sPlus:/data/local/tmp # stop;start
     
     <a href="https://tlog.cc/tags/iris/">iris</a>
     
-    <a href="https://tlog.cc/tags/k8s/">k8s</a>
-    
     <a href="https://tlog.cc/tags/linux/">linux</a>
     
-    <a href="https://tlog.cc/tags/macos/">macos</a>
-    
-    <a href="https://tlog.cc/tags/mysql/">mysql</a>
+    <a href="https://tlog.cc/tags/macOS/">macOS</a>
     
     <a href="https://tlog.cc/tags/nohup/">nohup</a>
     
-    <a href="https://tlog.cc/tags/osx/">osx</a>
-    
-    <a href="https://tlog.cc/tags/php/">php</a>
-    
-    <a href="https://tlog.cc/tags/popclip/">popclip</a>
-    
     <a href="https://tlog.cc/tags/shell/">shell</a>
     
-    <a href="https://tlog.cc/tags/sre/">sre</a>
-    
-    <a href="https://tlog.cc/tags/synology/">synology</a>
-    
-    <a href="https://tlog.cc/tags/timemachine/">timemachine</a>
-    
     <a href="https://tlog.cc/tags/vuejs/">vuejs</a>
-    
-    <a href="https://tlog.cc/tags/xhprof/">xhprof</a>
-    
-    <a href="https://tlog.cc/tags/xpenology/">xpenology</a>
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
@@ -541,57 +724,9 @@ root@R9sPlus:/data/local/tmp # stop;start
         </ul>
     </section>
 </div>
+            </div>
         </div>
     </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        
-        (function () {
-            $("pre code").parent().addClass("line-numbers")
-        }());
-
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-139549186-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
 </body>
+
 </html>

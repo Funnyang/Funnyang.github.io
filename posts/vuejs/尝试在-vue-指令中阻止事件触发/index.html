@@ -3,42 +3,45 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.78.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
 
     <title>尝试在 vue 指令中阻止事件触发 | 小 ceng 的时间日志</title>
     <meta property="og:title" content="尝试在 vue 指令中阻止事件触发 - 小 ceng 的时间日志">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2019-07-28T18:52:17&#43;08:00">
+    <meta property="article:published_time" content='2019-07-28T18:52:17&#43;08:00'>
         
         
-    <meta property="article:modified_time" content="2019-07-28T18:52:17&#43;08:00">
+    <meta property="article:modified_time" content='2019-07-28T18:52:17&#43;08:00'>
         
     <meta name="Keywords" content="">
     <meta name="description" content="尝试在 vue 指令中阻止事件触发">
         
     <meta name="author" content="lon3r">
     <meta property="og:url" content="https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
-
-
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
     
     
 </head>
 
+
 <body>
-<header id="header" class="clearfix">
+    <header id="header" class="clearfix">
     <div class="container">
         <div class="col-group">
             <div class="site-name ">
@@ -61,38 +64,131 @@
     </div>
 </header>
 
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
 
-<div id="body">
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents"></nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">尝试在 vue 指令中阻止事件触发</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年7月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%89%8D%E7%AB%AF'>前端</a></span>
+            
+        </div>
         
         
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">尝试在 vue 指令中阻止事件触发</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2019年7月28日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF">前端</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-meta">
-                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
-                        </div>
-                        
-                        
-                        <div class="post-content">
-                            <p>通常，大家都是在指令中绑定事件，而我遇到一种场景是希望阻止事件触发，准确地讲，是阻止元素或组件绑定的事件 <code>handler</code> 的执行。</p>
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p>通常，大家都是在指令中绑定事件，而我遇到一种场景是希望阻止事件触发，准确地讲，是阻止元素或组件绑定的事件 <code>handler</code> 的执行。</p>
 <p>这个场景是基于权限控制诞生的，网上能查到资料，不少的实践中，都使用自定义指令控制按钮级别的权限控制。而这些实践中，多数都是控制按钮的显隐，这点不难实现。但实际中，可能也会有点击按钮，然后通过提示告知用户无权限操作的需求。因此我希望权限指令 <code>v-permission</code> 也能适应这种场景。</p>
 <p>实现的思路其实也很简单，即先移除原有事件监听，再添加新的监听。问题就在于第一步比较难实现。</p>
 <p>经过一番研究，最后我将这个问题分为两种情况：</p>
@@ -101,47 +197,47 @@
 <li>原生事件</li>
 </ul>
 <p><code>vue</code> 自定义事件是可以禁用的，但是原生事件比较麻烦，想要移除原生事件的监听，需要提供原有绑定的函数，而这个信息无法在指令的 <code>hook</code> 中获取到（本来寄希望于 <code>vnode</code>, 然而多次尝试后无果）。所以最终是没有完全实现我想要的功能，只实现了一个半血版。demo 如下:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">on</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;element-ui/src/utils/dom&#39;</span>
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Message</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;element-ui&#39;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#000;font-weight:bold">import</span> { on } from <span style="color:#d14">&#39;element-ui/src/utils/dom&#39;</span>
+<span style="color:#000;font-weight:bold">import</span> { Message } from <span style="color:#d14">&#39;element-ui&#39;</span>
 
-<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">directive</span>(<span style="color:#e6db74">&#39;permission&#39;</span>, {
-  <span style="color:#a6e22e">inserted</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">el</span>, <span style="color:#a6e22e">binding</span>, <span style="color:#a6e22e">vnode</span>) =&gt; {
-      <span style="color:#75715e">// 禁用 click 兼容性检测
-</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">componentInstance</span>) {
-        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;v-permission 不支持用在普通dom元素&#34;</span>)
-        <span style="color:#66d9ef">return</span>
+Vue.directive(<span style="color:#d14">&#39;permission&#39;</span>, {
+  inserted<span style="color:#000;font-weight:bold">:</span> (el, binding, vnode) =&gt; {
+      <span style="color:#998;font-style:italic">// 禁用 click 兼容性检测
+</span><span style="color:#998;font-style:italic"></span>      <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">!</span>vnode.componentInstance) {
+        alert(<span style="color:#d14">&#34;v-permission 不支持用在普通dom元素&#34;</span>)
+        <span style="color:#000;font-weight:bold">return</span>
       }
-      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">nativeOn</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">nativeOn</span>.<span style="color:#a6e22e">click</span>) {
-        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;v-permission 不支持 click.native&#34;</span>)
-        <span style="color:#66d9ef">return</span>
-      }
-
-      <span style="color:#75715e">// 禁用点击事件(组件）
-</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">componentInstance</span>) {
-        <span style="color:#a6e22e">vnode</span>.<span style="color:#a6e22e">componentInstance</span>.<span style="color:#a6e22e">$off</span>(<span style="color:#e6db74">&#39;click&#39;</span>)
+      <span style="color:#000;font-weight:bold">if</span> (vnode.data.nativeOn <span style="color:#000;font-weight:bold">&amp;&amp;</span> vnode.data.nativeOn.click) {
+        alert(<span style="color:#d14">&#34;v-permission 不支持 click.native&#34;</span>)
+        <span style="color:#000;font-weight:bold">return</span>
       }
 
-      <span style="color:#a6e22e">on</span>(<span style="color:#a6e22e">el</span>, <span style="color:#e6db74">&#39;click&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">e</span>) {
-        <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>()
-        <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">stopPropagation</span>()
-        <span style="color:#a6e22e">Message</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;您无权进行此操作&#34;</span>)
+      <span style="color:#998;font-style:italic">// 禁用点击事件(组件）
+</span><span style="color:#998;font-style:italic"></span>      <span style="color:#000;font-weight:bold">if</span> (vnode.componentInstance) {
+        vnode.componentInstance.$off(<span style="color:#d14">&#39;click&#39;</span>)
+      }
+
+      on(el, <span style="color:#d14">&#39;click&#39;</span>, <span style="color:#000;font-weight:bold">function</span> (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        Message.error(<span style="color:#d14">&#34;您无权进行此操作&#34;</span>)
       })
   }
 })
 </code></pre></div><p>使用示例：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">// 支持
-&lt;<span style="color:#f92672">el-button</span> <span style="color:#a6e22e">v-permission</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#f92672">el-button</span>&gt;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">// 支持
+&lt;<span style="color:#000080">el-button</span> <span style="color:#008080">v-permission</span> <span style="color:#a61717;background-color:#e3d2d2">@</span><span style="color:#008080">click</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#000080">el-button</span>&gt;
 
 // 不支持，因为使用了 .native 修饰符，无法移除原有事件监听，即无法阻止 handleClick 的执行
-&lt;<span style="color:#f92672">el-button</span> <span style="color:#a6e22e">v-permission</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">native</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#f92672">el-button</span>&gt;
+&lt;<span style="color:#000080">el-button</span> <span style="color:#008080">v-permission</span> <span style="color:#a61717;background-color:#e3d2d2">@</span><span style="color:#008080">click</span><span style="color:#a61717;background-color:#e3d2d2">.</span><span style="color:#008080">native</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#000080">el-button</span>&gt;
 
 // 不支持，因为是元素dom，无法移除原有事件监听，即无法阻止 handleClick 的执行
-&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">v-permission</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#f92672">button</span>&gt;
+&lt;<span style="color:#000080">button</span> <span style="color:#008080">v-permission</span> <span style="color:#a61717;background-color:#e3d2d2">@</span><span style="color:#008080">click</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;handleClick()&#34;</span>&gt;&lt;/<span style="color:#000080">button</span>&gt;
 </code></pre></div><p>若朋友想到其他的实现思路，欢迎赐教。</p>
 
-                        </div>
+        </div>
 
-                        
+        
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong><a rel="author" href="https://tlog.cc/">lon3r</a></li>
@@ -153,20 +249,20 @@
 
 
 
-                        
+        
 
 
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="https://tlog.cc/tags/vuejs">vuejs</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/vuejs'>vuejs</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
     <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
@@ -190,11 +286,65 @@
 
     
     
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-139549186-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
                 </div>
-            </div>
-            <div id="secondary">
+
+                <div id="secondary">
     <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://tlog.cc/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
       <input type="hidden" name="sitesearch" value="https://tlog.cc/">
@@ -207,7 +357,7 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-ida-pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+        <a href="https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
     </li>
     
     <li>
@@ -223,11 +373,11 @@
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/notes/interview-question-01/" title="刷题">刷题</a>
+        <a href="https://tlog.cc/posts/notes/Interview-Question-01/" title="刷题">刷题</a>
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/notes/goolge-sre-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+        <a href="https://tlog.cc/posts/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
     </li>
     
     <li>
@@ -235,7 +385,7 @@
     </li>
     
     <li>
-        <a href="https://tlog.cc/posts/macos/anki-%E4%B8%8E-popclip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/" title="Anki 与 PopClip 工作流建设">Anki 与 PopClip 工作流建设</a>
+        <a href="https://tlog.cc/posts/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/" title="Anki 与 PopClip 工作流建设">Anki 与 PopClip 工作流建设</a>
     </li>
     
     <li>
@@ -267,95 +417,83 @@
 
 
     <section class="widget">
-        <h3 class="widget-title">分类</h3>
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li>
-        <a href="https://tlog.cc/categories/golang/">golang(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/Golang/">Golang (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/linux/">linux(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/linux/">linux (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/macos/">macos(2)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/macOS/">macOS (2)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/shell/">shell(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/shell/">shell (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/">前端(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/">前端 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%84%9F%E6%83%B3/">感想(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%84%9F%E6%83%B3/">感想 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%97%A5%E5%BF%97/">日志(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%97%A5%E5%BF%97/">日志 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9/">杂项(4)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9/">杂项 (4)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E7%A7%91%E6%8A%80/">科技(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E7%A7%91%E6%8A%80/">科技 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/">运维(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/">运维 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库(2)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库 (2)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%BB%91/">黑(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%BB%91/">黑 (1)</a></li>
     
-    <li>
-        <a href="https://tlog.cc/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果(1)</a>
-    </li>
+    <li><a href="https://tlog.cc/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果 (1)</a></li>
     
 </ul>
     </section>
 
     <section class="widget">
-        <h3 class="widget-title">标签</h3>
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://tlog.cc/tags/anki/">anki</a>
+    <a href="https://tlog.cc/tags/Anki/">Anki</a>
     
-    <a href="https://tlog.cc/tags/apache/">apache</a>
+    <a href="https://tlog.cc/tags/Apache/">Apache</a>
     
-    <a href="https://tlog.cc/tags/dns/">dns</a>
+    <a href="https://tlog.cc/tags/DNS/">DNS</a>
     
-    <a href="https://tlog.cc/tags/docker/">docker</a>
+    <a href="https://tlog.cc/tags/Docker/">Docker</a>
+    
+    <a href="https://tlog.cc/tags/Go/">Go</a>
+    
+    <a href="https://tlog.cc/tags/Golang/">Golang</a>
+    
+    <a href="https://tlog.cc/tags/Grafana/">Grafana</a>
+    
+    <a href="https://tlog.cc/tags/K8S/">K8S</a>
+    
+    <a href="https://tlog.cc/tags/MySQL/">MySQL</a>
+    
+    <a href="https://tlog.cc/tags/OSX/">OSX</a>
+    
+    <a href="https://tlog.cc/tags/PHP/">PHP</a>
+    
+    <a href="https://tlog.cc/tags/PopClip/">PopClip</a>
+    
+    <a href="https://tlog.cc/tags/SRE/">SRE</a>
+    
+    <a href="https://tlog.cc/tags/Synology/">Synology</a>
+    
+    <a href="https://tlog.cc/tags/TimeMachine/">TimeMachine</a>
+    
+    <a href="https://tlog.cc/tags/XHProf/">XHProf</a>
+    
+    <a href="https://tlog.cc/tags/Xpenology/">Xpenology</a>
     
     <a href="https://tlog.cc/tags/getopts/">getopts</a>
-    
-    <a href="https://tlog.cc/tags/go/">go</a>
-    
-    <a href="https://tlog.cc/tags/golang/">golang</a>
-    
-    <a href="https://tlog.cc/tags/grafana/">grafana</a>
     
     <a href="https://tlog.cc/tags/hackintosh/">hackintosh</a>
     
@@ -363,35 +501,15 @@
     
     <a href="https://tlog.cc/tags/iris/">iris</a>
     
-    <a href="https://tlog.cc/tags/k8s/">k8s</a>
-    
     <a href="https://tlog.cc/tags/linux/">linux</a>
     
-    <a href="https://tlog.cc/tags/macos/">macos</a>
-    
-    <a href="https://tlog.cc/tags/mysql/">mysql</a>
+    <a href="https://tlog.cc/tags/macOS/">macOS</a>
     
     <a href="https://tlog.cc/tags/nohup/">nohup</a>
     
-    <a href="https://tlog.cc/tags/osx/">osx</a>
-    
-    <a href="https://tlog.cc/tags/php/">php</a>
-    
-    <a href="https://tlog.cc/tags/popclip/">popclip</a>
-    
     <a href="https://tlog.cc/tags/shell/">shell</a>
     
-    <a href="https://tlog.cc/tags/sre/">sre</a>
-    
-    <a href="https://tlog.cc/tags/synology/">synology</a>
-    
-    <a href="https://tlog.cc/tags/timemachine/">timemachine</a>
-    
     <a href="https://tlog.cc/tags/vuejs/">vuejs</a>
-    
-    <a href="https://tlog.cc/tags/xhprof/">xhprof</a>
-    
-    <a href="https://tlog.cc/tags/xpenology/">xpenology</a>
     
     <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
     
@@ -425,57 +543,9 @@
         </ul>
     </section>
 </div>
+            </div>
         </div>
     </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        
-        (function () {
-            $("pre code").parent().addClass("line-numbers")
-        }());
-
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-139549186-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
 </body>
+
 </html>
