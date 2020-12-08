@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>关于斐讯K1已公开的两个漏洞 | 小 ceng 的时间日志</title>
+    <meta property="og:title" content="关于斐讯K1已公开的两个漏洞 - 小 ceng 的时间日志">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2016-02-19T01:27:24&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2016-02-19T01:27:24&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="关于斐讯K1已公开的两个漏洞">
+        
+    <meta name="author" content="lon3r">
+    <meta property="og:url" content="https://tlog.cc/post/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFK1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://tlog.cc/">
+                        小 ceng 的时间日志
+                    </a>
+                
+                <p class="description">与其曲谨，不若疏狂</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://tlog.cc/">首页</a>
+                    
+                    <a  href="https://tlog.cc/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents"></nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">关于斐讯K1已公开的两个漏洞</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2016年2月19日
+        </date>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <blockquote>
+<p>旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。</p>
+</blockquote>
+<p><!-- raw HTML omitted -->&lt;img style=&ldquo;width:710px;&ldquo;src=&quot;/images/2016/02/&ndash;k1.jpg&rdquo; alt=&ldquo;phicomm-k1&rdquo; title=&ldquo;phicomm-k1&rdquo; /&gt;<!-- raw HTML omitted -->
+封面图片来源：<a href="http://www.leikeji.com/article/3731">雷科技</a></p>
+<p>前阵子斐讯搞活动，免费送路由器，本人也弄了一台玩玩，主要放在父母厂子里做中继用，方便爸妈上网。俗话说天下没有免费的午餐，果然！</p>
+<p>简单介绍一下这款路由器：</p>
+<blockquote>
+<p>型号：K1 PSG1208                          <!-- raw HTML omitted -->
+网络标准: 802.11b 802.11g 802.11n         <!-- raw HTML omitted -->
+无线网络支持频率: 2.4G&amp;5G                  <!-- raw HTML omitted -->
+闪存：8M                                  <!-- raw HTML omitted -->
+内存：64M                                 <!-- raw HTML omitted -->
+CPU: mt7620</p>
+</blockquote>
+<p>客观的讲，这款路由并没有网上各位说的那么差，原厂固件也是蛮稳定的，尤其中继的设置十分简单方便。对于一般需求，并不需要刷其他固件，尤其一些人把华硕固件吹的神乎其神，正如看到某位网友的评测，原厂固件和华硕固件的信号是差不多的，没有谁强谁弱，而且亲测华硕固件在中继这方面和原厂固件是没法比的。</p>
+<p>然而<!-- raw HTML omitted --><strong>原厂固件存在严重的漏洞</strong><!-- raw HTML omitted -->，不排除故意留下后门的可能，如下：<!-- raw HTML omitted -->
+<a href="http://wooyun.org/bugs/wooyun-2015-0163398">WooYun-2015-163398</a> <!-- raw HTML omitted -->
+<a href="http://wooyun.org/bugs/wooyun-2015-0163398">wooyun-2015-0163402</a></p>
+<p>更可气的是，漏洞提交的日期是<strong>2015年12月22日</strong>，但至今斐讯官方<strong>仍没有修复</strong>。</p>
+<p>权限问题依然存在，处在局域网的用户可以轻松获取管理权限。这点其实考虑到父母厂里人多半不懂网络，有wifi密码这一层拦着，还可以忍受。</p>
+<p><strong>但是</strong>对于收集用户信息这一点，出现了更搞笑也更<strong>可气</strong>的一幕，官方对ftp上传服务器权限做了严格限制，杜绝了除了上传以外的所有权限，包括列目录这些权限也没有。在本次漏洞验证中，本人对该服务器的上传操作其实并没有成功，也许是网络原因，也许有其他限制，但根据返回的提示推断应该是存在这项权限的。为了验证路由器是否还在上传客户的浏览记录，本人想了一个巧妙地验证方法，那就是伪造上传服务器。</p>
+<p>先在本地搭建一个ftp服务器，添加一个和<code>config.dat</code>中一样的账户，然后telnet连接路由器，修改路由器<code>hosts</code>文件，使<code>soho.wifibase.ftp.phicomm.com</code>指向我的ftp服务器，果然收到了相关的文件，按照乌云上白帽子给的解密方法，成功解密！是的，我们的斐讯公司仍然在收集用户隐私信息，古人云“知错能改，善莫大焉”，然而我们看不到其一点诚意。</p>
+<p>这让我想到另一个现象，为什么老掉牙的骗术依然会有人上当，原因很简单，骗子们只是想逮着一个算一个，如此足矣！</p>
+<p>可能有人疑问为何不直接修改<code>config.dat</code>里的服务器地址，在路由器中恢复即可。本人当然尝试过，不过会返回错误。</p>
+<p>至此，不得已我也要刷固件了。</p>
+<p>不过，我还是愿意相信，也许有一天，灿烂的阳光能照进黑暗森林。</p>
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://tlog.cc/">lon3r</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://tlog.cc/post/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFK1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/">https://tlog.cc/post/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFK1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "tlog-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-139549186-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://tlog.cc/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://tlog.cc/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://tlog.cc/post/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/" title="getopts 的用法">getopts 的用法</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/notes/k8s-docker-network/" title="k8s 学习笔记之 Docker 网络">k8s 学习笔记之 Docker 网络</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/notes/Interview-Question-01/" title="刷题">刷题</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/grafana/grafana-get-start/" title="Grafana 学习笔记">Grafana 学习笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/" title="Anki 与 PopClip 工作流建设">Anki 与 PopClip 工作流建设</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/journal/2019-08-10-%E6%88%91%E7%9C%8B%E5%8D%8E%E4%B8%BA%E6%99%BA%E6%85%A7%E5%B1%8F/" title="我看华为智慧屏">我看华为智慧屏</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title" style="color:red">福利派送</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a href="https://www.vultr.com/?ref=6964447" title="走个 Vultr VPS 推广" target="_blank" style="color:red">
+                
+                    <img src="https://www.vultr.com/media/banner_1.png">
+                
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://tlog.cc/categories/Golang/">Golang (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/linux/">linux (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/macOS/">macOS (2)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/shell/">shell (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/">前端 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E6%84%9F%E6%83%B3/">感想 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E6%97%A5%E5%BF%97/">日志 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9/">杂项 (4)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E7%A7%91%E6%8A%80/">科技 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/">运维 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库 (2)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E9%BB%91/">黑 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://tlog.cc/tags/Anki/">Anki</a>
+    
+    <a href="https://tlog.cc/tags/Apache/">Apache</a>
+    
+    <a href="https://tlog.cc/tags/DNS/">DNS</a>
+    
+    <a href="https://tlog.cc/tags/Docker/">Docker</a>
+    
+    <a href="https://tlog.cc/tags/Go/">Go</a>
+    
+    <a href="https://tlog.cc/tags/Golang/">Golang</a>
+    
+    <a href="https://tlog.cc/tags/Grafana/">Grafana</a>
+    
+    <a href="https://tlog.cc/tags/K8S/">K8S</a>
+    
+    <a href="https://tlog.cc/tags/MySQL/">MySQL</a>
+    
+    <a href="https://tlog.cc/tags/OSX/">OSX</a>
+    
+    <a href="https://tlog.cc/tags/PHP/">PHP</a>
+    
+    <a href="https://tlog.cc/tags/PopClip/">PopClip</a>
+    
+    <a href="https://tlog.cc/tags/SRE/">SRE</a>
+    
+    <a href="https://tlog.cc/tags/Synology/">Synology</a>
+    
+    <a href="https://tlog.cc/tags/TimeMachine/">TimeMachine</a>
+    
+    <a href="https://tlog.cc/tags/XHProf/">XHProf</a>
+    
+    <a href="https://tlog.cc/tags/Xpenology/">Xpenology</a>
+    
+    <a href="https://tlog.cc/tags/getopts/">getopts</a>
+    
+    <a href="https://tlog.cc/tags/hackintosh/">hackintosh</a>
+    
+    <a href="https://tlog.cc/tags/iodined/">iodined</a>
+    
+    <a href="https://tlog.cc/tags/iris/">iris</a>
+    
+    <a href="https://tlog.cc/tags/linux/">linux</a>
+    
+    <a href="https://tlog.cc/tags/macOS/">macOS</a>
+    
+    <a href="https://tlog.cc/tags/nohup/">nohup</a>
+    
+    <a href="https://tlog.cc/tags/shell/">shell</a>
+    
+    <a href="https://tlog.cc/tags/vuejs/">vuejs</a>
+    
+    <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+    
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
+    <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
+    
+    <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
+    
+    <a href="https://tlog.cc/tags/%E6%99%BA%E6%85%A7%E5%B1%8F/">智慧屏</a>
+    
+    <a href="https://tlog.cc/tags/%E6%9C%AA%E6%9D%A5/">未来</a>
+    
+    <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
+    
+    <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
+    
+    <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://tlog.cc/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -9,136 +9,136 @@
     <lastBuildDate>Tue, 08 Dec 2020 14:00:44 +0800</lastBuildDate><atom:link href="https://tlog.cc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用 IDA Pro 动态调试安卓 so 文件</title>
-      <link>https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/</link>
+      <link>https://tlog.cc/post/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/</link>
       <pubDate>Tue, 08 Dec 2020 14:00:44 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/</guid>
+      <guid>https://tlog.cc/post/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/</guid>
       <description>因为需要破解一个 App 的签名算法，开始学习逆向。本人没有逆向经验，也没有安卓开发经验，甚至没有 Java 开发经验。因此花了不少时间才完成任务，故整理了此文章，作为一个备忘。 由于是第一次实战，因此参考了很多文章，但是每篇文章都有一些没有提到的点（对新手而言），因此个人结合自己的情况，重新整理了</description>
     </item>
     
     <item>
       <title>nohup 和 &amp; 的作用详解</title>
-      <link>https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://tlog.cc/post/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Wed, 25 Dec 2019 13:13:15 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://tlog.cc/post/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
       <description>通常，我们在终端使用命令时，若在其后添加 &amp;amp; 会使程序在后台运行。那么这个所谓的在后台运行是什么意思呢？ 这里其实要提到 Linux jobs 的概念，在 shell 中执行的每条命令都可以认为都是 job，这些 job 基本都是前台 job，若有的命令执行时间比较长，那么我们可以把它放到后台，使之成为后台 job，这样我们可以继</description>
     </item>
     
     <item>
       <title>getopts 的用法</title>
-      <link>https://tlog.cc/posts/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</link>
+      <link>https://tlog.cc/post/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</link>
       <pubDate>Fri, 13 Dec 2019 14:47:00 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</guid>
+      <guid>https://tlog.cc/post/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/</guid>
       <description>Linux 下很多命令都带有选项，比如： ls -l ~/ sort -n tail -f XXX.log 是否想让 shell 脚本也具有这样的功能呢？如果直接使用 shell 的字符串处理来分析参数，还是比较麻烦的，我们需要考虑传入的参数哪些是选项，哪些是选项的值，哪些是正常的参数等等，为了更好的体验，可能还要支持选项合并，类似于 sort -rn 。 幸运的是，Linux 有一</description>
     </item>
     
     <item>
       <title>k8s 学习笔记之 Docker 网络</title>
-      <link>https://tlog.cc/posts/notes/k8s-docker-network/</link>
+      <link>https://tlog.cc/post/notes/k8s-docker-network/</link>
       <pubDate>Thu, 24 Oct 2019 21:39:51 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/notes/k8s-docker-network/</guid>
+      <guid>https://tlog.cc/post/notes/k8s-docker-network/</guid>
       <description>本文主要梳理宿主机上容器之间通信的细节。 单台宿主机上，这些隔离的容器进程之间是如何通信的？ 容器处于不同的网络命名空间，它们之间无法直接通信，而是利用了一种名为 Veth Pair 的虚拟设备，它就像一根网线，一头连在宿主机，一头连在容器中。宿主机上的那一头还被插在了 docker0 网桥上。docker0 相当于一</description>
     </item>
     
     <item>
       <title>刷题</title>
-      <link>https://tlog.cc/posts/notes/Interview-Question-01/</link>
+      <link>https://tlog.cc/post/notes/Interview-Question-01/</link>
       <pubDate>Thu, 24 Oct 2019 17:34:14 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/notes/Interview-Question-01/</guid>
+      <guid>https://tlog.cc/post/notes/Interview-Question-01/</guid>
       <description>&lt;p&gt;看到一些试题，融合自己的理解，做了一些补充，慢慢总结更新。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Google SRE 阅读笔记（一）</title>
-      <link>https://tlog.cc/posts/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/</link>
+      <link>https://tlog.cc/post/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/</link>
       <pubDate>Fri, 18 Oct 2019 14:12:06 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/</guid>
+      <guid>https://tlog.cc/post/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/</guid>
       <description>&lt;p&gt;SRE 到底是什么？&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Grafana 学习笔记</title>
-      <link>https://tlog.cc/posts/grafana/grafana-get-start/</link>
+      <link>https://tlog.cc/post/grafana/grafana-get-start/</link>
       <pubDate>Sun, 29 Sep 2019 18:51:54 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/grafana/grafana-get-start/</guid>
+      <guid>https://tlog.cc/post/grafana/grafana-get-start/</guid>
       <description>在学习一款软件之前，我最热衷的事件就是搜索这款软件名字的含义。 关于 Grafana 名字的来历： It does not mean anything. Its a made up word. Grafana started with some code from the Kibana project (Kibana does mean something), and to honer that heritage I named it Grafana as mix between Graph and Kibana (Graph is spelled Graf in swedish) 看，Grafana 的名字有致敬 Kibana 的成分，那 Kibana 名字的来历又是什么呢？ Rashid Khan, the creator of Kibana, wanted to make a product that could visualize log data. So he thought, it would be cool</description>
     </item>
     
     <item>
       <title>Anki 与 PopClip 工作流建设</title>
-      <link>https://tlog.cc/posts/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</link>
+      <link>https://tlog.cc/post/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</link>
       <pubDate>Sun, 25 Aug 2019 11:03:50 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</guid>
+      <guid>https://tlog.cc/post/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/</guid>
       <description>想做这件事很久了，边阅读边整理卡片，利用闲散时间强化记忆，可能是比较理想的学习方式了吧。 Anki 的大名可能很多人都听说，我知道其实比较晚，也是最近才慢慢熟悉起来，它的门槛的确有点高，加上我没有刻意学习的习惯，软件也不算特别美观，所以久未提起兴趣。不过慢慢熟悉之后，就越来越喜欢这款软件了</description>
     </item>
     
     <item>
       <title>我看华为智慧屏</title>
-      <link>https://tlog.cc/posts/journal/2019-08-10-%E6%88%91%E7%9C%8B%E5%8D%8E%E4%B8%BA%E6%99%BA%E6%85%A7%E5%B1%8F/</link>
+      <link>https://tlog.cc/post/journal/2019-08-10-%E6%88%91%E7%9C%8B%E5%8D%8E%E4%B8%BA%E6%99%BA%E6%85%A7%E5%B1%8F/</link>
       <pubDate>Sat, 10 Aug 2019 15:55:38 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/journal/2019-08-10-%E6%88%91%E7%9C%8B%E5%8D%8E%E4%B8%BA%E6%99%BA%E6%85%A7%E5%B1%8F/</guid>
+      <guid>https://tlog.cc/post/journal/2019-08-10-%E6%88%91%E7%9C%8B%E5%8D%8E%E4%B8%BA%E6%99%BA%E6%85%A7%E5%B1%8F/</guid>
       <description>正拿着 iPad 学了会绘画，感觉太难，不想学了。这时，来了一条推送：全球首款华为鸿蒙操作系统终端——荣耀智慧屏正式发布。 于是到优酷看发布会直播，发布会已经开始一会儿了。坐下来看，无非是介绍一些智能电视的功能，有点火大，难道一个电视非得叫智慧屏？好在坚持看完了，果然好戏都在后头！ 不太想过多</description>
     </item>
     
     <item>
       <title>尝试在 vue 指令中阻止事件触发</title>
-      <link>https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/</link>
+      <link>https://tlog.cc/post/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/</link>
       <pubDate>Sun, 28 Jul 2019 18:52:17 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/</guid>
+      <guid>https://tlog.cc/post/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/</guid>
       <description>通常，大家都是在指令中绑定事件，而我遇到一种场景是希望阻止事件触发，准确地讲，是阻止元素或组件绑定的事件 handler 的执行。 这个场景是基于权限控制诞生的，网上能查到资料，不少的实践中，都使用自定义指令控制按钮级别的权限控制。而这些实践中，多数都是控制按钮的显隐，这点不难实现。但实际中，可能</description>
     </item>
     
     <item>
       <title>如何将 TimeMachine 备份数据从移动硬盘迁移到网络驱动器</title>
-      <link>https://tlog.cc/posts/macOS/%E5%A6%82%E4%BD%95%E5%B0%86-TimeMachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/</link>
+      <link>https://tlog.cc/post/macOS/%E5%A6%82%E4%BD%95%E5%B0%86-TimeMachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/</link>
       <pubDate>Sat, 20 Jul 2019 13:35:16 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/macOS/%E5%A6%82%E4%BD%95%E5%B0%86-TimeMachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/</guid>
+      <guid>https://tlog.cc/post/macOS/%E5%A6%82%E4%BD%95%E5%B0%86-TimeMachine-%E5%A4%87%E4%BB%BD%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%BF%81%E7%A7%BB%E5%88%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8%E5%99%A8/</guid>
       <description>不喜欢唠叨的，直接进入技术总结。 建议还是看一下全文，避免误操作。 TimeMachine (后文简称 TM）是 Apple 自家一款很强大的系统级别的备份软件，个人非常喜欢，虽然不是实时备份，但是当你用得时间长了，真的会有一种坐时光机的感觉。当然不是每个人都喜欢这种全面备份，所以也就不过多吹嘘，毕竟没有一件东西是完美</description>
     </item>
     
     <item>
       <title>黑群晖笔记</title>
-      <link>https://tlog.cc/posts/hei/hack-synology-note/</link>
+      <link>https://tlog.cc/post/hei/hack-synology-note/</link>
       <pubDate>Thu, 02 May 2019 19:32:57 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/hei/hack-synology-note/</guid>
+      <guid>https://tlog.cc/post/hei/hack-synology-note/</guid>
       <description>概念解析 Xpenology Xpenology 是群晖操作系统的引导(bootloader)，当然不是官方的。 群晖操作系统叫做 DSM (Disk Station Manager)，DSM 是群晖开发的自定义 Linux 版本，专门针对 NAS 服务进行了很多优化和特性实现。通常 DSM 只能运行在群晖自家设备上，而 Xpenology 创造了一种可能性————在任何 x86 设备上运行 DSM 。 更多细节，看</description>
     </item>
     
     <item>
       <title>假期随感</title>
-      <link>https://tlog.cc/posts/journal/2019-05-02/</link>
+      <link>https://tlog.cc/post/journal/2019-05-02/</link>
       <pubDate>Thu, 02 May 2019 15:02:31 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/journal/2019-05-02/</guid>
+      <guid>https://tlog.cc/post/journal/2019-05-02/</guid>
       <description>过去的一天，都在忙于折腾我的新玩具——蜗牛星际。我买的是 A 款双网卡版，想用来做黑群晖，顺带兼具下班时间家用电脑的职责。 本着生命不息，折腾不止的心态，果断格式化了卖家帮忙装好的系统。原因有三点： 本能的不信任 本能的想折腾 本能的原版强迫症（基于第一点） 家里没有有线鼠标，导致折腾路上遇到</description>
     </item>
     
     <item>
       <title>Iris 学习笔记 1</title>
-      <link>https://tlog.cc/posts/golang/iris-learning-notes-1/</link>
+      <link>https://tlog.cc/post/golang/iris-learning-notes-1/</link>
       <pubDate>Wed, 03 Apr 2019 11:43:25 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/golang/iris-learning-notes-1/</guid>
+      <guid>https://tlog.cc/post/golang/iris-learning-notes-1/</guid>
       <description>&lt;p&gt;Iris 学习简单记录，因为某些原因未在项目中使用，所以仅是记录而已，多数内容来源于官方 Readme。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>debian vsftpd安装配置</title>
-      <link>https://tlog.cc/posts/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
+      <link>https://tlog.cc/post/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Thu, 20 Apr 2017 14:54:14 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://tlog.cc/post/old_blog/debian-vsftpd%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -146,10 +146,10 @@
     
     <item>
       <title>源码安装 chkrootkit 报错</title>
-      <link>https://tlog.cc/posts/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/</link>
+      <link>https://tlog.cc/post/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/</link>
       <pubDate>Thu, 29 Sep 2016 07:17:22 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/</guid>
+      <guid>https://tlog.cc/post/old_blog/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85chkrootkit%E6%8A%A5%E9%94%99/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -157,10 +157,10 @@
     
     <item>
       <title>黑苹果直升 macOS Sierra</title>
-      <link>https://tlog.cc/posts/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macOS-Sierra/</link>
+      <link>https://tlog.cc/post/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macOS-Sierra/</link>
       <pubDate>Thu, 29 Sep 2016 07:17:22 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macOS-Sierra/</guid>
+      <guid>https://tlog.cc/post/old_blog/%E9%BB%91%E8%8B%B9%E6%9E%9C%E7%9B%B4%E5%8D%87macOS-Sierra/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -168,10 +168,10 @@
     
     <item>
       <title>Beginner’s Guide of Nginx</title>
-      <link>https://tlog.cc/posts/old_blog/Beginners-Guide-of-Nginx/</link>
+      <link>https://tlog.cc/post/old_blog/Beginners-Guide-of-Nginx/</link>
       <pubDate>Fri, 23 Sep 2016 13:55:20 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/Beginners-Guide-of-Nginx/</guid>
+      <guid>https://tlog.cc/post/old_blog/Beginners-Guide-of-Nginx/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -179,10 +179,10 @@
     
     <item>
       <title>Y480 完美黑苹果全套驱动分享</title>
-      <link>https://tlog.cc/posts/old_blog/Y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/</link>
+      <link>https://tlog.cc/post/old_blog/Y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/</link>
       <pubDate>Fri, 22 Jul 2016 15:15:37 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/Y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/</guid>
+      <guid>https://tlog.cc/post/old_blog/Y480-%E5%AE%8C%E7%BE%8E%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%85%A8%E5%A5%97%E9%A9%B1%E5%8A%A8%E5%88%86%E4%BA%AB/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -190,10 +190,10 @@
     
     <item>
       <title>英文原版Ghost如何使用七牛云</title>
-      <link>https://tlog.cc/posts/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88Ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/</link>
+      <link>https://tlog.cc/post/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88Ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/</link>
       <pubDate>Fri, 26 Feb 2016 06:53:28 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88Ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/</guid>
+      <guid>https://tlog.cc/post/old_blog/%E8%8B%B1%E6%96%87%E5%8E%9F%E7%89%88Ghost%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%83%E7%89%9B%E4%BA%91/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -201,10 +201,10 @@
     
     <item>
       <title>Ghost博客优化大结局（2）</title>
-      <link>https://tlog.cc/posts/old_blog/Ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/</link>
+      <link>https://tlog.cc/post/old_blog/Ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/</link>
       <pubDate>Fri, 26 Feb 2016 05:16:50 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/Ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/</guid>
+      <guid>https://tlog.cc/post/old_blog/Ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%802/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -212,10 +212,10 @@
     
     <item>
       <title>Ghost博客优化大结局（1）</title>
-      <link>https://tlog.cc/posts/old_blog/Ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/</link>
+      <link>https://tlog.cc/post/old_blog/Ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/</link>
       <pubDate>Fri, 26 Feb 2016 05:14:10 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/Ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/</guid>
+      <guid>https://tlog.cc/post/old_blog/Ghost%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E5%A4%A7%E7%BB%93%E5%B1%801/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -223,10 +223,10 @@
     
     <item>
       <title>nginx 代理 ghost 的高性能配置</title>
-      <link>https://tlog.cc/posts/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/</link>
+      <link>https://tlog.cc/post/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Fri, 26 Feb 2016 04:58:00 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://tlog.cc/post/old_blog/nginx%E4%BB%A3%E7%90%86ghost%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -234,10 +234,10 @@
     
     <item>
       <title>&#34;&gt;/dev/null  2&gt;&amp;1&#34; 和 &#34;2&gt;&amp;1  &gt;/dev/null&#34;的区别</title>
-      <link>https://tlog.cc/posts/old_blog/devnull%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <link>https://tlog.cc/post/old_blog/devnull%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
       <pubDate>Tue, 23 Feb 2016 05:26:04 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/devnull%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <guid>https://tlog.cc/post/old_blog/devnull%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -245,10 +245,10 @@
     
     <item>
       <title>关于斐讯K1已公开的两个漏洞</title>
-      <link>https://tlog.cc/posts/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFK1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</link>
+      <link>https://tlog.cc/post/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFK1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</link>
       <pubDate>Fri, 19 Feb 2016 01:27:24 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFK1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</guid>
+      <guid>https://tlog.cc/post/old_blog/%E5%85%B3%E4%BA%8E%E6%96%90%E8%AE%AFK1%E5%B7%B2%E5%85%AC%E5%BC%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%BC%8F%E6%B4%9E/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -256,10 +256,10 @@
     
     <item>
       <title>VPS 折腾轶事</title>
-      <link>https://tlog.cc/posts/old_blog/VPS%E6%8A%98%E8%85%BE%E8%BD%B6%E4%BA%8B/</link>
+      <link>https://tlog.cc/post/old_blog/VPS%E6%8A%98%E8%85%BE%E8%BD%B6%E4%BA%8B/</link>
       <pubDate>Fri, 29 Jan 2016 15:50:07 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/VPS%E6%8A%98%E8%85%BE%E8%BD%B6%E4%BA%8B/</guid>
+      <guid>https://tlog.cc/post/old_blog/VPS%E6%8A%98%E8%85%BE%E8%BD%B6%E4%BA%8B/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -267,10 +267,10 @@
     
     <item>
       <title>x80h刷安卓5.0</title>
-      <link>https://tlog.cc/posts/old_blog/x80h%E5%88%B7%E5%AE%89%E5%8D%935.0/</link>
+      <link>https://tlog.cc/post/old_blog/x80h%E5%88%B7%E5%AE%89%E5%8D%935.0/</link>
       <pubDate>Mon, 25 Jan 2016 03:33:27 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/x80h%E5%88%B7%E5%AE%89%E5%8D%935.0/</guid>
+      <guid>https://tlog.cc/post/old_blog/x80h%E5%88%B7%E5%AE%89%E5%8D%935.0/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -278,10 +278,10 @@
     
     <item>
       <title>OSX 10.11安装XHProf的经验和教训</title>
-      <link>https://tlog.cc/posts/old_blog/OSX%E5%AE%89%E8%A3%85XHProf%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</link>
+      <link>https://tlog.cc/post/old_blog/OSX%E5%AE%89%E8%A3%85XHProf%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</link>
       <pubDate>Sat, 10 Oct 2015 12:53:08 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/OSX%E5%AE%89%E8%A3%85XHProf%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</guid>
+      <guid>https://tlog.cc/post/old_blog/OSX%E5%AE%89%E8%A3%85XHProf%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -289,10 +289,10 @@
     
     <item>
       <title>OSX 10.11 中 Apache&#43;PHP&#43;MySQL 环境搭建</title>
-      <link>https://tlog.cc/posts/old_blog/OSX%E4%B8%ADApache&#43;PHP&#43;MySQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>https://tlog.cc/post/old_blog/OSX%E4%B8%ADApache&#43;PHP&#43;MySQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Wed, 07 Oct 2015 21:04:00 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/OSX%E4%B8%ADApache&#43;PHP&#43;MySQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>https://tlog.cc/post/old_blog/OSX%E4%B8%ADApache&#43;PHP&#43;MySQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -300,10 +300,10 @@
     
     <item>
       <title>联通201宽带破解</title>
-      <link>https://tlog.cc/posts/old_blog/%E8%81%94%E9%80%9A201%E5%AE%BD%E5%B8%A6%E7%A0%B4%E8%A7%A3/</link>
+      <link>https://tlog.cc/post/old_blog/%E8%81%94%E9%80%9A201%E5%AE%BD%E5%B8%A6%E7%A0%B4%E8%A7%A3/</link>
       <pubDate>Thu, 01 Oct 2015 22:16:14 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/%E8%81%94%E9%80%9A201%E5%AE%BD%E5%B8%A6%E7%A0%B4%E8%A7%A3/</guid>
+      <guid>https://tlog.cc/post/old_blog/%E8%81%94%E9%80%9A201%E5%AE%BD%E5%B8%A6%E7%A0%B4%E8%A7%A3/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -311,10 +311,10 @@
     
     <item>
       <title>Newifi Mini</title>
-      <link>https://tlog.cc/posts/old_blog/newifi-mini/</link>
+      <link>https://tlog.cc/post/old_blog/newifi-mini/</link>
       <pubDate>Thu, 01 Oct 2015 17:02:31 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/newifi-mini/</guid>
+      <guid>https://tlog.cc/post/old_blog/newifi-mini/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -322,10 +322,10 @@
     
     <item>
       <title>重返黑苹果</title>
-      <link>https://tlog.cc/posts/old_blog/%E9%87%8D%E8%BF%94%E9%BB%91%E8%8B%B9%E6%9E%9C/</link>
+      <link>https://tlog.cc/post/old_blog/%E9%87%8D%E8%BF%94%E9%BB%91%E8%8B%B9%E6%9E%9C/</link>
       <pubDate>Fri, 03 Jul 2015 12:57:02 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/%E9%87%8D%E8%BF%94%E9%BB%91%E8%8B%B9%E6%9E%9C/</guid>
+      <guid>https://tlog.cc/post/old_blog/%E9%87%8D%E8%BF%94%E9%BB%91%E8%8B%B9%E6%9E%9C/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -333,10 +333,10 @@
     
     <item>
       <title>一切只不过是殊途同归</title>
-      <link>https://tlog.cc/posts/old_blog/%E4%B8%80%E5%88%87%E5%8F%AA%E4%B8%8D%E8%BF%87%E6%98%AF%E6%AE%8A%E9%80%94%E5%90%8C%E5%BD%92/</link>
+      <link>https://tlog.cc/post/old_blog/%E4%B8%80%E5%88%87%E5%8F%AA%E4%B8%8D%E8%BF%87%E6%98%AF%E6%AE%8A%E9%80%94%E5%90%8C%E5%BD%92/</link>
       <pubDate>Sat, 11 Apr 2015 09:56:00 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/%E4%B8%80%E5%88%87%E5%8F%AA%E4%B8%8D%E8%BF%87%E6%98%AF%E6%AE%8A%E9%80%94%E5%90%8C%E5%BD%92/</guid>
+      <guid>https://tlog.cc/post/old_blog/%E4%B8%80%E5%88%87%E5%8F%AA%E4%B8%8D%E8%BF%87%E6%98%AF%E6%AE%8A%E9%80%94%E5%90%8C%E5%BD%92/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧文留念&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -344,10 +344,10 @@
     
     <item>
       <title>DNS 隧道免费上网教程之 iodined</title>
-      <link>https://tlog.cc/posts/old_blog/DNS%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</link>
+      <link>https://tlog.cc/post/old_blog/DNS%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</link>
       <pubDate>Tue, 03 Mar 2015 20:01:57 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/old_blog/DNS%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</guid>
+      <guid>https://tlog.cc/post/old_blog/DNS%E9%9A%A7%E9%81%93%E5%85%8D%E8%B4%B9%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B%E4%B9%8Biodined/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;旧博客迁移文章，内容可能已失去价值，仅为留念，做了简单重新排版，勉强可看。&lt;/p&gt;
 &lt;/blockquote&gt;

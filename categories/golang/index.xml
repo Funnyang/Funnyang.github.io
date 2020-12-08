@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 03 Apr 2019 11:43:25 +0800</lastBuildDate><atom:link href="https://tlog.cc/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Iris 学习笔记 1</title>
-      <link>https://tlog.cc/posts/golang/iris-learning-notes-1/</link>
+      <link>https://tlog.cc/post/golang/iris-learning-notes-1/</link>
       <pubDate>Wed, 03 Apr 2019 11:43:25 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/golang/iris-learning-notes-1/</guid>
+      <guid>https://tlog.cc/post/golang/iris-learning-notes-1/</guid>
       <description>&lt;p&gt;Iris 学习简单记录，因为某些原因未在项目中使用，所以仅是记录而已，多数内容来源于官方 Readme。&lt;/p&gt;</description>
     </item>
     

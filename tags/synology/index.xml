@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 02 May 2019 19:32:57 +0800</lastBuildDate><atom:link href="https://tlog.cc/tags/Synology/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>黑群晖笔记</title>
-      <link>https://tlog.cc/posts/hei/hack-synology-note/</link>
+      <link>https://tlog.cc/post/hei/hack-synology-note/</link>
       <pubDate>Thu, 02 May 2019 19:32:57 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/hei/hack-synology-note/</guid>
+      <guid>https://tlog.cc/post/hei/hack-synology-note/</guid>
       <description>概念解析 Xpenology Xpenology 是群晖操作系统的引导(bootloader)，当然不是官方的。 群晖操作系统叫做 DSM (Disk Station Manager)，DSM 是群晖开发的自定义 Linux 版本，专门针对 NAS 服务进行了很多优化和特性实现。通常 DSM 只能运行在群晖自家设备上，而 Xpenology 创造了一种可能性————在任何 x86 设备上运行 DSM 。 更多细节，看</description>
     </item>
     

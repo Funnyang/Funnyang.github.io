@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 29 Sep 2019 18:51:54 +0800</lastBuildDate><atom:link href="https://tlog.cc/tags/Grafana/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Grafana 学习笔记</title>
-      <link>https://tlog.cc/posts/grafana/grafana-get-start/</link>
+      <link>https://tlog.cc/post/grafana/grafana-get-start/</link>
       <pubDate>Sun, 29 Sep 2019 18:51:54 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/grafana/grafana-get-start/</guid>
+      <guid>https://tlog.cc/post/grafana/grafana-get-start/</guid>
       <description>在学习一款软件之前，我最热衷的事件就是搜索这款软件名字的含义。 关于 Grafana 名字的来历： It does not mean anything. Its a made up word. Grafana started with some code from the Kibana project (Kibana does mean something), and to honer that heritage I named it Grafana as mix between Graph and Kibana (Graph is spelled Graf in swedish) 看，Grafana 的名字有致敬 Kibana 的成分，那 Kibana 名字的来历又是什么呢？ Rashid Khan, the creator of Kibana, wanted to make a product that could visualize log data. So he thought, it would be cool</description>
     </item>
     

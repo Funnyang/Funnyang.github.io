@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>Grafana 学习笔记 | 小 ceng 的时间日志</title>
+    <meta property="og:title" content="Grafana 学习笔记 - 小 ceng 的时间日志">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-09-29T18:51:54&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-09-29T18:51:54&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="Grafana 学习笔记">
+        
+    <meta name="author" content="lon3r">
+    <meta property="og:url" content="https://tlog.cc/post/grafana/grafana-get-start/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://tlog.cc/">
+                        小 ceng 的时间日志
+                    </a>
+                
+                <p class="description">与其曲谨，不若疏狂</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://tlog.cc/">首页</a>
+                    
+                    <a  href="https://tlog.cc/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#variables">Variables</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Grafana 学习笔记</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年9月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E8%BF%90%E7%BB%B4'>运维</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p>在学习一款软件之前，我最热衷的事件就是搜索这款软件名字的含义。</p>
+<p><a href="https://github.com/grafana/grafana/issues/2186">关于 Grafana 名字的来历</a>：</p>
+<blockquote>
+<p>It does not mean anything. Its a made up word. Grafana started with some code from the Kibana project (Kibana does mean something), and to honer that heritage I named it Grafana as mix between Graph and Kibana (Graph is spelled Graf in swedish)</p>
+</blockquote>
+<p>看，Grafana 的名字有致敬 Kibana 的成分，那 <a href="https://discuss.elastic.co/t/the-meaning-of-kibana/89828">Kibana 名字的来历</a>又是什么呢？</p>
+<blockquote>
+<p>Rashid Khan, the creator of Kibana, wanted to make a product that could visualize log data. So he thought, it would be cool to name it based on a translation into a foreign language. He chose to translate &ldquo;wood hut&rdquo; into Swahili, because he served in the Peace Corps in Africa before working in technology (and because logs aren&rsquo;t really used to build huts in Kenya). He used Google Translate for it, and at the time Google Translate showed &ldquo;Kibana&rdquo; as the translation.</p>
+</blockquote>
+<blockquote>
+<p>It doesn&rsquo;t show that translation anymore though: now it translates roughly to &ldquo;Kibanda&rdquo;. &ldquo;Kibana&rdquo; seems that it actually means &ldquo;Baby&rdquo; in Swahili.</p>
+</blockquote>
+<blockquote>
+<p>Another fun fact: port 5601 was chosen because it is l33t speak for &ldquo;logs&rdquo; spelled backwards.</p>
+</blockquote>
+<p>是不是很有意思？因为作者曾服役于非洲的和平部队，他命名的时候选择将 ”wood hut&quot; 翻译为<a href="https://zh.wikipedia.org/wiki/%E6%96%AF%E7%93%A6%E5%B8%8C%E9%87%8C%E8%AF%AD"> Swahili 语</a>，然后谷歌翻译给出了 kibanda。
+
+        <a data-fancybox="gallery" href="/images/15697564074823.jpg">
+            <img class="mx-auto" alt="-w646" src="/images/15697564074823.jpg" />
+        </a>
+    </p>
+<p>进入正题，我的笔记一向很简单。</p>
+<p>这是一款画图软件（你叫“可视化”也没毛病），他能画什么图（<strong>Panels</strong>)：</p>
+<ol>
+<li>Graph（折线图、直方图之类）</li>
+<li>Singlestat（仪表盘或单纯一个数值那种图）</li>
+<li>Table（表格能表达的维度就很多了）</li>
+<li>Heatmap（热度图，就是直方图的进阶版，可以表达时间范围的数据分布状况）</li>
+<li>Alert list（告警列表，就是有什么告警，可以展示出来）</li>
+<li>Dashboard list（Dashboard 之间快速跳转的一种方式）</li>
+<li>Text（普通文本啦，不过可以写 markdown）</li>
+</ol>
+<p>作为一款画图软件，前面四种都是图可以理解，后面三张有啥用呢？很简单，画了很多图，要找一个地方放吧，这个地方就是 Dashboard。</p>
+<p>每个 Dashboard 图太多，是不是要汇总做一些说明，可以用 Text；有告警要方便查看，可以用 Alert list。图变得更多，一个 Dashboard 放不下，就要建立更多 Dashboard（分类），如果 Dashboard 之间有关联关系，记忆和切换不方便，就可以用 Dashboard list 汇总相关的 Dashboard。</p>
+<p>这样 Panel 和 Dashboard 的关系就搞清楚。</p>
+<p>数据源，也就是绘制图像的数据来源，相信不用解释，Mysql, Elasticsearch 这些都算，当然官方支持了一堆，这也是它强大的地方。</p>
+<p>然后再理解一个东西： Variables 变量</p>
+<h3 id="variables">Variables</h3>
+<p>变量含义很容易理解，主要需要理解在 Grafana 中起什么作用。据我目前的实践来看，主要用来简化重复绘图步骤和动态显示。比如说，我们监控两台服务器的 CPU 的使用率，可能存在以下两种场景：</p>
+<ol>
+<li>使用率随时间变化的情况（最常见，两根曲线绘制在一张图）</li>
+<li>绘制两个仪表盘，显示实时的使用率（绘制两次么？不，我们可以使用变量，因为唯一的不同就是服务器啊）</li>
+</ol>
+<p>还有什么场景可以使用变量呢？假设有好几组服务器，我想一次只展示一组服务器（很多台）的图表（很多张）。因为每组服务器的图表的都是一样的配置，所以我们也可以使用变量来替换变化的数据（这里假设就是服务器的分组名）。</p>
+<p>Grafana 的变量实际上可以认为是一个数组（有时也会是单个值），数组可以循环，不就避免了重复配置图表么？你还可配置是否可以<strong>同时选中</strong>数组的多个值（<a href="https://grafana.com/docs/reference/templating/#selection-options">Multi-value</a>），也可以配置 all 选项（表示选中所有）。最后使用图表的一个配置 <a href="https://grafana.com/docs/reference/templating/#repeating-panels">repeat</a> ，来达到重复绘制的目的。</p>
+<p>最后的问题就是这个数组该怎么定义了。和数据源一样，这个数组支持多种数据来源，可以硬编码，也可以动态查询，并且根据场景还会区分不同的数据类型（时间范围、字符串等）。</p>
+<h3 id="总结">总结</h3>
+<p>可能讲了一堆看不懂的废话，无妨，此时再去看官方文档，肯定好理解许多，只有自己看官方文档才能接受第一手知识嘛。</p>
+<p>为什么不写绘图细节呢？</p>
+<p>一、实操教程很容易找到；</p>
+<p>二、每种图的选项其实并不多，有耐心亲自去试，也才能达到了学习的效果。</p>
+<p>其实我觉得除了 Variables 比较难理解，其他可能都是英文障碍吧，每个选项慢慢抠，都能理解。所以最后列出学习过程出现的单词及其理解。</p>
+<table>
+<thead>
+<tr>
+<th>名词</th>
+<th>释义</th>
+<th>出现位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>spark line</td>
+<td>走势图</td>
+<td>Singlestat</td>
+</tr>
+<tr>
+<td>gauge</td>
+<td>测量仪器，也就是设置显示为仪表盘那种图的意思</td>
+<td>Singlestat</td>
+</tr>
+<tr>
+<td>value mapping</td>
+<td>值映射，将数据的值映射为“一段文本”显示</td>
+<td>Singlestat</td>
+</tr>
+<tr>
+<td>legend</td>
+<td>图例</td>
+<td>Graph</td>
+</tr>
+<tr>
+<td>playlist</td>
+<td>播放列表，用来轮换显示播放列表里的 Dashboard</td>
+<td></td>
+</tr>
+<tr>
+<td>gradient</td>
+<td>梯度</td>
+<td>Graph</td>
+</tr>
+<tr>
+<td>staircase</td>
+<td>楼梯，阶梯，也就是阶梯线</td>
+<td>Graph</td>
+</tr>
+<tr>
+<td>hover tooltip</td>
+<td>悬停提示</td>
+<td>Graph</td>
+</tr>
+<tr>
+<td>series</td>
+<td>每条线就可以理解为一个 series</td>
+<td></td>
+</tr>
+<tr>
+<td>stacking</td>
+<td>堆叠，可以去搜索一下“堆积折线图”</td>
+<td>Graph</td>
+</tr>
+<tr>
+<td>decimals</td>
+<td>小数位数</td>
+<td>Graph</td>
+</tr>
+<tr>
+<td>axes</td>
+<td>axis 的复数</td>
+<td></td>
+</tr>
+<tr>
+<td>axis</td>
+<td>轴，坐标轴</td>
+<td></td>
+</tr>
+<tr>
+<td>thresholds</td>
+<td>阈值</td>
+<td>Alert</td>
+</tr>
+<tr>
+<td>time regions</td>
+<td>时间区域，对特定时间区域标注，注意是 utc 时间</td>
+<td></td>
+</tr>
+<tr>
+<td>individual</td>
+<td>独立的，理解“堆积折线图”，就知道啥意思了</td>
+<td>Graph</td>
+</tr>
+<tr>
+<td>cumulative</td>
+<td>累加的，理解“堆积折线图”，就知道啥意思了</td>
+<td>Graph</td>
+</tr>
+<tr>
+<td>instant</td>
+<td>实时的，instant query 就是只查询最新时间的数据，而不是一个时间段的数据</td>
+<td></td>
+</tr>
+<tr>
+<td>heatmap</td>
+<td>热度图</td>
+<td></td>
+</tr>
+<tr>
+<td>histograms</td>
+<td>直方图</td>
+<td></td>
+</tr>
+<tr>
+<td>evaluate</td>
+<td>评估，出现在告警设置中，表示多长时间检查一下是否超过规则设定的阈值</td>
+<td></td>
+</tr>
+<tr>
+<td>dedupe</td>
+<td>dedupe是单词De-duplication简单形式，可以用作动词或名词，意思是“重复数据删除“。Grafana 早期版本多机部署时，存在告警重复的情况</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>另外，不想自己安装的，可以先到<a href="https://play.grafana.org/">练兵场</a>，摆弄一番。之后再自己安装一下，加深理解。</p>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://tlog.cc/">lon3r</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://tlog.cc/post/grafana/grafana-get-start/">https://tlog.cc/post/grafana/grafana-get-start/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/Grafana'>Grafana</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "tlog-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="https://tlog.cc/">小 ceng 的时间日志 By lon3r</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-139549186-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://tlog.cc/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://tlog.cc/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://tlog.cc/post/hei/%E4%BD%BF%E7%94%A8-IDA-Pro-%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E5%AE%89%E5%8D%93-so-%E6%96%87%E4%BB%B6/" title="使用 IDA Pro 动态调试安卓 so 文件">使用 IDA Pro 动态调试安卓 so 文件</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="nohup 和 &amp; 的作用详解">nohup 和 &amp; 的作用详解</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/linux/getopts-%E7%9A%84%E7%94%A8%E6%B3%95/" title="getopts 的用法">getopts 的用法</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/notes/k8s-docker-network/" title="k8s 学习笔记之 Docker 网络">k8s 学习笔记之 Docker 网络</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/notes/Interview-Question-01/" title="刷题">刷题</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/notes/Goolge-SRE-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" title="Google SRE 阅读笔记（一）">Google SRE 阅读笔记（一）</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/grafana/grafana-get-start/" title="Grafana 学习笔记">Grafana 学习笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/macOS/Anki-%E4%B8%8E-PopClip-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BB%BA%E8%AE%BE/" title="Anki 与 PopClip 工作流建设">Anki 与 PopClip 工作流建设</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/journal/2019-08-10-%E6%88%91%E7%9C%8B%E5%8D%8E%E4%B8%BA%E6%99%BA%E6%85%A7%E5%B1%8F/" title="我看华为智慧屏">我看华为智慧屏</a>
+    </li>
+    
+    <li>
+        <a href="https://tlog.cc/post/vuejs/%E5%B0%9D%E8%AF%95%E5%9C%A8-vue-%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91/" title="尝试在 vue 指令中阻止事件触发">尝试在 vue 指令中阻止事件触发</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title" style="color:red">福利派送</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a href="https://www.vultr.com/?ref=6964447" title="走个 Vultr VPS 推广" target="_blank" style="color:red">
+                
+                    <img src="https://www.vultr.com/media/banner_1.png">
+                
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://tlog.cc/categories/Golang/">Golang (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/linux/">linux (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/macOS/">macOS (2)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/shell/">shell (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E5%89%8D%E7%AB%AF/">前端 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E6%84%9F%E6%83%B3/">感想 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E6%97%A5%E5%BF%97/">日志 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E6%9D%82%E9%A1%B9/">杂项 (4)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E7%A7%91%E6%8A%80/">科技 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E8%BF%90%E7%BB%B4/">运维 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E9%A2%98%E5%BA%93/">题库 (2)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E9%BB%91/">黑 (1)</a></li>
+    
+    <li><a href="https://tlog.cc/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://tlog.cc/tags/Anki/">Anki</a>
+    
+    <a href="https://tlog.cc/tags/Apache/">Apache</a>
+    
+    <a href="https://tlog.cc/tags/DNS/">DNS</a>
+    
+    <a href="https://tlog.cc/tags/Docker/">Docker</a>
+    
+    <a href="https://tlog.cc/tags/Go/">Go</a>
+    
+    <a href="https://tlog.cc/tags/Golang/">Golang</a>
+    
+    <a href="https://tlog.cc/tags/Grafana/">Grafana</a>
+    
+    <a href="https://tlog.cc/tags/K8S/">K8S</a>
+    
+    <a href="https://tlog.cc/tags/MySQL/">MySQL</a>
+    
+    <a href="https://tlog.cc/tags/OSX/">OSX</a>
+    
+    <a href="https://tlog.cc/tags/PHP/">PHP</a>
+    
+    <a href="https://tlog.cc/tags/PopClip/">PopClip</a>
+    
+    <a href="https://tlog.cc/tags/SRE/">SRE</a>
+    
+    <a href="https://tlog.cc/tags/Synology/">Synology</a>
+    
+    <a href="https://tlog.cc/tags/TimeMachine/">TimeMachine</a>
+    
+    <a href="https://tlog.cc/tags/XHProf/">XHProf</a>
+    
+    <a href="https://tlog.cc/tags/Xpenology/">Xpenology</a>
+    
+    <a href="https://tlog.cc/tags/getopts/">getopts</a>
+    
+    <a href="https://tlog.cc/tags/hackintosh/">hackintosh</a>
+    
+    <a href="https://tlog.cc/tags/iodined/">iodined</a>
+    
+    <a href="https://tlog.cc/tags/iris/">iris</a>
+    
+    <a href="https://tlog.cc/tags/linux/">linux</a>
+    
+    <a href="https://tlog.cc/tags/macOS/">macOS</a>
+    
+    <a href="https://tlog.cc/tags/nohup/">nohup</a>
+    
+    <a href="https://tlog.cc/tags/shell/">shell</a>
+    
+    <a href="https://tlog.cc/tags/vuejs/">vuejs</a>
+    
+    <a href="https://tlog.cc/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+    
+    <a href="https://tlog.cc/tags/%E5%AE%89%E5%8D%93/">安卓</a>
+    
+    <a href="https://tlog.cc/tags/%E6%84%9F%E6%83%B3/">感想</a>
+    
+    <a href="https://tlog.cc/tags/%E6%95%88%E7%8E%87/">效率</a>
+    
+    <a href="https://tlog.cc/tags/%E6%99%BA%E6%85%A7%E5%B1%8F/">智慧屏</a>
+    
+    <a href="https://tlog.cc/tags/%E6%9C%AA%E6%9D%A5/">未来</a>
+    
+    <a href="https://tlog.cc/tags/%E8%81%94%E9%80%9A201/">联通201</a>
+    
+    <a href="https://tlog.cc/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/">蜗牛星际</a>
+    
+    <a href="https://tlog.cc/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
+    
+    <a href="https://tlog.cc/tags/%E9%BB%91%E7%BE%A4%E6%99%96/">黑群晖</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://tlog.cc/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

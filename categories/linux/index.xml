@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 25 Dec 2019 13:13:15 +0800</lastBuildDate><atom:link href="https://tlog.cc/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>nohup 和 &amp; 的作用详解</title>
-      <link>https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://tlog.cc/post/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Wed, 25 Dec 2019 13:13:15 +0800</pubDate>
       
-      <guid>https://tlog.cc/posts/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://tlog.cc/post/linux/nohup%E5%92%8C%E7%9A%84%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
       <description>通常，我们在终端使用命令时，若在其后添加 &amp;amp; 会使程序在后台运行。那么这个所谓的在后台运行是什么意思呢？ 这里其实要提到 Linux jobs 的概念，在 shell 中执行的每条命令都可以认为都是 job，这些 job 基本都是前台 job，若有的命令执行时间比较长，那么我们可以把它放到后台，使之成为后台 job，这样我们可以继</description>
     </item>
     
